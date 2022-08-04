@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:23:17 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/02 15:09:52 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/04 17:03:49 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,16 @@ t_tocken	*lexer_get_next_tocken(t_lexer *lexer);
 t_tocken	*lexer_collect_string(t_lexer *lexer);
 t_tocken	*lexer_advc_tocken(t_lexer *lexer, t_tocken *tocken);
 char		*lexer_get_char_as_string(t_lexer *lexer);
+char		*get_value_exit(t_lexer *lexer);
+char		*get_env_variable(t_lexer *lexer);
+void		lexer_collect_string_dollar(t_lexer *lexer, char **s);
+int			diff_of_special_chars(char c);
+int			find_closed_qoute(t_lexer *lexer, char c);
+t_tocken	*lexer_collect_string(t_lexer *lexer);
+t_tocken	*collect_redirect_g(t_lexer *lexer);
+t_tocken	*collect_redirect_l(t_lexer *lexer);
+void		ft_error(int i);
+void		lexer_get_string_dqoute(t_lexer *lexer, char **s);
+char		*get_string_dquote(t_lexer *lexer);
+char		*get_string_squote(t_lexer *lexer);
 #endif

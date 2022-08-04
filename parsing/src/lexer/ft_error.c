@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tocken.h                                           :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 18:58:53 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/04 17:43:32 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/04 16:55:43 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/04 17:27:12 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOCKEN_H
-# define TOCKEN_H
-# include <stdio.h>
-# include <stdlib.h>
+#include "../../inc/parsing.h"
 
-typedef enum s_tocken_type
+void	ft_error(int i)
 {
-	TOCKEN_WORD,
-	TOCKEN_PIPE,
-	TOCKEN_GREAT,
-	TOCKEN_DGREAT,
-	TOCKEN_LESS,
-	TOCKEN_HER_DOC,
-	TOCKEN_EOF
-}	t_tocken_type;
-
-typedef struct s_tocken
-{
-	t_tocken_type	type;
-	char			*value;
-}	t_tocken;
-
-t_tocken	*init_tocken(t_tocken_type	type, char *value);
-#endif
+	(void)i;
+	printf("ERROR\n");
+	exit(1);
+}

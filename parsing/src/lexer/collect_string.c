@@ -6,11 +6,27 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:19:47 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/03 12:26:04 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/04 22:26:58 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
+
+/*
+	special characters
+*/
+int	diff_of_special_chars(char c)
+{
+	if (c != '<' && c != '>'
+		&& c != '|' && c != '\t'
+		&& c != ' ' && c != '\0')
+		return (1);
+	return (0);
+}
+
+/*
+	looking for the next {"} || {'}
+*/
 
 int	find_closed_qoute(t_lexer *lexer, char c)
 {
@@ -26,52 +42,32 @@ int	find_closed_qoute(t_lexer *lexer, char c)
 	return (0);
 }
 
-t_tocken	*get_string_dquote(t_lexer *lexer)
-{
-	char	*s;
-
-	s = NULL;
-	lexer_advance(lexer);
-	if (!find_closed_qoute(lexer, '"'))
-		return (ft_strdup("\""));
-	while (lexer->c != '"' && lexer->i < ft_strlen(lexer->contents))
-	{
-		if (lexer->c == '$')
-			return (get_string_dollar(lexer));
-		else
-			return (get_string_dqoute(lexer));
-	}
-}
-
-char	*lexer_get_char_as_string(t_lexer *lexer)
-{
-	char	*s;
-
-	s = malloc(2 * sizeof(char));
-	if (!s)
-		return (NULL);
-	s[0] = lexer->c;
-	s[1] = '\0';
-	return (s);
-}
+/*
+	collect the character for Creating a string but becareful with
+	some special characters like {'<', '>', '|', '\t', c != ' ', '\0'}
+*/
 
 t_tocken	*lexer_collect_string(t_lexer *lexer)
 {
 	char	*s;
 
 	s = NULL;
-	while (lexer->c)
+	while (diff_of_special_chars(lexer->c))
 	{
 		if (lexer->c == '"')
-			return (get_string_Dquote(lexer));
+			s = get_string_dquote(lexer);
 		if (lexer->c == '\'')
-			return (get_string_Squote(lexer));
-		if (lexer->c == '$')
-			return (get_string_dollar(lexer));
-		s = ft_strjoin_char(s, lexer->c);
-		lexer_advance(lexer);
+			s = get_string_squote(lexer);
+		else
+		{
+			s = ft_strjoin_char(s, lexer->c);
+			if (s == NULL)
+				ft_error(errno);
+			lexer_advance(lexer);
+		}
 	}
-	lexer_advance(lexer);
-	retrun (init_tocken(TOCKEN_WORD, s));
+	return (init_tocken(TOCKEN_WORD, s));
 }
 
+		// else if (lexer->c == '$')
+		// 	s = get_string_dollar(lexer);

@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_string_dqoute.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/04 11:33:29 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/04 22:02:50 by ahmaidi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/parsing.h"
+
+/*
+	collect a string between double quote
+*/
+
+void	lexer_get_string_dqoute(t_lexer *lexer, char **s)
+{
+	int		start;
+	int		end;
+	char	*tmp;
+
+	start = lexer->i;
+	while (lexer->c != '"' && lexer->c != '$' && lexer->c != '\0')
+		lexer_advance(lexer);
+	end = lexer->i;
+	if (lexer->c == '\0')
+		return ;
+	tmp = ft_substr(lexer->contents, start, end - start);
+	if (tmp == NULL)
+		ft_error(errno);
+	*s = ft_strjoin(*s, tmp, 1);
+	if (*s == NULL)
+		ft_error(errno);
+	free(tmp);
+}
+
+/*
+	collect a string between double quote And 
+	expand if there env Variable or exit status next to $ between them.
+*/
+
+char	*get_string_dquote(t_lexer *lexer)
+{
+	char	*s;
+
+	lexer_advance(lexer);
+	if (!find_closed_qoute(lexer, '"'))
+		return (ft_strdup("\""));
+	s = ft_strdup("");
+	while (lexer->c != '"' && lexer->i < ft_strlen(lexer->contents))
+	{
+		if (lexer->c == '$')
+			lexer_collect_string_dollar(lexer, &s);
+		else
+			lexer_get_string_dqoute(lexer, &s);
+	}
+	lexer_advance(lexer);
+	return (s);
+}

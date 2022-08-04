@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tocken.c                                           :+:      :+:    :+:   */
+/*   get_string_sqoute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 19:08:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/04 15:09:53 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/04 15:46:38 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/04 21:43:15 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-/*
-intialize  a tocken ==> intialize the type && the value
-*/
-
-t_tocken	*init_tocken(t_tocken_type	type, char *value)
+char	*get_string_squote(t_lexer *lexer)
 {
-	t_tocken	*tocken;
+	char	*s;
+	int		start;
+	int		ends;
 
-	tocken = ft_calloc(1, sizeof(t_tocken));
-	tocken->type = type;
-	tocken->value = value;
-	return (tocken);
+	lexer_advance(lexer);
+	if (!find_closed_qoute(lexer, '\''))
+		return (ft_strdup("\'"));
+	start = lexer->i;
+	while (lexer->c != '\'' && lexer->c != '\0')
+		lexer_advance(lexer);
+	ends = lexer->i;
+	s = ft_substr(lexer->contents, start, ends - start);
+	lexer_advance(lexer);
+	if (!s)
+		ft_error(errno);
+	return (s);
 }

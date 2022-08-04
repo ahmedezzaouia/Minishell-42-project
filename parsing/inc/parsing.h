@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/01 10:53:08 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/04 17:03:44 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include "../src/libft/libft.h"
+# include <sys/errno.h>
+# include "../src/lib/libft.h"
 # include "tocken.h"
 # include "lexer.h"
+
 
 #endif

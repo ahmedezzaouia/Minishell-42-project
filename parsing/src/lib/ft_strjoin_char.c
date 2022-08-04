@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:45:28 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/03 10:57:24 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/04 22:14:38 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ char	*ft_strjoin_char(char *s, char c)
 	int		i;
 
 	i = 0;
-
 	str = malloc((ft_strlen(s) + 2) * sizeof(char));
 	if (!str)
 		return (NULL);
-	while (s!= NULL && s[i])
+	while (s != NULL && s[i])
 	{
 		str[i] = s[i];
 		i++;
