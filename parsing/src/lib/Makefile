@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 20:12:24 by ahmaidi           #+#    #+#              #
-#    Updated: 2021/11/20 13:07:17 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/09 18:09:14 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ FILES = ft_memset \
 		ft_putendl_fd \
 		ft_putnbr_fd \
 		ft_striteri \
+		ft_realloc
 
 FILES_B = 	ft_lstnew_bonus \
 	  		ft_lstadd_front_bonus \
@@ -73,7 +74,7 @@ OBJS_B = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_B)))
 all: $(NAME)
 
 $(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) -c -g $(SRCS)
+	$(CC) $(CFLAGS) -c - $(SRCS)
 	@echo "files objects created "
 
 $(NAME): $(OBJS)

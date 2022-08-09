@@ -6,11 +6,41 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:40:57 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/04 22:26:20 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/07 15:23:03 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
+
+/* remove multiple spaces */
+
+char	*ft_split_word(char *s)
+{
+	char	**tmp;
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = ft_strdup_er("");
+	tmp = ft_split(s, ' ');
+	if (!tmp)
+		ft_error(errno);
+	while (tmp[i])
+	{
+		str = ft_strjoin(str, tmp[i]);
+		if (!str)
+			ft_error(errno);
+		if (tmp[i + 1])
+		{
+			str = ft_strjoin(str, " ");
+			if (!str)
+				ft_error(errno);
+		}
+		i++;
+	}
+	free_it(tmp);
+	return (str);
+}
 
 /*
 	retrun the value of exist status
@@ -18,22 +48,27 @@
 
 char	*get_value_exit(t_lexer *lexer)
 {
-	(void)lexer;
-	printf("exit\n");
-	return (NULL);
+	char	*s;
+
+	s = ft_itoa(lexer->exit_status);
+	if (s == NULL)
+		ft_error(errno);
+	lexer_advance(lexer);
+	return (s);
 }
 
 /*
 	search in env Variable 
 */
 
-char	*get_env_variable(t_lexer *lexer)
+char	*get_env_variable(t_lexer *lexer, int status)
 {
 	char	*s;
 	int		start;
 	int		end;
 	char	*tmp;
 
+	(void)status;
 	start = lexer->i;
 	while (ft_isalnum(lexer->c) || lexer->c == '_')
 		lexer_advance(lexer);
@@ -43,9 +78,11 @@ char	*get_env_variable(t_lexer *lexer)
 		ft_error(errno);
 	tmp = s;
 	s = getenv(s);
-	if (!s)
-		s = ft_strdup("");
 	free(tmp);
+	if (!s)
+		s = ft_strdup_er("");
+	else if (status == 1)
+		s = ft_split_word(s);
 	return (s);
 }
 
@@ -59,22 +96,23 @@ char	*get_env_variable(t_lexer *lexer)
 
 void	lexer_collect_string_dollar(t_lexer *lexer, char **s)
 {
-	char	*tmp;
+	char	*str;
 
-	tmp = NULL;
 	lexer_advance(lexer);
 	if (lexer->c == '?')
-		tmp = get_value_exit(lexer);
+		str = get_value_exit(lexer);
 	else if (lexer->c != '_' && !ft_isalpha(lexer->c))
 	{
-		*s = ft_strjoin_char(*s, lexer->c);
-		if (*s)
+		str = ft_substr(lexer->contents, lexer->i - 1, 2);
+		if (!str)
 			ft_error(errno);
 		lexer_advance(lexer);
 	}
 	else
-		tmp = get_env_variable(lexer);
-	*s = ft_strjoin(*s, tmp, 1);
+		str = get_env_variable(lexer, 0);
+	*s = ft_strjoin(*s, str);
+	if (ft_strlen(str) == 0)
+		free(str);
 	if (*s == NULL)
 		ft_error(errno);
 }

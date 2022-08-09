@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tocken.c                                           :+:      :+:    :+:   */
+/*   get_simple_chars.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 19:08:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 12:13:48 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/05 16:38:42 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/09 15:15:12 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-/*
-intialize  a tocken ==> intialize the type && the value
-*/
-
-t_tocken	*init_tocken(t_tocken_type	type, char *value)
+/* get the string between the Simple String*/
+char	*get_simple_chars(t_lexer *lexer)
 {
-	t_tocken	*tocken;
+	char	*s;
+	int		start;
+	int		ends;
 
-	tocken = ft_calloc(1, sizeof(t_tocken));
-	if (!tocken)
+	start = lexer->i;
+	while (diff_of_special_chars(lexer->c) && lexer->c != '"'
+		&& lexer->c != '\'' )
+		lexer_advance(lexer);
+	ends = lexer->i;
+	s = ft_substr(lexer->contents, start, ends - start);
+	if (!s)
 		ft_error(errno);
-	tocken->type = type;
-	tocken->value = value;
-	return (tocken);
+	return (s);
 }

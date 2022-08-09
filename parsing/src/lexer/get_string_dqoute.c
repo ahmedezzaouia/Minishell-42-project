@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:33:29 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/04 22:02:50 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/07 12:20:31 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	lexer_get_string_dqoute(t_lexer *lexer, char **s)
 	tmp = ft_substr(lexer->contents, start, end - start);
 	if (tmp == NULL)
 		ft_error(errno);
-	*s = ft_strjoin(*s, tmp, 1);
+	*s = ft_strjoin(*s, tmp);
+	free(tmp);
 	if (*s == NULL)
 		ft_error(errno);
-	free(tmp);
 }
 
 /*
@@ -48,8 +48,8 @@ char	*get_string_dquote(t_lexer *lexer)
 
 	lexer_advance(lexer);
 	if (!find_closed_qoute(lexer, '"'))
-		return (ft_strdup("\""));
-	s = ft_strdup("");
+		return (ft_strdup_er("\""));
+	s = ft_strdup_er("");
 	while (lexer->c != '"' && lexer->i < ft_strlen(lexer->contents))
 	{
 		if (lexer->c == '$')

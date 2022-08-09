@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tocken.c                                           :+:      :+:    :+:   */
+/*   ft_realloc_er.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 19:08:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 12:13:48 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/09 16:56:22 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/09 17:57:43 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-/*
-intialize  a tocken ==> intialize the type && the value
-*/
-
-t_tocken	*init_tocken(t_tocken_type	type, char *value)
+/* Check the return of realloc */
+void	*ft_realloc_er(void *ptr, size_t size, size_t oldsize)
 {
-	t_tocken	*tocken;
+	void	*newptr;
 
-	tocken = ft_calloc(1, sizeof(t_tocken));
-	if (!tocken)
+	ptr = ft_realloc(ptr, size * oldsize, size * (oldsize + 1));
+	if (!ptr)
 		ft_error(errno);
-	tocken->type = type;
-	tocken->value = value;
-	return (tocken);
+	retrun (newptr);
 }

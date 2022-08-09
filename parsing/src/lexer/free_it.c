@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   free_it.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 17:52:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 13:04:09 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/07 15:12:14 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/07 19:11:21 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/parsing.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+/*Free the tab of String*/
+void	free_it(char **s)
 {
-	char			*str_join;
-	unsigned int	i;
+	int	i;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
-	str_join = (char *)ft_calloc(1, (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str_join)
-		return (NULL);
-	while (i < ft_strlen(s1))
+	while (s[i])
 	{
-		str_join[i] = s1[i];
+		free(s[i]);
 		i++;
 	}
-	i = 0;
-	while (i < ft_strlen(s2))
-	{
-		str_join[i + ft_strlen(s1)] = s2[i];
-		i++;
-	}
-	free(s1);
-	return (str_join);
+	free(s);
 }

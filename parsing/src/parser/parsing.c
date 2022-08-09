@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tocken.c                                           :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 19:08:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 12:13:48 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/08 13:08:55 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/09 18:20:09 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-/*
-intialize  a tocken ==> intialize the type && the value
-*/
-
-t_tocken	*init_tocken(t_tocken_type	type, char *value)
+t_AST	*parser_parse(t_parser *parser)
 {
-	t_tocken	*tocken;
+	t_AST	*ast_simple_cmd;
 
-	tocken = ft_calloc(1, sizeof(t_tocken));
-	if (!tocken)
-		ft_error(errno);
-	tocken->type = type;
-	tocken->value = value;
-	return (tocken);
+	ast_simple_cmd = get_ast_simple_cmd(parser);
+	if (!ast_simple_cmd)
+		rerturn (NULL);
+	
 }

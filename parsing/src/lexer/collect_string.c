@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:19:47 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/04 22:26:58 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:36:17 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,24 @@ int	find_closed_qoute(t_lexer *lexer, char c)
 t_tocken	*lexer_collect_string(t_lexer *lexer)
 {
 	char	*s;
+	char	*str;
 
 	s = NULL;
+	str = ft_strdup_er("");
 	while (diff_of_special_chars(lexer->c))
 	{
 		if (lexer->c == '"')
 			s = get_string_dquote(lexer);
-		if (lexer->c == '\'')
+		else if (lexer->c == '\'')
 			s = get_string_squote(lexer);
+		else if (lexer->c == '$')
+			s = get_string_dollar(lexer);
 		else
-		{
-			s = ft_strjoin_char(s, lexer->c);
-			if (s == NULL)
-				ft_error(errno);
-			lexer_advance(lexer);
-		}
+			s = get_simple_chars(lexer);
+		str = ft_strjoin(str, s);
+		free (s);
+		if (!str)
+			ft_error(errno);
 	}
-	return (init_tocken(TOCKEN_WORD, s));
+	return (init_tocken(TOCKEN_WORD, str));
 }
-
-		// else if (lexer->c == '$')
-		// 	s = get_string_dollar(lexer);
