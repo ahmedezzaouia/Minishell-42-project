@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: otman <otman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 18:26:14 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/10 13:43:46 by otman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ t_AST	*init_ast(t_type_cmd type)
 
 int	parser_expected(t_parser *parser, t_tocken_type type)
 {
-	if (parser->cur_tocken->type == type
-		&& !ft_strncmp(parser->cur_tocken->value, "'", 1)
-		&& !ft_strncmp(parser->cur_tocken->value, "\"", 1))
+	if (parser->cur_tocken->type == type)
 	{
 		free_tocken(parser->prev_tocken);
 		parser->prev_tocken = parser->cur_tocken;
@@ -94,7 +92,7 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 		else if (collect_redirect(parser, ast))
 			return (free_ast_cmd(ast));
 	}
-	ast->args_val = realloc_(ast->args_val, sizeof(char *), ast->args_size);
-	ast->args_val[ast->args_size] = NULL;
+	ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
+	ast->args[ast->size_args] = NULL;
 	return (ast);
 }

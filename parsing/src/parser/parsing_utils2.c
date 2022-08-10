@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: otman <otman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 18:33:58 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/10 13:46:43 by otman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	collect_args(t_parser *parser, t_AST *ast)
 		parser->prev_tocken = parser->cur_tocken;
 		parser->cur_tocken = lexer_get_next_tocken(parser->lexer);
 	}
-	ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
-	ast->args[ast->size_args] = NULL;
 }
 
 /* get the type of redirect */
@@ -50,18 +48,29 @@ t_type_redir	get_type_redirect(t_parser *parser)
 	else
 		return (HERE_DOC);
 }
-
+/*Analyse HERE DOC */
+void analyse_here_doc(t_parser *parser, t_AST *ast)
+{
+	
+}
 /* Collect the filename of redirections */
 int	collect_redirect(t_parser *parser, t_AST *ast)
 {
 	t_type_redir	type;
 
 	type = get_type_redirect(parser);
-	parser_expected(parser, type);
+	parser_expected(parser, parser->cur_token->type);
 	if (parser_expected(parser, TOCKEN_WORD))
 		return (1);
 	ast->redirec = ft_realloc_re(ast->redirec, sizeof(t_redir *),
 			ast->size_redirec);
 	ast->size_redirec += 1;
-	ast->redirec[ast->size_redirec - 1]->filename = malloc(ft_strlen(parser->cur_tocken->value));
+	ast->redirec[ast->size_redirec - 1] = malloc(sizeof(t_redir));
+	if (ast->redirec[ast->size_redirec - 1] == NULL)
+		ft_error(errno);
+	if (type == HERE_DOC)
+		analyse_here_doc(parser, ast);
+	ast->redirec[ast->size_redirec - 1]->type = type;
+	ast->redirec[ast->size_redirec - 1]->filename = parser->cur_tocken->value;
+	return (0);
 }
