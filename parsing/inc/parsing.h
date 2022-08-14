@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 18:19:21 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/14 19:20:20 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef enum s_type_cmd
 typedef struct s_AST
 {
 	t_type_cmd		type;
-	struct s_AST	*pipe;
+	struct s_AST	**pipe;
 	int				pipe_size;
 	char			**args;
 	int				size_args;
@@ -72,10 +72,18 @@ t_AST			*parser_parse(t_parser *parser);
 t_AST			*get_ast_simple_cmd(t_parser *parser);
 int				check_syntax_cmd(t_parser *parser);
 void			collect_args(t_parser *parser, t_AST *ast);
-void			*ft_realloc_er(void *ptr, size_t size, size_t oldsize);
+void			*ft_realloc_er(void *old_alloc, size_t count, size_t old_size);
 int				parser_expected(t_parser *parser, t_tocken_type type);
 void			free_tocken(t_tocken *tocken);
 t_type_redir	get_type_redirect(t_parser *parser);
 int				collect_redirect(t_parser *parser, t_AST *ast);
-
+int				visitor_vis(t_AST *ast);
+void			free_tocken(t_tocken *tocken);
+void			free_parser(t_parser *parser);
+t_AST			*free_ast_cmd(t_AST *ast);
+t_AST			*free_ast_pipe(t_AST *ast);
+void			alloc_redirec(t_AST *ast);
+void			analyse_here_doc(t_parser *parser,
+					t_type_redir *type, int index_c);
+void			get_ast_pipeline(t_parser *parser, t_AST **ast);
 #endif

@@ -6,16 +6,42 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 15:21:26 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/14 23:13:20 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
 
+static int	check_here_max_doc(char *line)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == '<' && line[i] == '<')
+		{
+			count++;
+			i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+static int	exit_error_max_here_doc(int g_exit_status)
+{
+	write(2, "maximum here-document count exceeded\n", 38);
+	g_exit_status = 258;
+	return (g_exit_status);
+}
+
 int	main(void)
 {
-	t_lexer		*lexer;
-	t_tocken	*t;
+	t_AST		*ast;
+	t_parser	*parser;
 	char		*line;
 	int			fd;
 
@@ -23,18 +49,11 @@ int	main(void)
 	if (fd == -1)
 		ft_error(errno);
 	line = get_next_line(fd);
-	lexer = init_lexer(line, 0);
-	t = (void *)0;
-	while ((t = lexer_get_next_tocken(lexer))->type != 6)
-	{
-		printf("1 TOCKEN(%d ||%s)\n", t->type, t->value);
-		free(t->value);
-		free(t);
-	}
-	printf("1 TOCKEN(%d ||%s)\n", t->type, t->value);
-		free(t->value);
-		free(t);
-	// while (1)
-	// 	;
-	return (0);
+	if (check_here_max_doc(line) >= 17)
+		return (exit_error_max_here_doc(g_exit_status));
+	parser = init_parser(line, g_exit_status);
+	ast = parser_parse(parser);
+	visitor_vis(ast);
+	free_ast_pipe(ast);
+	return (g_exit_status);
 }

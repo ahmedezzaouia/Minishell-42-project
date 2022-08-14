@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:57:18 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 17:57:25 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/11 11:40:05 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 The purpose of realloc in C is to expand current memory blocks
 while leaving the original content as it is. */
 
-void	*ft_realloc(void *old_alloc, size_t old_size, size_t new_size)
+void	*ft_realloc(void *old_alloc, size_t new_size)
 {
 	unsigned char	*new_alloc;
 	size_t			i;

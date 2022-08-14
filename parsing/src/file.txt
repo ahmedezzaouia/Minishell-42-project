@@ -1,1 +1,1 @@
-echo -n hello | << l >> $15USER
+ << l << l << l << l << l << l << l << l << l << l << l << l << l << l << l << l << l

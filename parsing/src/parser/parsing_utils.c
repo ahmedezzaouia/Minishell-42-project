@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otman <otman@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/10 13:43:46 by otman            ###   ########.fr       */
+/*   Updated: 2022/08/14 18:44:28 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	parser_expected(t_parser *parser, t_tocken_type type)
 	write(2, parser->cur_tocken->value, ft_strlen(parser->cur_tocken->value));
 	write(2, "'\n", 2);
 	g_exit_status = 258;
-	return (g_exit_status);
+	return (1);
 }
 
 /* Syntax Error */

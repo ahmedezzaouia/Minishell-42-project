@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 15:31:40 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 17:11:40 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/11 11:33:41 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_strjoin_char(char *s, char c);
-void	*ft_realloc(void *old_alloc, size_t old_size, size_t new_size);
+void	*ft_realloc(void *old_alloc, size_t new_size);
 #endif
