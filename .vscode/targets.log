@@ -6,9 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Tue Aug 16 17:50:13 2022
+# Make data base, printed on Tue Aug 16 22:04:47 2022
+ 
 
 # Variables
 
@@ -37,14 +37,13 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 15)
-SRCS = parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/get_next_line/get_next_line_utils.c parsing/src/get_next_line/get_next_line.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_ 
-it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c
+SRCS = parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/get_next_line/get_next_line_utils.c parsing/src/get_next_line/get_next_line.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c
 # makefile (from `Makefile', line 26)
 READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.ePueWCj2Ii/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.kfRnOI0nAH/Render
 # environment
 PATH = /Users/ahmaidi/.brew/bin:/Users/ahmaidi/.brew/bin:/Users/ahmaidi/goinfre/.brew/bin:/goinfre/ahmaidi/miniconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -54,7 +53,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vBUmBFozog/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.UaVuQdKwH6/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -124,7 +123,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -154,7 +153,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 86124
+VSCODE_PID = 57496
 # variable set hash-table stats:
 # Load=71/1024=7%, Rehash=0, Collisions=3/98=3%
 
@@ -242,6 +241,7 @@ parsing/src/lib/ft_strlen.c:
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+ 
 
 # Not a target:
 parsing/src/visitor.c:
@@ -288,7 +288,7 @@ Makefile:
 # Not a target:
 parsing/src/parser/parsing_utils2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 01:06:46
+#  Last modified 2022-08-16 18:04:26
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -345,7 +345,6 @@ parsing/src/lib/ft_bzero.c:
 #  Last modified 2022-04-09 11:08:16
 #  File has been updated.
 #  Successfully updated.
- 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -406,7 +405,7 @@ parsing/src/lexer/ft_strdup_er.c:
 
 parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/get_next_line/get_next_line_utils.c parsing/src/get_next_line/get_next_line.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 17:36:47
+#  Last modified 2022-08-16 18:04:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -497,6 +496,7 @@ parsing/src/parser/check_error.c:
 #  Last modified 2022-08-16 01:12:05
 #  File has been updated.
 #  Successfully updated.
+ 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -576,6 +576,6 @@ parsing/src/lexer/get_string_sqoute.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug 16 17:50:13 2022
+# Finished Make data base on Tue Aug 16 22:04:47 2022
 
  

@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 15:36:32 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 22:37:01 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(void)
 		parser = init_parser(cmd_line, g_exit_status);
 		ast = parser_parse(parser);
 		free_parser(parser);
+		/* execution */
 		visitor(ast);
 		free_ast_pipe(ast);
 	}
