@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:53:27 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 12:36:01 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 00:32:48 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ t_tocken	*lexer_get_next_tocken(t_lexer *lexer)
 	{
 		if (lexer->c == ' ')
 			lexer_skip_white_spaces(lexer);
-		if (lexer->c == '|')
+		else if (lexer->c == '|')
 			return (lexer_advc_tocken(lexer,
 					init_tocken(TOCKEN_PIPE, ft_strdup("|"))));
-		if (lexer->c == '>')
+		else if (lexer->c == '>')
 			return (collect_redirect_g(lexer));
-		if (lexer->c == '<')
+		else if (lexer->c == '<')
 			return (collect_redirect_l(lexer));
-		if (lexer->c != ' ' && lexer->c != '\t')
+		else if (lexer->c != ' ' && lexer->c != '\t')
 			return (lexer_collect_string(lexer));
 	}
 	return (init_tocken(TOCKEN_EOF, ft_strdup_er("newline")));

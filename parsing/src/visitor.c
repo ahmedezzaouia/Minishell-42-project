@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 22:32:24 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/14 19:30:05 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:57:00 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ static void	visitor_pipeline(t_AST *ast)
 	}
 }
 
-int	visitor_vis(t_AST *ast)
+int	visitor(t_AST *ast)
 {
-	visitor_pipeline(ast);
+	if (ast)
+		visitor_pipeline(ast);
 	return (0);
 }

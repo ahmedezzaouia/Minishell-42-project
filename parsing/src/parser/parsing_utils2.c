@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/14 16:41:53 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 01:06:46 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* collect the arg in the table of args*/
 void	collect_args(t_parser *parser, t_AST *ast)
 {
-	while (parser->cur_tocken->type == TOCKEN_WORD)
+	while (parser->cur_tocken && parser->cur_tocken->type == TOCKEN_WORD)
 	{
 		ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
 		ast->size_args += 1;

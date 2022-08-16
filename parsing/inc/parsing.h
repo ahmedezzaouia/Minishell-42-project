@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/14 19:20:20 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/15 23:28:14 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <sys/errno.h>
 # include <string.h>
 # include <errno.h>
 # include "../src/lib/libft.h"
-# include "../src/get_next_line/get_next_line.h"
 # include "tocken.h"
 # include "lexer.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
 int	g_exit_status;
 
@@ -77,7 +79,7 @@ int				parser_expected(t_parser *parser, t_tocken_type type);
 void			free_tocken(t_tocken *tocken);
 t_type_redir	get_type_redirect(t_parser *parser);
 int				collect_redirect(t_parser *parser, t_AST *ast);
-int				visitor_vis(t_AST *ast);
+int				visitor(t_AST *ast);
 void			free_tocken(t_tocken *tocken);
 void			free_parser(t_parser *parser);
 t_AST			*free_ast_cmd(t_AST *ast);
@@ -86,4 +88,5 @@ void			alloc_redirec(t_AST *ast);
 void			analyse_here_doc(t_parser *parser,
 					t_type_redir *type, int index_c);
 void			get_ast_pipeline(t_parser *parser, t_AST **ast);
+void			check_error_max_here_doc(char *cmd_line);
 #endif

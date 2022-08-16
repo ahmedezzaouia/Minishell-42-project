@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:11:00 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/14 19:19:17 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 02:00:38 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ t_AST	*free_ast_pipe(t_AST *ast)
 	if (ast != NULL)
 	{
 		while (ast->pipe_size-- > 0)
+		{
 			free_ast_cmd(ast->pipe[ast->pipe_size]);
-		free(ast->pipe[ast->pipe_size]);
-		free(ast);
+		}
+			free(ast->pipe);
+			free(ast);
 	}
 	return (NULL);
 }

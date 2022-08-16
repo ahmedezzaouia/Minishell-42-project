@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/14 18:44:28 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 02:04:05 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parser_expected(t_parser *parser, t_tocken_type type)
 		parser->cur_tocken = lexer_get_next_tocken(parser->lexer);
 		return (0);
 	}
-	write(2, "bash: syntax error near unexpected token `", 42);
+	write(2, "Minishell: syntax error near unexpected token `", 48);
 	write(2, parser->cur_tocken->value, ft_strlen(parser->cur_tocken->value));
 	write(2, "'\n", 2);
 	g_exit_status = 258;
@@ -69,6 +69,8 @@ int	parser_expected(t_parser *parser, t_tocken_type type)
 /* Syntax Error */
 int	check_syntax_cmd(t_parser *parser)
 {
+	if (!parser->cur_tocken)
+		return (1);
 	if (parser->cur_tocken->type == TOCKEN_PIPE
 		|| parser->cur_tocken->type == TOCKEN_EOF)
 		return (parser_expected(parser, TOCKEN_WORD));
@@ -84,7 +86,7 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 	if (check_syntax_cmd(parser))
 		return (NULL);
 	ast = init_ast(SIMPLE_CMD);
-	while (parser->cur_tocken->type != TOCKEN_PIPE
+	while (parser->cur_tocken && parser->cur_tocken->type != TOCKEN_PIPE
 		&& parser->cur_tocken->type != TOCKEN_EOF)
 	{
 		if (parser->cur_tocken->type == TOCKEN_WORD)
@@ -92,6 +94,8 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 		else if (collect_redirect(parser, ast))
 			return (free_ast_cmd(ast));
 	}
+	if (!parser->cur_tocken)
+		return (NULL);
 	ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
 	ast->args[ast->size_args] = NULL;
 	return (ast);

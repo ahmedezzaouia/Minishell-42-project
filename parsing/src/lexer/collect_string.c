@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:19:47 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/11 13:11:59 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 00:36:05 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ int	find_closed_qoute(t_lexer *lexer, char c)
 	some special characters like {'<', '>', '|', '\t', c != ' ', '\0'}
 */
 
+static void	*free_unc_q( char **str)
+{
+	free(*str);
+	return (NULL);
+}
+
 t_tocken	*lexer_collect_string(t_lexer *lexer)
 {
 	char	*s;
@@ -64,6 +70,8 @@ t_tocken	*lexer_collect_string(t_lexer *lexer)
 			s = get_string_dollar(lexer);
 		else
 			s = get_simple_chars(lexer);
+		if (!s)
+			return (free_unc_q(&str));
 		str = ft_strjoin(str, s);
 		free (s);
 		if (!str)

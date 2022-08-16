@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:46:38 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 12:34:51 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/15 19:35:15 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ char	*get_string_squote(t_lexer *lexer)
 
 	lexer_advance(lexer);
 	if (!find_closed_qoute(lexer, '\''))
-		return (ft_strdup("\'"));
+	{
+		write(2, "Minishell: Missing close single qoute\n", 39);
+		return (NULL);
+	}
 	start = lexer->i;
 	while (lexer->c != '\'' && lexer->c != '\0')
 		lexer_advance(lexer);
