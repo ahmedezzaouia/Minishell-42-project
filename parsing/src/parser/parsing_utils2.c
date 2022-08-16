@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 01:06:46 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 18:04:26 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ void	alloc_redirec(t_AST *ast)
 		ft_error(errno);
 }
 
+/* Check ambigous redirect */
+int	check_ambiguous(t_parser *parser)
+{
+	if (parser->lexer->is_ambg)
+	{
+		write(2, "Minishell: ambiguous redirect\n", 31);
+		g_exit_status = 258;
+		return (1);
+	}
+	return (0);
+}
+
 /* Collect the filename of redirections */
 int	collect_redirect(t_parser *parser, t_AST *ast)
 {
@@ -58,6 +70,8 @@ int	collect_redirect(t_parser *parser, t_AST *ast)
 	type = get_type_redirect(parser);
 	parser_expected(parser, parser->cur_tocken->type);
 	if (parser_expected(parser, TOCKEN_WORD))
+		return (1);
+	if (type != HERE_DOC && check_ambiguous(parser))
 		return (1);
 	alloc_redirec(ast);
 	if (type == HERE_DOC)

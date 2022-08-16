@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/15 23:28:14 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 18:01:05 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void			analyse_here_doc(t_parser *parser,
 					t_type_redir *type, int index_c);
 void			get_ast_pipeline(t_parser *parser, t_AST **ast);
 void			check_error_max_here_doc(char *cmd_line);
+int				check_ambiguous(t_parser *parser);
 #endif

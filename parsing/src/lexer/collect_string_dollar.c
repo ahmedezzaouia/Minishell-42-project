@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:40:57 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/07 15:23:03 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 17:19:57 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ char	*get_env_variable(t_lexer *lexer, int status)
 	s = getenv(s);
 	free(tmp);
 	if (!s)
+	{
 		s = ft_strdup_er("");
+		lexer->is_ambg = 1;
+	}
 	else if (status == 1)
 		s = ft_split_word(s);
 	return (s);

@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:53:27 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 00:32:48 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 17:20:43 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_lexer	*init_lexer(char *contents, int exit_status)
 	lexer->c = contents[lexer->i];
 	lexer->contents = contents;
 	lexer->exit_status = exit_status;
+	lexer->is_ambg = 0;
 	return (lexer);
 }
 
