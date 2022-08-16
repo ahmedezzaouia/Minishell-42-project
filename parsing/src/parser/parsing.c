@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:08:55 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 02:05:56 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/16 02:23:52 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_AST	*parser_parse(t_parser *parser)
 		ft_error(errno);
 	t->pipe[0] = ast_simple_cmd;
 	t->pipe_size += 1;
-	while (parser->cur_tocken && parser->cur_tocken->type == TOCKEN_PIPE)
+	while (t && parser->cur_tocken && parser->cur_tocken->type == TOCKEN_PIPE)
 		get_ast_pipeline(parser, &t);
 	return (t);
 }

@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/16 02:06:58 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/16 02:15:48 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/f
 parsing/src/lib/ft_itoa.c parsing/src/get_next_line/get_next_line_utils.c parsing/src/get_next_line/get_next_line.c parsing/src/parser/ft_realloc_er.c \
 parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c \
 parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RM = rm -f
 READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib \
 			   -I /Users/$(USER)/.brew/opt/readline/include

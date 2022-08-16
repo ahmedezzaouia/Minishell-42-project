@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Tue Aug 16 01:02:53 2022
+# Make data base, printed on Tue Aug 16 02:18:48 2022
 
 # Variables
 
@@ -100,6 +100,7 @@ USER = ahmaidi
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 13)
 NAME = parser
+ 
 # environment
 LESS = -R
 # automatic
@@ -227,7 +228,7 @@ parsing/src/lib/ft_itoa.c:
 # Not a target:
 parsing/src/parser/parsing.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-15 23:39:33
+#  Last modified 2022-08-16 02:05:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -278,17 +279,16 @@ parsing/src/lexer/colloct_redirect.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 01:01:07
+#  Last modified 2022-08-16 02:15:48
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
- 
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 parsing/src/parser/parsing_utils2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 00:40:26
+#  Last modified 2022-08-16 01:06:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -299,7 +299,6 @@ parsing/src/parser/ft_realloc_er.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-15 00:53:08
 #  File has been updated.
- 
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
@@ -404,9 +403,10 @@ parsing/src/lexer/ft_strdup_er.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+ 
 parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/get_next_line/get_next_line_utils.c parsing/src/get_next_line/get_next_line.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 01:01:11
+#  Last modified 2022-08-16 02:17:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -425,7 +425,7 @@ parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_doll
 # Not a target:
 parsing/src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 00:34:36
+#  Last modified 2022-08-16 01:31:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -443,7 +443,7 @@ parsing/src/lexer/tocken.c:
 # Not a target:
 parsing/src/parser/free_it.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-15 18:25:15
+#  Last modified 2022-08-16 02:00:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -494,7 +494,7 @@ parsing/src/lib/ft_isalpha.c:
 # Not a target:
 parsing/src/parser/check_error.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-15 19:38:33
+#  Last modified 2022-08-16 01:12:05
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -521,7 +521,7 @@ parsing/src/lib/ft_realloc.c:
 # Not a target:
 parsing/src/parser/parsing_utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-15 23:56:42
+#  Last modified 2022-08-16 02:04:05
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -551,7 +551,6 @@ parsing/src/get_next_line/get_next_line_utils.c:
 #  Last modified 2022-08-07 16:15:46
 #  File has been updated.
 #  Successfully updated.
- 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -577,6 +576,6 @@ parsing/src/lexer/get_string_sqoute.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug 16 01:02:53 2022
+# Finished Make data base on Tue Aug 16 02:18:48 2022
 
  
