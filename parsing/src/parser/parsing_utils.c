@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 02:04:05 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 17:13:59 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,16 @@ t_parser	*init_parser(char *cmd, int exit_status)
 }
 /* initialize the AST */
 
-t_AST	*init_ast(t_type_cmd type)
+t_AST	*init_ast(void)
 {
 	t_AST	*ast;
 
 	ast = malloc(1 * sizeof(t_AST));
 	if (!ast)
 		ft_error(errno);
-	ast->type = type;
-	ast->pipe = (void *)0;
-	ast->pipe_size = 0;
-	ast->args = (void *)0;
+	ast->args = NULL;
 	ast->size_args = 0;
-	ast->redirec = (void *)0;
+	ast->redirec = NULL;
 	ast->size_redirec = 0;
 	return (ast);
 }
@@ -52,17 +49,21 @@ t_AST	*init_ast(t_type_cmd type)
 
 int	parser_expected(t_parser *parser, t_tocken_type type)
 {
-	if (parser->cur_tocken->type == type)
+	if (parser->cur_tocken)
 	{
-		free_tocken(parser->prev_tocken);
-		parser->prev_tocken = parser->cur_tocken;
-		parser->cur_tocken = lexer_get_next_tocken(parser->lexer);
-		return (0);
+		if (parser->cur_tocken->type == type)
+		{
+			free_tocken(parser->prev_tocken);
+			parser->prev_tocken = parser->cur_tocken;
+			parser->cur_tocken = lexer_get_next_tocken(parser->lexer);
+			return (0);
+		}
+		write(2, "Minishell: syntax error near unexpected token `", 48);
+		write(2, parser->cur_tocken->value,
+			ft_strlen(parser->cur_tocken->value));
+		write(2, "'\n", 2);
+		g_exit_status = 258;
 	}
-	write(2, "Minishell: syntax error near unexpected token `", 48);
-	write(2, parser->cur_tocken->value, ft_strlen(parser->cur_tocken->value));
-	write(2, "'\n", 2);
-	g_exit_status = 258;
 	return (1);
 }
 
@@ -85,7 +86,7 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 
 	if (check_syntax_cmd(parser))
 		return (NULL);
-	ast = init_ast(SIMPLE_CMD);
+	ast = init_ast();
 	while (parser->cur_tocken && parser->cur_tocken->type != TOCKEN_PIPE
 		&& parser->cur_tocken->type != TOCKEN_EOF)
 	{
@@ -95,8 +96,14 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 			return (free_ast_cmd(ast));
 	}
 	if (!parser->cur_tocken)
+	{
+		free_ast_cmd(ast);
 		return (NULL);
-	ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
-	ast->args[ast->size_args] = NULL;
+	}
+	if(ast->args)
+	{
+		ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
+		ast->args[ast->size_args] = NULL;
+	}
 	return (ast);
 }

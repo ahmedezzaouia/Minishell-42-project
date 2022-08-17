@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 18:01:05 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:52:32 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,20 @@ typedef struct s_redir
 	t_type_redir	type;
 	char			*filename;
 }	t_redir;
-typedef enum s_type_cmd
-{
-	SIMPLE_CMD,
-	PIPELINE,
-}	t_type_cmd;
 
 typedef struct s_AST
 {
-	t_type_cmd		type;
-	struct s_AST	**pipe;
-	int				pipe_size;
 	char			**args;
 	int				size_args;
 	t_redir			**redirec;
 	int				size_redirec;
 }	t_AST;
+
+typedef struct s_pipes
+{
+	t_AST	**tab_cmd;
+	int		nbre_pipes;
+}	t_pipes;
 
 typedef struct s_parser
 {
@@ -69,8 +67,9 @@ t_parser		*init_parser(char *cmd, int exit_status);
 
 /* init the Abstract tree */
 
-t_AST			*init_ast(t_type_cmd type);
-t_AST			*parser_parse(t_parser *parser);
+void    execution(t_pipes *pipes, char **env);
+t_AST			*init_ast(void);
+t_pipes			*parser_parse(t_parser *parser);
 t_AST			*get_ast_simple_cmd(t_parser *parser);
 int				check_syntax_cmd(t_parser *parser);
 void			collect_args(t_parser *parser, t_AST *ast);
@@ -79,15 +78,15 @@ int				parser_expected(t_parser *parser, t_tocken_type type);
 void			free_tocken(t_tocken *tocken);
 t_type_redir	get_type_redirect(t_parser *parser);
 int				collect_redirect(t_parser *parser, t_AST *ast);
-int				visitor(t_AST *ast);
+int				visitor(t_pipes *ast);
 void			free_tocken(t_tocken *tocken);
 void			free_parser(t_parser *parser);
 t_AST			*free_ast_cmd(t_AST *ast);
-t_AST			*free_ast_pipe(t_AST *ast);
+t_pipes			*free_ast_pipe(t_pipes *pipes);
 void			alloc_redirec(t_AST *ast);
 void			analyse_here_doc(t_parser *parser,
 					t_type_redir *type, int index_c);
-void			get_ast_pipeline(t_parser *parser, t_AST **ast);
+void			get_ast_pipeline(t_parser *parser, t_pipes **pipes);
 void			check_error_max_here_doc(char *cmd_line);
 int				check_ambiguous(t_parser *parser);
 #endif

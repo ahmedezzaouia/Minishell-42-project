@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:11:00 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 02:00:38 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 13:36:21 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ t_AST	*free_ast_cmd(t_AST *ast)
 
 /* free pipe line */
 
-t_AST	*free_ast_pipe(t_AST *ast)
+t_pipes	*free_ast_pipe(t_pipes *pipes)
 {
-	if (ast != NULL)
+	if (pipes != NULL)
 	{
-		while (ast->pipe_size-- > 0)
+		while (pipes->nbre_pipes-- > 0)
 		{
-			free_ast_cmd(ast->pipe[ast->pipe_size]);
+			free_ast_cmd(pipes->tab_cmd[pipes->nbre_pipes]);
 		}
-			free(ast->pipe);
-			free(ast);
+		free(pipes->tab_cmd);
+		free(pipes);
 	}
 	return (NULL);
 }

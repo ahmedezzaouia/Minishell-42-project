@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:19:47 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 16:52:35 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 13:37:10 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_tocken	*lexer_collect_string(t_lexer *lexer)
 	str = ft_strdup_er("");
 	while (diff_of_special_chars(lexer->c))
 	{
-
 		if (lexer->c == '"')
 			s = get_string_dquote(lexer);
 		else if (lexer->c == '\'')

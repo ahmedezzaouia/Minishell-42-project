@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 22:32:24 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/15 16:57:00 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 00:26:32 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ void	visitor_command(t_AST *pipe)
 	}
 }
 
-static void	visitor_pipeline(t_AST *ast)
+static void	visitor_pipeline(t_pipes *ast)
 {
 	int	i;
 
 	printf("---------pipeline------\n");
 	i = 0;
-	while (i < ast->pipe_size)
+	while (i < ast->nbre_pipes)
 	{
 		printf("The PIPE nbre of %d\n", i);
-		visitor_command(ast->pipe[i]);
+		visitor_command(ast->tab_cmd[i]);
 		i++;
 	}
 }
 
-int	visitor(t_AST *ast)
+int	visitor(t_pipes *ast)
 {
 	if (ast)
 		visitor_pipeline(ast);
