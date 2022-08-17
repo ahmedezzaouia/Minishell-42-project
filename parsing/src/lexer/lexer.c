@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:53:27 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 17:20:43 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 23:25:43 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /*
 intialize a lexer ==> intialize lexer->c && lexer->index && lexer->contents
 */
-t_lexer	*init_lexer(char *contents, int exit_status)
+t_lexer	*init_lexer(char *contents)
 {
 	t_lexer	*lexer;
 
@@ -24,7 +24,7 @@ t_lexer	*init_lexer(char *contents, int exit_status)
 	lexer->i = 0;
 	lexer->c = contents[lexer->i];
 	lexer->contents = contents;
-	lexer->exit_status = exit_status;
+	lexer->exit_status = g_exit_status;
 	lexer->is_ambg = 0;
 	return (lexer);
 }

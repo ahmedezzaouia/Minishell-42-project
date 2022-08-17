@@ -6,14 +6,14 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 17:13:59 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 23:24:35 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
 /* initialize the parser */
-t_parser	*init_parser(char *cmd, int exit_status)
+t_parser	*init_parser(char *cmd)
 {
 	t_lexer		*lexer;
 	t_parser	*parser;
@@ -21,7 +21,7 @@ t_parser	*init_parser(char *cmd, int exit_status)
 	parser = ft_calloc(1, sizeof(t_parser));
 	if (!parser)
 		ft_error(errno);
-	lexer = init_lexer(cmd, exit_status);
+	lexer = init_lexer(cmd);
 	if (!lexer)
 		ft_error(errno);
 	parser->lexer = lexer;

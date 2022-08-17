@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 15:52:32 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 23:25:17 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ typedef struct s_parser
 }	t_parser;
 
 /* init the parser */
-t_parser		*init_parser(char *cmd, int exit_status);
+t_parser		*init_parser(char *cmd);
 
 /* init the Abstract tree */
 
-void    execution(t_pipes *pipes, char **env);
+void			execution(t_pipes *pipes, char **env);
 t_AST			*init_ast(void);
 t_pipes			*parser_parse(t_parser *parser);
 t_AST			*get_ast_simple_cmd(t_parser *parser);

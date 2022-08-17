@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 17:19:25 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 23:22:21 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		add_history(cmd_line);
 		check_error_max_here_doc(cmd_line);
-		parser = init_parser(cmd_line, g_exit_status);
+		parser = init_parser(cmd_line);
 		ast = parser_parse(parser);
 		free_parser(parser);
 		visitor(ast);

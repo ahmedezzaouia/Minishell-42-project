@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 13:45:15 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/17 23:26:40 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_ambiguous(t_parser *parser)
 	if (parser->lexer->is_ambg)
 	{
 		write(2, "Minishell: ambiguous redirect\n", 31);
-		g_exit_status = 258;
+		g_exit_status = 1;
 		return (1);
 	}
 	return (0);
