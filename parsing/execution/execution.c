@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/18 21:44:41 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/18 23:13:06 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,21 @@ int    handle_redirections(t_AST *pipe_strc)
     int i;
     int fd;
     t_redir **redirec;
+    // struct stat fileStat;
 
     i = 0;
     redirec = pipe_strc->redirec;
+    if (!redirec)
+        return (0);
     while (i < pipe_strc->size_redirec)
     {
         
         if (redirec[i]->type == INPUT)
         {
+            // if(stat(redirec[i]->filename,&fileStat) < 0)    
+            //     return (0);
             fd = open(redirec[i]->filename, O_RDONLY);
-            // printf("fd == %d\n",fd);
+           
             if (fd == -1)
             {
                 printf("file is not exist\n");
@@ -71,14 +76,21 @@ int    handle_redirections(t_AST *pipe_strc)
             fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
             if (fd == -1)
             {
-                printf("file is not exist\n");
-                exit(EXIT_FAILURE);
+                // printf("Minishell: %s: Permission denied\n", redirec[i]->filename);
+                ft_putstr_fd("Minishell: Permission denied\n", 2);
+                exit(1);
             }
             dup2(fd, 1);
         }
         else if (redirec[i]->type == APPAND)
         {
             fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY | O_APPEND, 0644);
+            if (fd == -1)
+            {
+                // printf("Minishell: %s: Permission denied\n", redirec[i]->filename);
+                ft_putstr_fd("Minishell: Permission denied\n", 2);
+                exit(1);
+            }
             if (fd == -1)
             {
                 printf("file is not exist\n");
@@ -96,30 +108,19 @@ void    exec_commad(t_AST *pipe_strc, char **env)
 {
     char *cmd_path;
     char *cmd;
-    printf("pipe_strc->args[0] == %s\n", pipe_strc->args[0]);
-    if (pipe_strc->redirec)
-        handle_redirections(pipe_strc);
+
+    // printf("args[0]== %s\n\n", pipe_strc->args[0]);
+    handle_redirections(pipe_strc);
     if (!pipe_strc->args)
-    {
-        // printf("IS NULL \n");
         exit(1);
-    }
+
     if (pipe_strc->args[0][0] == 47)
         cmd = pipe_strc->args[0];
     else
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
-        
 
     cmd_path = get_path(env, cmd);
     printf("cmd_path == %s\n",cmd_path);
-    // if (!cmd_path)
-    // {
-    //     printf("No such file or directory\n");
-    //     exit(EXIT_FAILURE);
-    // }
-    // i = 3;
-    // while (i < 1024)
-    //     close(i++);
     if(execve(cmd_path, pipe_strc->args, env) == -1)
     {
         printf("command not execute\n");
@@ -144,24 +145,7 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     else
         exec_commad(pipe_strc, env);
     
-    // char *cmd_path;
-    // // printf("cmd == %s\n", pipe_strc->args[0]);
-    // if (pipe_strc->redirec)
-    //     handle_redirections(pipe_strc);
-    // if (!pipe_strc->args)
-    // {
-    //     // printf("IS NULL \n");
-    //     exit(1);
-    // }
-    // cmd_path = get_path(env, ft_strjoin(ft_strdup("/"), pipe_strc->args[0]));
-
-    // // i = 3;
-    // // while (i < 1024)
-    // //     close(i++);
-    // if(execve(cmd_path, pipe_strc->args, env) == -1)
-    // {
-    //     printf("command not execute\n");
-    // }
+    
 }
 
 void    exec_pipe_cmd(t_pipes *pipes, char **env)
