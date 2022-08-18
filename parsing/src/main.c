@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/18 00:42:05 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:32:01 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	main(int ac, char **av, char **env)
 		parser = init_parser(cmd_line);
 		ast = parser_parse(parser);
 		free_parser(parser);
-		// visitor(ast);
-		if(ast)
-			execution(ast, env);
+		visitor(ast);
+		// if(ast)
+		// 	execution(ast, env);
 		free_ast_pipe(ast);
-		}
+	}
 	return (g_exit_status);
 }

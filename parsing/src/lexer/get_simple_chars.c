@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 16:38:42 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/09 15:15:12 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/18 15:30:50 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_simple_chars(t_lexer *lexer)
 
 	start = lexer->i;
 	while (diff_of_special_chars(lexer->c) && lexer->c != '"'
-		&& lexer->c != '\'' )
+		&& lexer->c != '\'' && lexer->c != '$')
 		lexer_advance(lexer);
 	ends = lexer->i;
 	s = ft_substr(lexer->contents, start, ends - start);
