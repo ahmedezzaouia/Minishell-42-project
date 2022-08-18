@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/17 17:12:40 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/18 01:18:38 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,17 @@ int    handle_redirections(t_AST *pipe_strc)
 
     i = 0;
     redirec = pipe_strc->redirec;
-    // if (!redirec)
-    //     return (0);
     while (i < pipe_strc->size_redirec)
     {
         
         if (redirec[i]->type == INPUT)
         {
             fd = open(redirec[i]->filename, O_RDONLY);
+            printf("fd == %d\n",fd);
             if (fd == -1)
             {
                 printf("file is not exist\n");
-                return (0);
+                exit(EXIT_FAILURE);
             }
             dup2(fd, 0);
             close(fd);
@@ -70,6 +69,12 @@ int    handle_redirections(t_AST *pipe_strc)
         else if (redirec[i]->type == OUTPUT)
         {
             fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY , 0644);
+            printf("fd == %d\n",fd);
+            if (fd == -1)
+            {
+                printf("file is not exist\n");
+                exit(EXIT_FAILURE);
+            }
             dup2(fd, 1);
         }
         i++;
@@ -78,10 +83,8 @@ int    handle_redirections(t_AST *pipe_strc)
     
 }
 
-void    exec_simple_cmd(t_AST *pipe_strc, char **env)
+void    exec_commad(t_AST *pipe_strc, char **env)
 {
-    // check if /user/bin/ls path example or Not
-    // printf("exec_simple_cmd called\n");
     char *cmd_path;
     // printf("cmd == %s\n", pipe_strc->args[0]);
     if (pipe_strc->redirec)
@@ -100,6 +103,43 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env)
     {
         printf("command not execute\n");
     }
+}
+
+void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
+{
+    // check if /user/bin/ls path example or Not
+    // printf("exec_simple_cmd called\n");
+    if (nbre_pipes == 1)
+    {
+        if (fork() == 0)
+            exec_commad(pipe_strc, env);
+        else
+        {
+            wait(NULL);
+        }
+        
+    }
+    else
+        exec_commad(pipe_strc, env);
+    
+    // char *cmd_path;
+    // // printf("cmd == %s\n", pipe_strc->args[0]);
+    // if (pipe_strc->redirec)
+    //     handle_redirections(pipe_strc);
+    // if (!pipe_strc->args)
+    // {
+    //     // printf("IS NULL \n");
+    //     exit(1);
+    // }
+    // cmd_path = get_path(env, ft_strjoin(ft_strdup("/"), pipe_strc->args[0]));
+
+    // // i = 3;
+    // // while (i < 1024)
+    // //     close(i++);
+    // if(execve(cmd_path, pipe_strc->args, env) == -1)
+    // {
+    //     printf("command not execute\n");
+    // }
 }
 
 void    exec_pipe_cmd(t_pipes *pipes, char **env)
@@ -132,7 +172,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
                 close(fd[1]);
             }
             // printf("pipe called\n");
-            exec_simple_cmd(pipes->tab_cmd[i], env);
+            exec_simple_cmd(pipes->tab_cmd[i], env, pipes->nbre_pipes + 1);
             // child process code end  
         }
         else
@@ -155,7 +195,7 @@ void    execution(t_pipes *pipes, char **env)
 {
 
     if (pipes->nbre_pipes == 1)
-        exec_simple_cmd(pipes->tab_cmd[0], env);
+        exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)
         exec_pipe_cmd(pipes, env);
     // int i = 3;
