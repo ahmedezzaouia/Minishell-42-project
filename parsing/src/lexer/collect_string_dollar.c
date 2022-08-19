@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:40:57 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 15:34:30 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/19 01:56:33 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 /* remove multiple spaces */
 
-char	*ft_split_word(char *s)
+char	*ft_split_word(char *s, int *status)
 {
 	char	**tmp;
 	char	*str;
 	int		i;
 
 	i = 0;
+	*status = 1;
 	str = ft_strdup_er("");
 	tmp = ft_split(s, ' ');
 	if (!tmp)
@@ -86,7 +87,7 @@ char	*get_env_variable(t_lexer *lexer, int status)
 			lexer->is_ambg = 1;
 	}
 	else if (status == 1)
-		s = ft_split_word(s);
+		s = ft_split_word(s, &lexer->split_lexer);
 	return (s);
 }
 

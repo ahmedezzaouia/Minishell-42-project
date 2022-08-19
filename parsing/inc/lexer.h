@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:23:17 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 23:24:59 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/18 23:29:45 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_lexer
 	unsigned int	i;
 	char			*contents;
 	int				is_ambg;
+	int				split_lexer;
 	int				exit_status;
 }	t_lexer;
 
@@ -46,6 +47,6 @@ char		*get_string_squote(t_lexer *lexer);
 char		*get_simple_chars(t_lexer *lexer);
 char		*ft_strdup_er(char *str);
 char		*get_string_dollar(t_lexer	*lexer);
-char		*ft_split_word(char *s);
+char		*ft_split_word(char *s, int *status);
 void		free_it(char **s);
 #endif

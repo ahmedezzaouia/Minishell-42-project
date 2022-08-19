@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Thu Aug 18 16:49:51 2022
+# Make data base, printed on Thu Aug 18 19:12:46 2022
 
 # Variables
 
@@ -35,10 +34,10 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 24)
 CFLAGS = -Wall -Wextra -Werror 
 # makefile (from `Makefile', line 1)
- 
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 15)
-SRCS = parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/execution/execution.c
+ 
+SRCS = parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
 # makefile (from `Makefile', line 26)
 READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 # environment
@@ -164,9 +163,9 @@ VSCODE_PID = 3605
 
 # Directories
 
-# . (device 16777227, inode 3838386): 8 files, no impossibilities.
+# . (device 16777227, inode 3838386): 7 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 7 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -246,7 +245,7 @@ parsing/src/lib/ft_strlen.c:
 # Not a target:
 parsing/src/visitor.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 15:28:49
+#  Last modified 2022-08-18 18:10:41
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -270,7 +269,7 @@ parsing/src/lexer/colloct_redirect.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 15:28:49
+#  Last modified 2022-08-18 19:10:39
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -279,7 +278,7 @@ Makefile:
 # Not a target:
 parsing/src/parser/parsing_utils2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 15:28:49
+#  Last modified 2022-08-18 19:05:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -308,8 +307,8 @@ parsing/src/lib/ft_split.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-18 15:28:49
 #  File has been updated.
- 
 #  Successfully updated.
+ 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -343,7 +342,7 @@ parsing/src/lib/ft_bzero.c:
 # Not a target:
 parsing/src/lexer/lexer.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 15:28:49
+#  Last modified 2022-08-18 19:03:45
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -389,7 +388,7 @@ parsing/execution/execution.c:
 # Not a target:
 parsing/src/lexer/collect_string_dollar.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 15:28:49
+#  Last modified 2022-08-18 18:59:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -404,10 +403,10 @@ parsing/src/lexer/ft_strdup_er.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/execution/execution.c
+parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
-#  Last modified 2022-08-18 15:31:07
+#  Last modified 2022-08-18 18:48:55
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -417,15 +416,15 @@ parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_doll
 # automatic
 # * := 
 # automatic
-# + := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/execution/execution.c
+# + := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
 # automatic
 # | := 
 # automatic
 # < := parsing/src/lexer/collect_string.c
 # automatic
-# ^ := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/execution/execution.c
+# ^ := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
 # automatic
-# ? := parsing/src/main.c
+# ? := parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/lexer.c parsing/src/parser/parsing_utils2.c parsing/src/parser/fill_args.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=2/16=12%
 #  commands to execute (from `Makefile', line 31):
@@ -486,6 +485,7 @@ parsing/src/lib/ft_substr.c:
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
+ 
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -493,7 +493,6 @@ re: fclean all
 # Not a target:
 parsing/src/lexer/get_string_dqoute.c:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-08-18 15:28:49
 #  File has been updated.
 #  Successfully updated.
@@ -539,7 +538,7 @@ parsing/src/lib/ft_realloc.c:
 # Not a target:
 parsing/src/parser/parsing_utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 15:28:49
+#  Last modified 2022-08-18 18:44:50
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -572,8 +571,17 @@ parsing/src/lexer/get_string_sqoute.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+# Not a target:
+parsing/src/parser/fill_args.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 19:09:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 # files hash-table stats:
-# Load=43/1024=4%, Rehash=0, Collisions=0/98=0%
+# Load=44/1024=4%, Rehash=0, Collisions=0/100=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -585,6 +593,6 @@ parsing/src/lexer/get_string_sqoute.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Aug 18 16:49:51 2022
+# Finished Make data base on Thu Aug 18 19:12:46 2022
 
  

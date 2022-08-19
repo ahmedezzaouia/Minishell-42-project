@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 23:26:40 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/19 03:13:48 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,16 @@ void	collect_args(t_parser *parser, t_AST *ast)
 {
 	while (parser->cur_tocken && parser->cur_tocken->type == TOCKEN_WORD)
 	{
-		ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
+		if (parser->lexer->split_lexer)
+		{
+			fill_args(&(ast->args), &parser->cur_tocken->value,
+				&(ast->size_args));
+			parser_expected(parser, TOCKEN_WORD);
+			if (parser->cur_tocken->type != TOCKEN_WORD)
+				break ;
+		}
+		ast->args = ft_realloc_er(ast->args, sizeof(char *),
+				ast->size_args);
 		ast->size_args += 1;
 		ast->args[ast->size_args - 1] = parser->cur_tocken->value;
 		parser_expected(parser, TOCKEN_WORD);
@@ -72,7 +81,10 @@ int	collect_redirect(t_parser *parser, t_AST *ast)
 	if (parser_expected(parser, TOCKEN_WORD))
 		return (1);
 	if (type != HERE_DOC && check_ambiguous(parser))
+	{
+		free(parser->prev_tocken->value);
 		return (1);
+	}
 	alloc_redirec(ast);
 	if (type == HERE_DOC)
 		analyse_here_doc(parser, &type, index_c);

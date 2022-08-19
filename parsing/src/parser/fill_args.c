@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   fill_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 20:16:17 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 02:13:02 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/18 19:06:13 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/19 02:15:08 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/parsing.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	fill_args(char ***args, char **str, int *size)
 {
-	void	*p;
+	char	**split;
+	int		i;
 
-	p = (void *)malloc(count * size);
-	if (!p)
-		return (NULL);
-	else
+	i = 0;
+	split = ft_split(*str, ' ');
+	if (!split)
+		ft_error(errno);
+	while (split[i])
 	{
-		ft_bzero(p, count * size);
-		return (p);
+		*args = ft_realloc_er(*args, sizeof(char *), *size);
+		*size += 1;
+		(*args)[*size - 1] = split[i];
+		i++;
 	}
+	free(split);
+	free(*str);
 }

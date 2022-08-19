@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/17 23:24:35 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/19 03:14:32 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 		free_ast_cmd(ast);
 		return (NULL);
 	}
-	if(ast->args)
+	if (ast->args)
 	{
 		ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
 		ast->args[ast->size_args] = NULL;
