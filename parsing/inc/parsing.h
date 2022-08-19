@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/19 01:28:53 by ahmaidi          ###   ########.fr       */
+=======
+/*   Updated: 2022/08/18 23:01:27 by ahmez-za         ###   ########.fr       */
+>>>>>>> 27e51b4e6825f5a2d137ddf256ab74f6e76f5274
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +28,9 @@
 # include "lexer.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/stat.h>
+#include <signal.h>
+
 
 int	g_exit_status;
 
@@ -89,5 +96,9 @@ void			analyse_here_doc(t_parser *parser,
 void			get_ast_pipeline(t_parser *parser, t_pipes **pipes);
 void			check_error_max_here_doc(char *cmd_line);
 int				check_ambiguous(t_parser *parser);
+<<<<<<< HEAD
 void			fill_args(char ***args, char **str, int *size);
+=======
+
+>>>>>>> 27e51b4e6825f5a2d137ddf256ab74f6e76f5274
 #endif
