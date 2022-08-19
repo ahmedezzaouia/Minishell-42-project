@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 01:28:53 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/19 04:31:31 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/errno.h>
 # include <string.h>
 # include <errno.h>
-# include "../src/lib/libft.h"
+# include "../parsing/lib/libft.h"
 # include "tocken.h"
 # include "lexer.h"
 # include <readline/readline.h>

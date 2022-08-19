@@ -6,11 +6,11 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 04:03:30 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/19 04:20:56 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parsing.h"
+#include "./inc/parsing.h"
 
 int	read_cmd_line(char **cmd)
 {
