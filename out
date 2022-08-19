@@ -1,4 +1,0 @@
-cmd == /usr/bin/grep
-cmd_path == /usr/bin/grep
-cmd_path == /bin/ls
-hell
