@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/18 23:13:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/19 02:49:37 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,11 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     // check if /user/bin/ls path example or Not
     // printf("exec_simple_cmd called\n");
     if (nbre_pipes == 1)
-    {
+    { 
         if (fork() == 0)
             exec_commad(pipe_strc, env);
         else
-        {
             wait(NULL);
-        }
-        
     }
     else
         exec_commad(pipe_strc, env);
@@ -153,48 +150,53 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     int i;
     int fd[2];
     int pid;
-    int last_fd = 0;
+    int last_fd = -1;
 
     pipes->nbre_pipes--;
     i = 0;
     while (i <= pipes->nbre_pipes)
     {
-
         if (pipe(fd) == -1)
             ft_print_error();
+        // printf("====>%s\n", pipes->tab_cmd[i]->args[0]);
         pid = fork();
         if (pid == 0)
         {
       
             // child process code start
-            if (i != 0)
-            {
-                dup2(last_fd, STDIN_FILENO);
-                close(last_fd);
-            }
             if (i != pipes->nbre_pipes)
             {
-                dup2(fd[1], STDOUT_FILENO);
+                dup2(fd[1], 1);
                 close(fd[1]);
             }
+            else 
+                close(fd[1]);
+            if (last_fd != -1)
+            {
+                dup2(last_fd, 0);
+                close(last_fd);
+            }
+            close(fd[0]);
             // printf("pipe called\n");
             exec_simple_cmd(pipes->tab_cmd[i], env, pipes->nbre_pipes + 1);
             // child process code end  
         }
         else
         {
+            if (last_fd != -1)
+                close(last_fd);
             last_fd = fd[0];
+            // printf("cmd == %s **** last_fd ===== %d in [i] == %d with pip[%d -- %d]\n", pipes->tab_cmd[i]->args[0], i, fd[0], fd[1]);
             close(fd[1]);
         }
         i++;
-        
     }
+    i = 0;
+    int res = 0;
+    while (res != -1) 
+        res = waitpid(-1, NULL, 0);    
     close(fd[0]);
     close(fd[1]);
-    i = 0;
-    while (i++ <= pipes->nbre_pipes)
-        wait(NULL);
-    
 }
 
 void    execution(t_pipes *pipes, char **env)
