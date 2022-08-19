@@ -3,25 +3,54 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/19 04:38:12 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/19 15:58:02 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = parser
+NAME = minishell
 CC = gcc 
-SRCS = minishell/parsing/lexer/collect_string.c minishell/parsing/lexer/collect_string_dollar.c minishell/parsing/lexer/free_it.c \
-minishell/parsing/lexer/ft_strdup_er.c minishell/parsing/lexer/colloct_redirect.c minishell/parsing/lexer/get_string_dollar.c \
-minishell/parsing/lexer/get_string_dqoute.c minishell/parsing/lexer/get_string_sqoute.c minishell/parsing/lexer/lexer.c \
-minishell/parsing/lexer/tocken.c minishell/parsing/lexer/ft_error.c minishell/main.c minishell/parsing/lexer/get_simple_chars.c \
-minishell/parsing/lib/ft_calloc.c minishell/parsing/lib/ft_split.c minishell/parsing/lib/ft_putchar_fd.c  minishell/parsing/lib/ft_putstr_fd.c minishell/parsing/lib/ft_realloc.c minishell/parsing/lib/ft_strlen.c minishell/parsing/lib/ft_isalpha.c minishell/parsing/lib/ft_strdup.c \
-minishell/parsing/lib/ft_strjoin.c minishell/parsing/lib/ft_strjoin_char.c minishell/parsing/lib/ft_substr.c minishell/parsing/lib/ft_memcpy.c minishell/parsing/lib/ft_bzero.c minishell/parsing/lib/ft_isalnum.c \
-minishell/parsing/lib/ft_itoa.c minishell/parsing/parser/ft_realloc_er.c \
-minishell/parsing/parser/parsing_utils.c minishell/parsing/parser/parsing_utils2.c minishell/parsing/parser/free_it.c minishell/parsing/parser/parsing.c minishell/parsing/visitor.c \
-minishell/parsing/parser/anlyse_here_doc.c minishell/parsing/parser/check_error.c minishell/parsing/parser/fill_args.c minishell/execution/execution.c
+SRCS = parsing/lexer/collect_string.c \
+parsing/lexer/collect_string_dollar.c \
+parsing/lexer/free_it.c \
+parsing/lexer/ft_strdup_er.c \
+parsing/lexer/colloct_redirect.c \
+parsing/lexer/get_string_dollar.c \
+parsing/lexer/get_string_dqoute.c \
+parsing/lexer/get_string_sqoute.c \
+parsing/lexer/lexer.c \
+parsing/lexer/tocken.c \
+parsing/lexer/ft_error.c \
+main.c \
+parsing/lexer/get_simple_chars.c \
+parsing/lib/ft_calloc.c \
+parsing/lib/ft_split.c \
+parsing/lib/ft_putchar_fd.c \
+parsing/lib/ft_putstr_fd.c \
+parsing/lib/ft_realloc.c \
+parsing/lib/ft_strlen.c \
+parsing/lib/ft_isalpha.c \
+parsing/lib/ft_strdup.c \
+parsing/lib/ft_strjoin.c \
+parsing/lib/ft_strjoin_char.c \
+parsing/lib/ft_substr.c \
+parsing/lib/ft_memcpy.c \
+parsing/lib/ft_bzero.c \
+parsing/lib/ft_isalnum.c \
+parsing/lib/ft_itoa.c \
+parsing/parser/ft_realloc_er.c \
+parsing/parser/parsing_utils.c \
+parsing/parser/parsing_utils2.c \
+parsing/parser/free_it.c \
+parsing/parser/parsing.c \
+parsing/visitor.c \
+parsing/parser/anlyse_here_doc.c \
+parsing/parser/check_error.c \
+parsing/parser/fill_args.c \
+execution/execution.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
@@ -30,7 +59,7 @@ READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib \
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	@$(CC) $(CFLAGS) $(READLINE) $(SRCS) -o parser
+	@$(CC) $(CFLAGS) $(READLINE) $(SRCS) -o $(NAME)
 	@echo "\033[92mExecution file Created\033[0m"
 fclean:
 	$(RM) $(NAME)
