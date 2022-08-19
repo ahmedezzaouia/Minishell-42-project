@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Fri Aug 19 03:23:24 2022
+# Make data base, printed on Fri Aug 19 03:30:24 2022
 
 # Variables
 
@@ -25,12 +25,20 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 CURDIR := /Users/ahmaidi/Desktop/minishell
 # makefile
 SHELL = /bin/sh
+# makefile (from `Makefile', line 27)
+RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
+# makefile (from `Makefile', line 26)
+CFLAGS = -Wall -Wextra -Werror -g 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
+# makefile (from `Makefile', line 16)
+SRCS = parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_putchar_fd.c  parsing/src/lib/ft_putstr_fd.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
+# makefile (from `Makefile', line 28)
+READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 # environment
 VSCODE_CWD = /
 # environment
@@ -64,7 +72,7 @@ VSCODE_CODE_CACHE_PATH = /Users/ahmaidi/Library/Application Support/Code/CachedD
 # environment
 LOGNAME = ahmaidi
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 ZSH = /Users/ahmaidi/.oh-my-zsh
 # environment
@@ -81,12 +89,16 @@ MAKECMDGOALS := all
 HOMEBREW_CACHE = /tmp/ahmaidi/Homebrew/Caches
 # environment
 SHLVL = 1
+# makefile (from `Makefile', line 15)
+CC = gcc 
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = ahmaidi
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 14)
+NAME = parser
 # environment
 LESS = -R
 # automatic
@@ -142,7 +154,7 @@ LANG = C
 # environment
 VSCODE_PID = 60448
 # variable set hash-table stats:
-# Load=65/1024=6%, Rehash=0, Collisions=1/79=1%
+# Load=71/1024=7%, Rehash=0, Collisions=4/106=4%
 
 # Pattern-specific Variable Values
 
@@ -150,9 +162,9 @@ VSCODE_PID = 60448
 
 # Directories
 
-# . (device 16777227, inode 3838386): 10 files, no impossibilities.
+# . (device 16777227, inode 3838386): 8 files, no impossibilities.
 
-# 10 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -161,11 +173,91 @@ VSCODE_PID = 60448
 # Files
 
 # Not a target:
-all:
+parsing/src/lexer/get_simple_chars.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:30:50
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_putchar_fd.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+all: parser
+#  Phony target (prerequisite of .PHONY).
 #  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+
+.PHONY: all fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+# Not a target:
+parsing/src/lexer/get_string_dollar.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 01:57:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_memcpy.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_itoa.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/parsing.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 02:52:53
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_strlen.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/visitor.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 02:48:01
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -174,10 +266,180 @@ all:
 #  File has not been updated.
 
 # Not a target:
+parsing/src/lexer/colloct_redirect.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+ 
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
 Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 03:26:27
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/parsing_utils2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 03:13:48
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/ft_realloc_er.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_strjoin.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_split.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 02:12:55
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/anlyse_here_doc.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_strjoin_char.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_bzero.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/lexer.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 19:03:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/ft_error.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+fclean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
+#  commands to execute (from `Makefile', line 36):
+	$(RM) $(NAME)
+	@echo "\033[91mExecution file deleted\033[0m"
+	
+
+# Not a target:
+parsing/src/lexer/collect_string.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/execution/execution.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/collect_string_dollar.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 01:56:33
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/ft_strdup_er.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parser: parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_putchar_fd.c parsing/src/lib/ft_putstr_fd.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := parser
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_putchar_fd.c parsing/src/lib/ft_putstr_fd.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
+# automatic
+# | := 
+# automatic
+# < := parsing/src/lexer/collect_string.c
+# automatic
+# ^ := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_putchar_fd.c parsing/src/lib/ft_putstr_fd.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
+# automatic
+ 
+# ? := parsing/src/lexer/collect_string.c parsing/src/lexer/collect_string_dollar.c parsing/src/lexer/free_it.c parsing/src/lexer/ft_strdup_er.c parsing/src/lexer/colloct_redirect.c parsing/src/lexer/get_string_dollar.c parsing/src/lexer/get_string_dqoute.c parsing/src/lexer/get_string_sqoute.c parsing/src/lexer/lexer.c parsing/src/lexer/tocken.c parsing/src/lexer/ft_error.c parsing/src/main.c parsing/src/lexer/get_simple_chars.c parsing/src/lib/ft_calloc.c parsing/src/lib/ft_split.c parsing/src/lib/ft_putchar_fd.c parsing/src/lib/ft_putstr_fd.c parsing/src/lib/ft_realloc.c parsing/src/lib/ft_strlen.c parsing/src/lib/ft_isalpha.c parsing/src/lib/ft_strdup.c parsing/src/lib/ft_strjoin.c parsing/src/lib/ft_strjoin_char.c parsing/src/lib/ft_substr.c parsing/src/lib/ft_memcpy.c parsing/src/lib/ft_bzero.c parsing/src/lib/ft_isalnum.c parsing/src/lib/ft_itoa.c parsing/src/parser/ft_realloc_er.c parsing/src/parser/parsing_utils.c parsing/src/parser/parsing_utils2.c parsing/src/parser/free_it.c parsing/src/parser/parsing.c parsing/src/visitor.c parsing/src/parser/anlyse_here_doc.c parsing/src/parser/check_error.c parsing/src/parser/fill_args.c parsing/execution/execution.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
+#  commands to execute (from `Makefile', line 33):
+	@$(CC) $(CFLAGS) $(READLINE) $(SRCS) -o parser
+	@echo "\033[92mExecution file Created\033[0m"
+	
 
 # Not a target:
 .DEFAULT:
@@ -185,8 +447,158 @@ Makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+parsing/src/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 02:57:26
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/tocken.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/free_it.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 03:14:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_calloc.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 02:13:02
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_substr.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+parsing/src/lexer/get_string_dqoute.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_isalpha.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/check_error.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_isalnum.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_realloc.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/parsing_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 03:14:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_strdup.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/free_it.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lib/ft_putstr_fd.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/lexer/get_string_sqoute.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 15:28:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+parsing/src/parser/fill_args.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 02:15:08
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 # files hash-table stats:
-# Load=4/1024=0%, Rehash=0, Collisions=0/5=0%
+# Load=46/1024=4%, Rehash=0, Collisions=0/104=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -198,8 +610,6 @@ Makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug 19 03:23:24 2022
+# Finished Make data base on Fri Aug 19 03:30:24 2022
 
  
-Makefile:9: *** missing separator.  Stop.
-
