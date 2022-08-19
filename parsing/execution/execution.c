@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/18 01:18:38 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/19 04:03:19 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ char    *get_path(char **env, char *cmd)
     char    **path_chunks;
     char    *cmd_joined_path;
 
-    path_chunks = ft_split(getenv("PATH"), ':');
     i = 0;
+    printf("cmd == %s\n", cmd);
+    path_chunks = ft_split(getenv("PATH"), ':');
     while (path_chunks[i])
     {
         cmd_joined_path = ft_strjoin(path_chunks[i], cmd);
         if (access(cmd_joined_path, F_OK) == 0)
             return (cmd_joined_path);
-        // printf("chunk[%d] == %s\n",i, cmd_joined_path);
         i++;
     }
     // todo :: you have to check if all path are not valid 
-    return (NULL);
+    return (cmd);
 }
   
 
@@ -48,16 +48,21 @@ int    handle_redirections(t_AST *pipe_strc)
     int i;
     int fd;
     t_redir **redirec;
+    // struct stat fileStat;
 
     i = 0;
     redirec = pipe_strc->redirec;
+    if (!redirec)
+        return (0);
     while (i < pipe_strc->size_redirec)
     {
         
         if (redirec[i]->type == INPUT)
         {
+            // if(stat(redirec[i]->filename,&fileStat) < 0)    
+            //     return (0);
             fd = open(redirec[i]->filename, O_RDONLY);
-            printf("fd == %d\n",fd);
+           
             if (fd == -1)
             {
                 printf("file is not exist\n");
@@ -68,8 +73,24 @@ int    handle_redirections(t_AST *pipe_strc)
         }
         else if (redirec[i]->type == OUTPUT)
         {
-            fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY , 0644);
-            printf("fd == %d\n",fd);
+            fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
+            if (fd == -1)
+            {
+                // printf("Minishell: %s: Permission denied\n", redirec[i]->filename);
+                ft_putstr_fd("Minishell: Permission denied\n", 2);
+                exit(1);
+            }
+            dup2(fd, 1);
+        }
+        else if (redirec[i]->type == APPAND)
+        {
+            fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY | O_APPEND, 0644);
+            if (fd == -1)
+            {
+                // printf("Minishell: %s: Permission denied\n", redirec[i]->filename);
+                ft_putstr_fd("Minishell: Permission denied\n", 2);
+                exit(1);
+            }
             if (fd == -1)
             {
                 printf("file is not exist\n");
@@ -86,22 +107,24 @@ int    handle_redirections(t_AST *pipe_strc)
 void    exec_commad(t_AST *pipe_strc, char **env)
 {
     char *cmd_path;
-    // printf("cmd == %s\n", pipe_strc->args[0]);
-    if (pipe_strc->redirec)
-        handle_redirections(pipe_strc);
-    if (!pipe_strc->args)
-    {
-        // printf("IS NULL \n");
-        exit(1);
-    }
-    cmd_path = get_path(env, ft_strjoin(ft_strdup("/"), pipe_strc->args[0]));
+    char *cmd;
 
-    // i = 3;
-    // while (i < 1024)
-    //     close(i++);
+    // printf("args[0]== %s\n\n", pipe_strc->args[0]);
+    handle_redirections(pipe_strc);
+    if (!pipe_strc->args)
+        exit(1);
+
+    if (pipe_strc->args[0][0] == 47)
+        cmd = pipe_strc->args[0];
+    else
+        cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
+
+    cmd_path = get_path(env, cmd);
+    printf("cmd_path == %s\n",cmd_path);
     if(execve(cmd_path, pipe_strc->args, env) == -1)
     {
         printf("command not execute\n");
+
     }
 }
 
@@ -110,36 +133,16 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     // check if /user/bin/ls path example or Not
     // printf("exec_simple_cmd called\n");
     if (nbre_pipes == 1)
-    {
+    { 
         if (fork() == 0)
             exec_commad(pipe_strc, env);
         else
-        {
             wait(NULL);
-        }
-        
     }
     else
         exec_commad(pipe_strc, env);
     
-    // char *cmd_path;
-    // // printf("cmd == %s\n", pipe_strc->args[0]);
-    // if (pipe_strc->redirec)
-    //     handle_redirections(pipe_strc);
-    // if (!pipe_strc->args)
-    // {
-    //     // printf("IS NULL \n");
-    //     exit(1);
-    // }
-    // cmd_path = get_path(env, ft_strjoin(ft_strdup("/"), pipe_strc->args[0]));
-
-    // // i = 3;
-    // // while (i < 1024)
-    // //     close(i++);
-    // if(execve(cmd_path, pipe_strc->args, env) == -1)
-    // {
-    //     printf("command not execute\n");
-    // }
+    
 }
 
 void    exec_pipe_cmd(t_pipes *pipes, char **env)
@@ -147,48 +150,53 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     int i;
     int fd[2];
     int pid;
-    int last_fd = 0;
+    int last_fd = -1;
 
     pipes->nbre_pipes--;
     i = 0;
     while (i <= pipes->nbre_pipes)
     {
-
         if (pipe(fd) == -1)
             ft_print_error();
+        // printf("====>%s\n", pipes->tab_cmd[i]->args[0]);
         pid = fork();
         if (pid == 0)
         {
       
             // child process code start
-            if (i != 0)
-            {
-                dup2(last_fd, STDIN_FILENO);
-                close(last_fd);
-            }
             if (i != pipes->nbre_pipes)
             {
-                dup2(fd[1], STDOUT_FILENO);
+                dup2(fd[1], 1);
                 close(fd[1]);
             }
+            else 
+                close(fd[1]);
+            if (last_fd != -1)
+            {
+                dup2(last_fd, 0);
+                close(last_fd);
+            }
+            close(fd[0]);
             // printf("pipe called\n");
             exec_simple_cmd(pipes->tab_cmd[i], env, pipes->nbre_pipes + 1);
             // child process code end  
         }
         else
         {
+            if (last_fd != -1)
+                close(last_fd);
             last_fd = fd[0];
+            // printf("cmd == %s **** last_fd ===== %d in [i] == %d with pip[%d -- %d]\n", pipes->tab_cmd[i]->args[0], i, fd[0], fd[1]);
             close(fd[1]);
         }
         i++;
-        
     }
+    i = 0;
+    int res = 0;
+    while (res != -1) 
+        res = waitpid(-1, NULL, 0);    
     close(fd[0]);
     close(fd[1]);
-    i = 0;
-    while (i++ <= pipes->nbre_pipes)
-        wait(NULL);
-    
 }
 
 void    execution(t_pipes *pipes, char **env)

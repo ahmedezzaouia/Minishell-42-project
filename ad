@@ -1,0 +1,6 @@
+cmd == /grep
+cmd_path == /usr/bin/grep
+cmd_path == /bin/ls
+parser
+parser.dSYM
+parsing
