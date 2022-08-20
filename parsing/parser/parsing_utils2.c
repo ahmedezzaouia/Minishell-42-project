@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 03:13:48 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/20 19:05:16 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	collect_args(t_parser *parser, t_AST *ast)
 {
 	while (parser->cur_tocken && parser->cur_tocken->type == TOCKEN_WORD)
 	{
+		if (parser->lexer->env_vide)
+		{
+			parser_expected(parser, TOCKEN_WORD);
+			continue ;
+		}
 		if (parser->lexer->split_lexer)
 		{
 			fill_args(&(ast->args), &parser->cur_tocken->value,
@@ -58,9 +63,9 @@ void	alloc_redirec(t_AST *ast)
 }
 
 /* Check ambigous redirect */
-int	check_ambiguous(t_parser *parser)
+int	check_ambiguous(int status)
 {
-	if (parser->lexer->is_ambg)
+	if (status)
 	{
 		write(2, "Minishell: ambiguous redirect\n", 31);
 		g_exit_status = 1;
@@ -74,17 +79,20 @@ int	collect_redirect(t_parser *parser, t_AST *ast)
 {
 	t_type_redir	type;
 	int				index_c;
+	int				ambg;
 
 	index_c = parser->lexer->i;
 	type = get_type_redirect(parser);
 	parser_expected(parser, parser->cur_tocken->type);
-	if (parser_expected(parser, TOCKEN_WORD))
-		return (1);
-	if (type != HERE_DOC && check_ambiguous(parser))
+	ambg = parser->lexer->is_ambg;
+	if (type != HERE_DOC && check_ambiguous(ambg))
 	{
-		free(parser->prev_tocken->value);
+		if (parser->cur_tocken->value)
+			free(parser->cur_tocken->value);
 		return (1);
 	}
+	if (parser_expected(parser, TOCKEN_WORD))
+		return (1);
 	alloc_redirec(ast);
 	if (type == HERE_DOC)
 		analyse_here_doc(parser, &type, index_c);

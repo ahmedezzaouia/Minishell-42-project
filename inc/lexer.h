@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:23:17 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/18 23:29:45 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/20 01:48:54 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_lexer
 	char			*contents;
 	int				is_ambg;
 	int				split_lexer;
+	int				env_vide;
 	int				exit_status;
 }	t_lexer;
 

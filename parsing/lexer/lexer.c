@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:53:27 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/18 19:03:45 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/20 14:53:19 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_lexer	*init_lexer(char *contents)
 	lexer->exit_status = g_exit_status;
 	lexer->is_ambg = 0;
 	lexer->split_lexer = 0;
+	lexer->env_vide = 0;
 	return (lexer);
 }
 
@@ -71,6 +72,8 @@ t_tocken	*lexer_get_next_tocken(t_lexer *lexer)
 {
 	while (lexer->c != '\0')
 	{
+		lexer->is_ambg = 0;
+		lexer->env_vide = 0;
 		lexer->split_lexer = 0;
 		if (lexer->c == ' ')
 			lexer_skip_white_spaces(lexer);

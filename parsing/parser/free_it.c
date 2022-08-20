@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:11:00 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 03:14:52 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/20 19:08:04 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	free_tocken(t_tocken *tocken)
 	if (tocken != NULL)
 	{
 		if (tocken->type != TOCKEN_WORD)
-			free(tocken->value);
-		free(tocken);
+		{
+			if (tocken->value)
+				free(tocken->value);
+		}
+		if (tocken)
+			free(tocken);
 	}
 }
 
@@ -34,9 +38,12 @@ void	free_parser(t_parser *parser)
 			free(parser->lexer->contents);
 			free(parser->lexer);
 		}
-		free_tocken(parser->prev_tocken);
-		free_tocken(parser->cur_tocken);
-		free(parser);
+		if (parser->prev_tocken)
+			free_tocken(parser->prev_tocken);
+		if (parser->cur_tocken)
+			free_tocken(parser->cur_tocken);
+		if (parser)
+			free(parser);
 	}
 }
 
@@ -53,8 +60,10 @@ t_AST	*free_ast_cmd(t_AST *ast)
 			free(ast->redirec[ast->size_redirec]->filename);
 			free(ast->redirec[ast->size_redirec]);
 		}
-		free(ast->redirec);
-		free(ast);
+		if (ast->redirec)
+			free(ast->redirec);
+		if (ast)
+			free(ast);
 	}
 	return (NULL);
 }
@@ -69,8 +78,10 @@ t_pipes	*free_ast_pipe(t_pipes *pipes)
 		{
 			free_ast_cmd(pipes->tab_cmd[pipes->nbre_pipes]);
 		}
-		free(pipes->tab_cmd);
-		free(pipes);
+		if (pipes->tab_cmd)
+			free(pipes->tab_cmd);
+		if (pipes)
+			free(pipes);
 	}
 	return (NULL);
 }

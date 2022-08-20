@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/19 15:58:02 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/20 22:33:43 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ parsing/lexer/ft_error.c \
 main.c \
 parsing/lexer/get_simple_chars.c \
 parsing/lib/ft_calloc.c \
+parsing/lib/ft_strncmp.c \
 parsing/lib/ft_split.c \
 parsing/lib/ft_putchar_fd.c \
 parsing/lib/ft_putstr_fd.c \
@@ -47,6 +48,7 @@ parsing/parser/parsing_utils2.c \
 parsing/parser/free_it.c \
 parsing/parser/parsing.c \
 parsing/visitor.c \
+parsing/parser/not_redirect.c \
 parsing/parser/anlyse_here_doc.c \
 parsing/parser/check_error.c \
 parsing/parser/fill_args.c \

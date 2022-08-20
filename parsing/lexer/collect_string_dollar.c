@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:40:57 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 01:56:33 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/20 14:59:09 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ char	*get_value_exit(t_lexer *lexer)
 	search in env Variable 
 */
 
+/*---------- if env doesn't exist -------------- */
+
+void	dollar_vide(t_lexer *lexer)
+{
+	lexer->is_ambg = 1;
+	lexer->env_vide = 1;
+}
+
+/*-----------------------------------------------*/
+
 char	*get_env_variable(t_lexer *lexer, int status)
 {
 	char	*s;
@@ -69,7 +79,6 @@ char	*get_env_variable(t_lexer *lexer, int status)
 	int		end;
 	char	*tmp;
 
-	(void)status;
 	start = lexer->i;
 	while (ft_isalnum(lexer->c) || lexer->c == '_')
 		lexer_advance(lexer);
@@ -84,7 +93,7 @@ char	*get_env_variable(t_lexer *lexer, int status)
 	{
 		s = ft_strdup_er("");
 		if (status == 1)
-			lexer->is_ambg = 1;
+			dollar_vide(lexer);
 	}
 	else if (status == 1)
 		s = ft_split_word(s, &lexer->split_lexer);
@@ -106,7 +115,8 @@ void	lexer_collect_string_dollar(t_lexer *lexer, char **s)
 	lexer_advance(lexer);
 	if (lexer->c == '?')
 		str = get_value_exit(lexer);
-	else if (lexer->c != '_' && !ft_isalpha(lexer->c))
+	else if (lexer->c != '_' && !ft_isalpha(lexer->c)
+		&& lexer->c != '"' && lexer->c != ' ')
 	{
 		str = ft_substr(lexer->contents, lexer->i - 1, 2);
 		if (!str)

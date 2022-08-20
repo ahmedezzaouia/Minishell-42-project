@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 04:30:58 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:07:45 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int	parser_expected(t_parser *parser, t_tocken_type type)
 	{
 		if (parser->cur_tocken->type == type)
 		{
+			if (parser->lexer->env_vide
+				&& not_redirect(parser->prev_tocken))
+				free(parser->cur_tocken->value);
 			free_tocken(parser->prev_tocken);
 			parser->prev_tocken = parser->cur_tocken;
 			parser->cur_tocken = lexer_get_next_tocken(parser->lexer);

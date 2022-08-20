@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 04:31:31 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:33:10 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_redir
 {
 	t_type_redir	type;
 	char			*filename;
+	int				heredoc[2];
 }	t_redir;
 
 typedef struct s_AST
@@ -88,6 +89,7 @@ void			analyse_here_doc(t_parser *parser,
 					t_type_redir *type, int index_c);
 void			get_ast_pipeline(t_parser *parser, t_pipes **pipes);
 void			check_error_max_here_doc(char *cmd_line);
-int				check_ambiguous(t_parser *parser);
+int				check_ambiguous(int status);
 void			fill_args(char ***args, char **str, int *size);
+int				not_redirect(t_tocken *tocken);
 #endif

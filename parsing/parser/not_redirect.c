@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   not_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 17:52:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 17:46:18 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/20 15:25:00 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/20 16:49:22 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/parsing.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+int	not_redirect(t_tocken *tocken)
 {
-	char			*str_join;
-	unsigned int	i;
-
-	if (!s1 || !s2)
-		return (NULL);
-	i = 0;
-	str_join = (char *)ft_calloc(1, (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str_join)
-		return (NULL);
-	while (i < ft_strlen(s1))
+	if (tocken)
 	{
-		str_join[i] = s1[i];
-		i++;
+		if (tocken->type == TOCKEN_GREAT
+			|| tocken->type == TOCKEN_DGREAT || tocken->type == TOCKEN_LESS
+			|| tocken->type == TOCKEN_HER_DOC)
+			return (0);
 	}
-	i = 0;
-	while (i < ft_strlen(s2))
-	{
-		str_join[i + ft_strlen(s1)] = s2[i];
-		i++;
-	}
-	free(s1);
-	return (str_join);
+	return (1);
 }

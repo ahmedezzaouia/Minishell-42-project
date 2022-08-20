@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/19 04:03:19 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:32:00 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char    *get_path(char **env, char *cmd)
     char    *cmd_joined_path;
 
     i = 0;
-    printf("cmd == %s\n", cmd);
+    // printf("cmd == %s\n", cmd);
     path_chunks = ft_split(getenv("PATH"), ':');
     while (path_chunks[i])
     {
@@ -42,13 +42,22 @@ char    *get_path(char **env, char *cmd)
     return (cmd);
 }
   
+// int    search_for_next_redirec_type(t_AST *pipe_strc, t_type_redir type, int red_index)
+// {
+//     while (red_index < pipe_strc->size_redirec)
+//     {
+//         if (pipe_strc->redirec[red_index]->type == type)
+//             return (1);
+//         red_index++;
+//     }
+//     return (0);
+// }
 
 int    handle_redirections(t_AST *pipe_strc)
 {
     int i;
     int fd;
     t_redir **redirec;
-    // struct stat fileStat;
 
     i = 0;
     redirec = pipe_strc->redirec;
@@ -56,47 +65,73 @@ int    handle_redirections(t_AST *pipe_strc)
         return (0);
     while (i < pipe_strc->size_redirec)
     {
+        // printf("type == %d **** filename == %s\n", redirec[i]->type, redirec[i]->filename);
         
         if (redirec[i]->type == INPUT)
         {
-            // if(stat(redirec[i]->filename,&fileStat) < 0)    
-            //     return (0);
+
             fd = open(redirec[i]->filename, O_RDONLY);
-           
             if (fd == -1)
-            {
-                printf("file is not exist\n");
-                exit(EXIT_FAILURE);
-            }
+                perror("Minishell\n");
+
             dup2(fd, 0);
             close(fd);
+
         }
         else if (redirec[i]->type == OUTPUT)
         {
-            fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
+
+            fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_TRUNC, 0644);
             if (fd == -1)
-            {
-                // printf("Minishell: %s: Permission denied\n", redirec[i]->filename);
-                ft_putstr_fd("Minishell: Permission denied\n", 2);
-                exit(1);
-            }
+                perror("Minishell\n");
             dup2(fd, 1);
+            close(fd);
+  
         }
-        else if (redirec[i]->type == APPAND)
+        else if (redirec[i]->type == APPAND )
         {
-            fd = open(redirec[i]->filename,  O_CREAT | O_WRONLY | O_APPEND, 0644);
+            fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_APPEND, 0644);
             if (fd == -1)
-            {
-                // printf("Minishell: %s: Permission denied\n", redirec[i]->filename);
-                ft_putstr_fd("Minishell: Permission denied\n", 2);
-                exit(1);
-            }
-            if (fd == -1)
-            {
-                printf("file is not exist\n");
-                exit(EXIT_FAILURE);
-            }
+                perror("Minishell\n");
             dup2(fd, 1);
+            close(fd);
+        }
+        else if (redirec[i]->type == HERE_DOC)
+        {
+            // char *str;
+            
+            // str = NULL;
+            // if (search_for_next_redirec_type(pipe_strc, HERE_DOC, i + 1))
+            //     is_last_herdoc = 1;
+            // else
+            // {
+            //     if (pipe(p) == -1)
+            //         ft_print_error();
+            //     is_last_herdoc = 0;
+            // }
+            // while ((str = get_next_line(0)))
+            // {   
+            //     if (!ft_strncmp(str, redirec[i]->filename, ft_strlen(redirec[i]->filename)))
+            //     {
+            //         free(str);
+            //         break ;
+            //     }
+            //     ft_putstr_fd(str, p[1]);
+            //     free(str);
+            // }
+            // if (!is_last_herdoc)
+            // {
+            //     dup2(p[0], 0);
+            //     handle_redirections(pipe_strc, 2);
+            // }
+
+            // close(p[0]);
+            // close(p[1]);
+            // if (!is_last_herdoc)
+            //     break ;
+
+            dup2(redirec[i]->heredoc[0], 0);
+            close(redirec[i]->heredoc[0]);
         }
         i++;
     }
@@ -109,10 +144,12 @@ void    exec_commad(t_AST *pipe_strc, char **env)
     char *cmd_path;
     char *cmd;
 
-    // printf("args[0]== %s\n\n", pipe_strc->args[0]);
     handle_redirections(pipe_strc);
-    if (!pipe_strc->args)
-        exit(1);
+
+    // if (!pipe_strc->args)
+    // {
+    //     exit(1);
+    // }
 
     if (pipe_strc->args[0][0] == 47)
         cmd = pipe_strc->args[0];
@@ -120,18 +157,17 @@ void    exec_commad(t_AST *pipe_strc, char **env)
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
 
     cmd_path = get_path(env, cmd);
-    printf("cmd_path == %s\n",cmd_path);
+    // printf("cmd_path == %s\n",cmd_path);
     if(execve(cmd_path, pipe_strc->args, env) == -1)
     {
-        printf("command not execute\n");
+        printf("minishell: %s:command not found\n",cmd + 1);
 
     }
 }
 
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
-    // check if /user/bin/ls path example or Not
-    // printf("exec_simple_cmd called\n");
+    // (void)nbre_pipes;
     if (nbre_pipes == 1)
     { 
         if (fork() == 0)
@@ -160,6 +196,11 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
             ft_print_error();
         // printf("====>%s\n", pipes->tab_cmd[i]->args[0]);
         pid = fork();
+        if (pid == -1)
+        {
+            printf("minishell: fork: Resource temporarily unavailable\n");
+            break ;
+        }
         if (pid == 0)
         {
       
