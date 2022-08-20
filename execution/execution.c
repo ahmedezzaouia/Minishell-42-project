@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/20 22:32:00 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/20 23:46:59 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,10 +157,11 @@ void    exec_commad(t_AST *pipe_strc, char **env)
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
 
     cmd_path = get_path(env, cmd);
+    printf("cmd_path === %s\n\n", cmd_path);
     // printf("cmd_path == %s\n",cmd_path);
     if(execve(cmd_path, pipe_strc->args, env) == -1)
     {
-        printf("minishell: %s:command not found\n",cmd + 1);
+        perror("minishell: ");
 
     }
 }

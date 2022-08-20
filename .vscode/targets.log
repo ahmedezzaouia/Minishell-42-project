@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Sat Aug 20 22:31:29 2022
+# Make data base, printed on Sat Aug 20 23:16:29 2022
 
 # Variables
 
@@ -25,24 +25,24 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 CURDIR := /Users/ahmaidi/Desktop/mini
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 57)
+# makefile (from `Makefile', line 58)
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 56)
+# makefile (from `Makefile', line 57)
 CFLAGS = -Wall -Wextra -Werror -g 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 16)
-SRCS = parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c
-# makefile (from `Makefile', line 58)
+SRCS = parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_strncmp.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c
+# makefile (from `Makefile', line 59)
 READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.Wnr4DB3niN/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.6Cv3LTYJ5t/Render
 # environment
 PATH = /Users/ahmaidi/.brew/bin:/Users/ahmaidi/.brew/bin:/Users/ahmaidi/goinfre/.brew/bin:/goinfre/ahmaidi/miniconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -52,7 +52,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.WcwZ44zuko/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.82Ym5xR8Xo/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -72,7 +72,7 @@ VSCODE_CODE_CACHE_PATH = /Users/ahmaidi/Library/Application Support/Code/CachedD
 # environment
 LOGNAME = ahmaidi
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 ZSH = /Users/ahmaidi/.oh-my-zsh
 # environment
@@ -152,9 +152,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 18054
+VSCODE_PID = 3531
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=4/107=4%
+# Load=71/1024=7%, Rehash=0, Collisions=3/98=3%
 
 # Pattern-specific Variable Values
 
@@ -172,15 +172,24 @@ VSCODE_PID = 18054
 
 # Files
 
+# Not a target:
+parsing/lib/ft_strncmp.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-19 15:42:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 all: minishell
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/9=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 parsing/parser/check_error.c:
@@ -244,7 +253,7 @@ parsing/lexer/free_it.c:
 # Not a target:
 main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-20 19:12:06
+#  Last modified 2022-08-20 22:32:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -267,6 +276,7 @@ parsing/lib/ft_putstr_fd.c:
 
 # Not a target:
 parsing/lexer/get_string_sqoute.c:
+ 
 #  Implicit rule search has been done.
 #  Last modified 2022-08-19 15:42:10
 #  File has been updated.
@@ -276,7 +286,6 @@ parsing/lexer/get_string_sqoute.c:
 
 # Not a target:
 parsing/parser/not_redirect.c:
- 
 #  Implicit rule search has been done.
 #  Last modified 2022-08-20 16:49:22
 #  File has been updated.
@@ -296,7 +305,7 @@ parsing/parser/fill_args.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-20 15:30:41
+#  Last modified 2022-08-20 22:33:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -323,37 +332,20 @@ parsing/lib/ft_putchar_fd.c:
 # Not a target:
 execution/execution.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-19 15:42:10
+#  Last modified 2022-08-20 22:32:00
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-minishell: parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c
+minishell: parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_strncmp.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
-#  Last modified 2022-08-20 19:08:13
+#  Last modified 2022-08-20 22:33:46
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := minishell
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c
-# automatic
-# | := 
-# automatic
-# < := parsing/lexer/collect_string.c
-# automatic
-# ^ := parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c
-# automatic
-# ? := main.c
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/17=12%
-#  commands to execute (from `Makefile', line 63):
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(CFLAGS) $(READLINE) $(SRCS) -o $(NAME)
 	@echo "\033[92mExecution file Created\033[0m"
 	
@@ -372,7 +364,7 @@ fclean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 67):
 	$(RM) $(NAME)
 	@echo "\033[91mExecution file deleted\033[0m"
 	
@@ -468,7 +460,6 @@ parsing/lib/ft_strjoin.c:
 parsing/lib/ft_split.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-19 15:42:10
- 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -544,6 +535,7 @@ parsing/lexer/collect_string_dollar.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+ 
 parsing/lexer/ft_strdup_er.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-19 15:42:10
@@ -607,7 +599,7 @@ parsing/lib/ft_isalpha.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=47/1024=5%, Rehash=0, Collisions=0/106=0%
+# Load=48/1024=5%, Rehash=0, Collisions=0/107=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -619,6 +611,6 @@ parsing/lib/ft_isalpha.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Aug 20 22:31:29 2022
+# Finished Make data base on Sat Aug 20 23:16:29 2022
 
  
