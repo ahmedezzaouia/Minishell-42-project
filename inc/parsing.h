@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 06:42:28 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:15:53 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-int	g_exit_status;
+typedef struct s_global_data
+{
+	int		exit_status;
+	char	**env_list;
+}	t_global_data;
+
 
 typedef enum s_type_redir
 {
@@ -71,7 +76,7 @@ t_parser		*init_parser(char *cmd);
 
 void			execution(t_pipes *pipes, char **env);
 void			ft_cd_cmd(t_AST *pipe_strc);
-void			ft_pwd_cmd();
+void			ft_pwd_cmd(void);
 
 t_AST			*init_ast(void);
 t_pipes			*parser_parse(t_parser *parser);
@@ -96,4 +101,8 @@ void			check_error_max_here_doc(char *cmd_line);
 int				check_ambiguous(int status);
 void			fill_args(char ***args, char **str, int *size);
 int				not_redirect(t_tocken *tocken);
+
+void			env_variable(char***env_list, char **env);
+
+t_global_data	g_data;
 #endif

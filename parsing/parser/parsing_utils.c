@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/20 19:07:45 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 18:17:31 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	parser_expected(t_parser *parser, t_tocken_type type)
 		write(2, parser->cur_tocken->value,
 			ft_strlen(parser->cur_tocken->value));
 		write(2, "'\n", 2);
-		g_exit_status = 258;
+		g_data.exit_status = 258;
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/21 06:34:31 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/21 18:16:32 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ parsing/lexer/get_string_sqoute.c \
 parsing/lexer/lexer.c \
 parsing/lexer/tocken.c \
 parsing/lexer/ft_error.c \
+parsing/lexer/env_list.c \
 main.c \
 parsing/lexer/get_simple_chars.c \
 parsing/lib/ft_calloc.c \

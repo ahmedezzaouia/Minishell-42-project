@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 08:10:09 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:16:57 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	(void)env;
+	env_variable(&(g_data.env_list), env);
 	while (1)
 	{
 		if (!read_cmd_line(&cmd_line))
@@ -95,5 +95,5 @@ int	main(int ac, char **av, char **env)
 		free_ast_pipe(ast);
 		// system("leaks minishell");
 	}
-	return (g_exit_status);
+	return (g_data.exit_status);
 }

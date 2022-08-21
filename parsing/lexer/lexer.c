@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:53:27 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/20 14:53:19 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 18:17:23 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_lexer	*init_lexer(char *contents)
 	lexer->i = 0;
 	lexer->c = contents[lexer->i];
 	lexer->contents = contents;
-	lexer->exit_status = g_exit_status;
+	lexer->exit_status = g_data.exit_status;
 	lexer->is_ambg = 0;
 	lexer->split_lexer = 0;
 	lexer->env_vide = 0;
