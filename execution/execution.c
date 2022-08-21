@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 03:17:13 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 05:40:09 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,29 +94,22 @@ int    handle_redirections(t_AST *pipe_strc)
     
 }
 
-int is_builtins(t_AST *pipe_strc)
+void run_builtins(t_AST *pipe_strc)
 {
     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
     char *cmd;
 
     cmd = pipe_strc->args[0];
     if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
-    {
         ft_cd_cmd(pipe_strc);
-        return (1);
-    }
-    
-    return (0);
+
 }
 
 void    exec_commad(t_AST *pipe_strc, char **env)
 {
     char *cmd_path;
     char *cmd;
-
     handle_redirections(pipe_strc);
-    if (is_builtins(pipe_strc))
-        return ;
     if (pipe_strc->args[0][0] == 47)
         cmd = pipe_strc->args[0];
     else
@@ -130,15 +123,20 @@ void    exec_commad(t_AST *pipe_strc, char **env)
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
     // (void)nbre_pipes;
-
-    if (nbre_pipes == 1)
+    if (pipe_strc->is_builten)
+    {
+        // printf("getpid() == %d\n", getpid());
+        // if (getpid() !=0)
+        run_builtins(pipe_strc);
+    }
+    else if (nbre_pipes == 1)
     { 
         if (fork() == 0)
             exec_commad(pipe_strc, env);
         else
             wait(NULL);
     }
-    else
+    else if (nbre_pipes > 1)
         exec_commad(pipe_strc, env);
     
 
@@ -157,6 +155,11 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     i = 0;
     while (i <= pipes->nbre_pipes)
     {
+        if (pipes->tab_cmd[i]->is_builten)
+        {
+            i++;
+            continue;
+        }
         if (pipe(fd) == -1)
             ft_print_error();
         pid = fork();
@@ -202,8 +205,28 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     close(fd[1]);
 }
 
+void check_builtins(t_pipes *pipes)
+{
+    // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
+    int i;
+    char *cmd;
+
+    i = 0;
+    while (i < pipes->nbre_pipes)
+    {
+        cmd = pipes->tab_cmd[i]->args[0];
+        if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+            pipes->tab_cmd[i]->is_builten = 1;
+        else
+            pipes->tab_cmd[i]->is_builten = 0;
+
+        i++;
+    }
+}
+
 void    execution(t_pipes *pipes, char **env)
 {   
+    check_builtins(pipes);
     if (pipes->nbre_pipes == 1)
         exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)

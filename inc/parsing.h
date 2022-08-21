@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 02:56:52 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 05:09:20 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_AST
 	int				size_args;
 	t_redir			**redirec;
 	int				size_redirec;
+	int				is_builten;
 }	t_AST;
 
 typedef struct s_pipes
