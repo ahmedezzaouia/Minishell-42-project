@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 02:04:52 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 03:17:13 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,29 @@ int    handle_redirections(t_AST *pipe_strc)
     
 }
 
+int is_builtins(t_AST *pipe_strc)
+{
+    // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
+    char *cmd;
+
+    cmd = pipe_strc->args[0];
+    if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+    {
+        ft_cd_cmd(pipe_strc);
+        return (1);
+    }
+    
+    return (0);
+}
+
 void    exec_commad(t_AST *pipe_strc, char **env)
 {
     char *cmd_path;
     char *cmd;
 
     handle_redirections(pipe_strc);
+    if (is_builtins(pipe_strc))
+        return ;
     if (pipe_strc->args[0][0] == 47)
         cmd = pipe_strc->args[0];
     else
@@ -107,15 +124,13 @@ void    exec_commad(t_AST *pipe_strc, char **env)
 
     cmd_path = get_path(env, cmd);
     if(execve(cmd_path, pipe_strc->args, env) == -1)
-    {
         perror("minishell: ");
-
-    }
 }
 
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
     // (void)nbre_pipes;
+
     if (nbre_pipes == 1)
     { 
         if (fork() == 0)
@@ -125,6 +140,8 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     }
     else
         exec_commad(pipe_strc, env);
+    
+
     
     
 }
@@ -186,8 +203,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
 }
 
 void    execution(t_pipes *pipes, char **env)
-{
-
+{   
     if (pipes->nbre_pipes == 1)
         exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)

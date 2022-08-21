@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/21 00:10:35 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/21 02:55:53 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ parsing/parser/not_redirect.c \
 parsing/parser/anlyse_here_doc.c \
 parsing/parser/check_error.c \
 parsing/parser/fill_args.c \
-execution/execution.c
+execution/execution.c \
+execution/ft_cd_cmd.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f

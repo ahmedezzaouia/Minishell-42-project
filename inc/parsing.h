@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/20 22:33:10 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 02:56:52 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ t_parser		*init_parser(char *cmd);
 /* init the Abstract tree */
 
 void			execution(t_pipes *pipes, char **env);
+void			ft_cd_cmd(t_AST *pipe_strc);
+
 t_AST			*init_ast(void);
 t_pipes			*parser_parse(t_parser *parser);
 t_AST			*get_ast_simple_cmd(t_parser *parser);
