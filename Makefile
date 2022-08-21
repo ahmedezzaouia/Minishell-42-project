@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/21 18:16:32 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/21 18:40:33 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ parsing/lexer/lexer.c \
 parsing/lexer/tocken.c \
 parsing/lexer/ft_error.c \
 parsing/lexer/env_list.c \
+parsing/lexer/get_env.c \
 main.c \
 parsing/lexer/get_simple_chars.c \
 parsing/lib/ft_calloc.c \

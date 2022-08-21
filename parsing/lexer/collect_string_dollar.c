@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:40:57 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 01:31:27 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 20:10:10 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_split_word(char *s, int *status)
 		}
 		i++;
 	}
-	free_it(tmp);
+	free_it(tmp, s);
 	return (str);
 }
 
@@ -87,7 +87,7 @@ char	*get_env_variable(t_lexer *lexer, int status)
 	if (s == NULL)
 		ft_error(errno);
 	tmp = s;
-	s = getenv(s);
+	s = ft_get_env(s);
 	free(tmp);
 	if (!s)
 	{
@@ -118,7 +118,7 @@ void	lexer_collect_string_dollar(t_lexer *lexer, char **s)
 	else
 		str = get_env_variable(lexer, 0);
 	*s = ft_strjoin(*s, str);
-	if (ft_strlen(str) == 0)
+	if (ft_strlen(str) >= 0)
 		free(str);
 	if (*s == NULL)
 		ft_error(errno);

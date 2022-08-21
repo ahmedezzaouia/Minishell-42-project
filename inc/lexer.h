@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:23:17 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/20 01:48:54 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 19:06:23 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ char		*get_simple_chars(t_lexer *lexer);
 char		*ft_strdup_er(char *str);
 char		*get_string_dollar(t_lexer	*lexer);
 char		*ft_split_word(char *s, int *status);
-void		free_it(char **s);
+void		free_it(char **s, char *str);
 #endif

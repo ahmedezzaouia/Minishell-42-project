@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 18:15:53 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 21:36:54 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_global_data
 	int		exit_status;
 	char	**env_list;
 }	t_global_data;
-
 
 typedef enum s_type_redir
 {
@@ -101,7 +100,7 @@ void			check_error_max_here_doc(char *cmd_line);
 int				check_ambiguous(int status);
 void			fill_args(char ***args, char **str, int *size);
 int				not_redirect(t_tocken *tocken);
-
+char			*ft_get_env(char *s);
 void			env_variable(char***env_list, char **env);
 
 t_global_data	g_data;

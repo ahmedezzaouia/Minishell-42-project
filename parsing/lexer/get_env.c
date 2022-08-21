@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_it.c                                          :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 15:12:14 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 19:04:18 by ahmaidi          ###   ########.fr       */
+/*   Created: 2022/08/21 18:29:20 by ahmaidi           #+#    #+#             */
+/*   Updated: 2022/08/21 21:36:13 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-/*Free the tab of String*/
-void	free_it(char **s, char *str)
+char	*ft_get_env(char *s)
 {
-	int	i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	free(str);
-	while (s[i])
+	str = NULL;
+	if (!s || !g_data.env_list || !*(g_data.env_list))
+		return (NULL);
+	while (g_data.env_list[i])
 	{
-		free(s[i]);
+		if ((!ft_strncmp(s, g_data.env_list[i], ft_strlen(s)))
+			&& (g_data.env_list[i][ft_strlen(s)] == '='))
+		{
+			str = ft_substr(g_data.env_list[i], ft_strlen(s) + 1,
+					ft_strlen(g_data.env_list[i]) - ft_strlen(s));
+			if (!str)
+				ft_error(errno);
+			break ;
+		}
 		i++;
 	}
-	free(s);
+	return (str);
 }
