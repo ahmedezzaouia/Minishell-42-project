@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 17:20:43 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:43:44 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,14 @@ int    handle_redirections(t_AST *pipe_strc)
 
 void run_builtins(t_AST *pipe_strc)
 {
+    int std_out;
     // (void) pipe_strc;
     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
     char *cmd;
+    std_out = -1;
+    std_out = dup(1);
+    if (pipe_strc->size_redirec)
+        handle_redirections(pipe_strc);
     if (!pipe_strc->args)
         return ;
     cmd = pipe_strc->args[0];
@@ -106,7 +111,14 @@ void run_builtins(t_AST *pipe_strc)
         ft_cd_cmd(pipe_strc);
     else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
         ft_pwd_cmd();
-// printf("run builten\n");
+    else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+        ft_echo(pipe_strc->args);
+   
+    close(1);
+    dup2(std_out, 1);
+
+
+    // dup2(0, 0);
 }
 
 void    exec_commad(t_AST *pipe_strc, char **env)
@@ -225,6 +237,8 @@ void check_builtins(t_pipes *pipes)
             pipes->tab_cmd[i]->is_builten = 1;
         else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
             pipes->tab_cmd[i]->is_builten = 1;
+        else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+            pipes->tab_cmd[i]->is_builten = 1;
         else
             pipes->tab_cmd[i]->is_builten = 0;
         // printf("cmd == [%s] ****is*** %d\n",pipes->tab_cmd[i]->args[0],pipes->tab_cmd[i]->is_builten)
@@ -234,6 +248,7 @@ void check_builtins(t_pipes *pipes)
 
 void    execution(t_pipes *pipes, char **env)
 {   
+    
     (void)env;
     check_builtins(pipes);
     		// visitor(pipes);

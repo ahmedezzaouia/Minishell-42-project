@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:38:59 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:21:03 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 23:00:54 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_echo(char **av)
 
 	i = 1;
 	status = 1;
+	rm_newline = 0;
 	while (av[i])
 	{
 		if (status && remove_newline(av[i]))
