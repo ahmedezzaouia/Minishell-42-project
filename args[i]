@@ -1,5 +1,0 @@
-command start in execve
-[32mMinishell$ [0mi === 1
-[32mMinishell$ [0mcmd_strc->size_args == 1
-[32mMinishell$ [0mminishell: fork: Resource temporarily unavailable
-[32mMinishell$ [0m^C
