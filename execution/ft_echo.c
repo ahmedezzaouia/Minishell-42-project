@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:38:59 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:21:03 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/22 00:41:00 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ int	remove_newline(char *s)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
+	if (s[i] == '-' && s[i + 1] !='\0')
+		i++;
+	else
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == 'n')
@@ -37,6 +41,7 @@ void	ft_echo(char **av)
 
 	i = 1;
 	status = 1;
+	rm_newline = 0;
 	while (av[i])
 	{
 		if (status && remove_newline(av[i]))
