@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:28 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 22:50:40 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 01:33:00 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ char	*get_string_dollar(t_lexer	*lexer)
 		str = get_value_exit(lexer);
 	else if (lexer->c == '\'' || lexer->c == '"')
 		str = get_string_quote(lexer);
-	else if (lexer->c != '_' && !ft_isalpha(lexer->c))
-	{
-		str = ft_substr(lexer->contents, lexer->i - 1, 2);
-		if (!str)
-			ft_error(errno);
-		lexer_advance(lexer);
-	}
 	else
 		str = get_env_variable(lexer, 1);
 	if (!str)

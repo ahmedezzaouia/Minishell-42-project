@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/20 22:33:43 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/21 00:10:35 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ parsing/lib/ft_split.c \
 parsing/lib/ft_putchar_fd.c \
 parsing/lib/ft_putstr_fd.c \
 parsing/lib/ft_realloc.c \
+parsing/lib/ft_isdigit.c \
 parsing/lib/ft_strlen.c \
 parsing/lib/ft_isalpha.c \
 parsing/lib/ft_strdup.c \
