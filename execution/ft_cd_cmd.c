@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 03:34:36 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 03:52:07 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ void    ft_cd_cmd(t_AST *cmd_strc)
     if (cmd_strc->size_args == 1)
     {
         // printf("getenv(HOME) === %s\n", getenv("HOME"));
-        chdir(getenv("HOME"));
+        if (chdir(getenv("HOME")) == -1)
+            perror("Minishell :");
     }
     else
-        chdir(cmd_strc->args[i]);
+    {
+        if (chdir(cmd_strc->args[i]) == -1)
+            perror("Minishell :");
+
+    }
          
 }
