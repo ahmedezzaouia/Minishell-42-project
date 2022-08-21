@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 22:32:24 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/19 02:48:01 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/21 08:04:38 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	visitor_command(t_AST *pipe)
 			pipe->redirec[i]->filename);
 		i++;
 	}
+	printf("\033[35m********** is Builten = %d **********\033[0m\n", pipe->is_builten);
 	printf("\033[37m+++++++++++++++++++++++++++++++++++++\033[0m\n");
 }
 

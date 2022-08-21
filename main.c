@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 05:14:16 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 08:10:09 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av, char **env)
 		parser = init_parser(cmd_line);
 		ast = parser_parse(parser);
 		free_parser(parser);
-		visitor(ast);
+		// visitor(ast);
 		if (ast)
 		{
 			char *str;

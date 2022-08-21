@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 05:40:09 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:59:28 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,17 @@ int    handle_redirections(t_AST *pipe_strc)
 
 void run_builtins(t_AST *pipe_strc)
 {
+    // (void) pipe_strc;
     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
     char *cmd;
-
+    if (!pipe_strc->args)
+        return ;
     cmd = pipe_strc->args[0];
     if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
         ft_cd_cmd(pipe_strc);
-
+    else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+        ft_pwd_cmd();
+// printf("run builten\n");
 }
 
 void    exec_commad(t_AST *pipe_strc, char **env)
@@ -110,12 +114,14 @@ void    exec_commad(t_AST *pipe_strc, char **env)
     char *cmd_path;
     char *cmd;
     handle_redirections(pipe_strc);
+    if (!pipe_strc->args)
+        return ;
     if (pipe_strc->args[0][0] == 47)
         cmd = pipe_strc->args[0];
     else
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
-
     cmd_path = get_path(env, cmd);
+    printf("command start in execve\n");
     if(execve(cmd_path, pipe_strc->args, env) == -1)
         perror("minishell: ");
 }
@@ -123,11 +129,14 @@ void    exec_commad(t_AST *pipe_strc, char **env)
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
     // (void)nbre_pipes;
+    // (void)env;
     if (pipe_strc->is_builten)
     {
-        // printf("getpid() == %d\n", getpid());
-        // if (getpid() !=0)
         run_builtins(pipe_strc);
+        if (nbre_pipes == 1)
+            return ;
+        else
+            exit(0);
     }
     else if (nbre_pipes == 1)
     { 
@@ -138,9 +147,6 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     }
     else if (nbre_pipes > 1)
         exec_commad(pipe_strc, env);
-    
-
-    
     
 }
 
@@ -155,11 +161,6 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     i = 0;
     while (i <= pipes->nbre_pipes)
     {
-        if (pipes->tab_cmd[i]->is_builten)
-        {
-            i++;
-            continue;
-        }
         if (pipe(fd) == -1)
             ft_print_error();
         pid = fork();
@@ -170,7 +171,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
         }
         if (pid == 0)
         {
-      
+            
             // child process code start
             if (i != pipes->nbre_pipes)
             {
@@ -217,19 +218,24 @@ void check_builtins(t_pipes *pipes)
         cmd = pipes->tab_cmd[i]->args[0];
         if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
             pipes->tab_cmd[i]->is_builten = 1;
+        else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+            pipes->tab_cmd[i]->is_builten = 1;
         else
             pipes->tab_cmd[i]->is_builten = 0;
-
+        // printf("cmd == [%s] ****is*** %d\n",pipes->tab_cmd[i]->args[0],pipes->tab_cmd[i]->is_builten)
         i++;
     }
 }
 
 void    execution(t_pipes *pipes, char **env)
 {   
+    (void)env;
     check_builtins(pipes);
+    		// visitor(pipes);
     if (pipes->nbre_pipes == 1)
         exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)
         exec_pipe_cmd(pipes, env);
+    
 }
 

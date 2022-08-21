@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 05:09:20 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/21 06:42:28 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_parser		*init_parser(char *cmd);
 
 void			execution(t_pipes *pipes, char **env);
 void			ft_cd_cmd(t_AST *pipe_strc);
+void			ft_pwd_cmd();
 
 t_AST			*init_ast(void);
 t_pipes			*parser_parse(t_parser *parser);
