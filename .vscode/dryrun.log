@@ -1,5 +1,6 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/ahmaidi/Desktop/mini'
-make: Nothing to be done for `all'.
-make: Leaving directory `/Users/ahmaidi/Desktop/mini'
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/ahmez-za/Desktop/hey_minishell'
+gcc  -Wall -Wextra -Werror -g  -lreadline -L /Users/ahmez-za/.brew/opt/readline/lib -I /Users/ahmez-za/.brew/opt/readline/include parsing/lexer/collect_string.c parsing/lexer/collect_string_dollar.c parsing/lexer/free_it.c parsing/lexer/ft_strdup_er.c parsing/lexer/colloct_redirect.c parsing/lexer/get_string_dollar.c parsing/lexer/get_string_dqoute.c parsing/lexer/get_string_sqoute.c parsing/lexer/lexer.c parsing/lexer/tocken.c parsing/lexer/ft_error.c main.c parsing/lexer/get_simple_chars.c parsing/lib/ft_calloc.c parsing/lib/ft_strncmp.c parsing/lib/ft_split.c parsing/lib/ft_putchar_fd.c parsing/lib/ft_putstr_fd.c parsing/lib/ft_realloc.c parsing/lib/ft_isdigit.c parsing/lib/ft_strlen.c parsing/lib/ft_isalpha.c parsing/lib/ft_strdup.c parsing/lib/ft_strjoin.c parsing/lib/ft_strjoin_char.c parsing/lib/ft_substr.c parsing/lib/ft_memcpy.c parsing/lib/ft_bzero.c parsing/lib/ft_isalnum.c parsing/lib/ft_itoa.c parsing/parser/ft_realloc_er.c parsing/parser/parsing_utils.c parsing/parser/parsing_utils2.c parsing/parser/free_it.c parsing/parser/parsing.c parsing/visitor.c parsing/parser/not_redirect.c parsing/parser/anlyse_here_doc.c parsing/parser/check_error.c parsing/parser/fill_args.c execution/execution.c -o minishell
+echo "\033[92mExecution file Created\033[0m"
+make: Leaving directory `/Users/ahmez-za/Desktop/hey_minishell'
  
