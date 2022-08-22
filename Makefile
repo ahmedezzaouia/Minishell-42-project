@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/22 15:31:21 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/22 21:27:24 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ parsing/lexer/get_env.c \
 main.c \
 parsing/lexer/get_simple_chars.c \
 parsing/lib/ft_calloc.c \
+parsing/lib/ft_strchr.c \
 parsing/lib/ft_strncmp.c \
 parsing/lib/ft_split.c \
 parsing/lib/ft_putchar_fd.c \
@@ -77,4 +78,3 @@ fclean:
 re: fclean all
 
 .PHONY: all fclean re
-

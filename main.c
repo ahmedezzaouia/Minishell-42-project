@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 22:57:49 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/22 21:26:32 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ int	main(int ac, char **av, char **env)
 				}
 				i++;
 			}
-			
 			execution(ast, env);
 		}
-		free_ast_pipe(ast);
-		// system("leaks minishell");
+		//free_ast_pipe(ast);
+		 system("leaks minishell");
 	}
 	return (g_data.exit_status);
 }
