@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 23:43:44 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/22 15:34:12 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ void run_builtins(t_AST *pipe_strc)
         ft_pwd_cmd();
     else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
         ft_echo(pipe_strc->args);
-   
+    else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+        ft_env_cmd();
     close(1);
     dup2(std_out, 1);
 
@@ -238,6 +239,8 @@ void check_builtins(t_pipes *pipes)
         else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
             pipes->tab_cmd[i]->is_builten = 1;
         else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+            pipes->tab_cmd[i]->is_builten = 1;
+        else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
             pipes->tab_cmd[i]->is_builten = 1;
         else
             pipes->tab_cmd[i]->is_builten = 0;

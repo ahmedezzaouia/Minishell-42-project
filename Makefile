@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/22 00:33:37 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/22 15:31:21 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ execution/execution.c \
 execution/ft_cd_cmd.c \
 execution/ft_pwd_cmd.c \
 execution/ft_echo.c \
+execution/ft_env_cmd.c \
 
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address

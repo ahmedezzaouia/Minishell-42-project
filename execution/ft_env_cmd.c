@@ -6,7 +6,22 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:00:30 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 19:04:57 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/22 15:34:47 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../inc/parsing.h"
+
+void    ft_env_cmd()
+{
+    int i;
+
+    i = 0;
+    while (g_data.env_list[i])
+    {
+        ft_putstr_fd(g_data.env_list[i], 1);
+        ft_putstr_fd("\n", 1);
+       i++;
+    }
+    
+}
