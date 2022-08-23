@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:16:50 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 16:31:16 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/23 17:36:19 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	exit_with_one_args(char *str)
 		write(2, "exit\n", 6);
 		write(2, "Minishell : exit: ", 19);
 		write(2, str, ft_strlen(str));
-		write(2, " numeric argument required\n", 28);
+		write(2, ": numeric argument required\n", 28);
 		exit(255);
 	}
 	else
@@ -55,13 +55,20 @@ static void	exit_with_one_args(char *str)
 
 void	ft_exit(char **av, unsigned int size)
 {
-
 	if (size == 2)
 	{
 		exit_with_one_args(av[1]);
 	}
 	else if (size > 2)
 	{
+		if (!check_first_args_is_nbre(av[1]))
+		{
+			write(2, "exit\n", 6);
+			write(2, "Minishell : exit: ", 19);
+			write(2, av[1], ft_strlen(av[1]));
+			write(2, ": numeric argument required\n", 28);
+			exit(255);
+		}
 		write(2, "exit\n", 6);
 		write(2, "Minishell : exit: too arguments\n", 33);
 		exit(1);

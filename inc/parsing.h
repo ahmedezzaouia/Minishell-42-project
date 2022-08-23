@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 05:17:34 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:57:25 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ void			ft_cd_cmd(t_AST *pipe_strc);
 void			ft_pwd_cmd(void);
 void			ft_echo(char **av);
 void			ft_env_cmd(void);
-int    			handle_redirections(t_AST *pipe_strc);
-void    		ft_herdoc(t_pipes *ast);
+int				handle_redirections(t_AST *pipe_strc);
+void			ft_herdoc(t_pipes *ast);
 t_AST			*get_ast_simple_cmd(t_parser *parser);
+void			ft_exit(char **av, unsigned int size);
 char			*ft_get_env(char *s);
 
 /*   parsing functions     */

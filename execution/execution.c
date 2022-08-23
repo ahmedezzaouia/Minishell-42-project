@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/23 05:19:35 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:57:54 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void run_builtins(t_AST *pipe_strc, int size)
         ft_echo(pipe_strc->args);
     else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
         ft_env_cmd();
+    else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+        ft_exit(pipe_strc->args, pipe_strc->size_args);
     close(1);
     dup2(std_out, 1);
 
@@ -217,6 +219,8 @@ void check_builtins(t_pipes *pipes)
         else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
             pipes->tab_cmd[i]->is_builten = 1;
         else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+            pipes->tab_cmd[i]->is_builten = 1;
+        else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
             pipes->tab_cmd[i]->is_builten = 1;
         else
             pipes->tab_cmd[i]->is_builten = 0;
