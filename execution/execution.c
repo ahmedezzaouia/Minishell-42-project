@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/23 03:43:20 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:26:20 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void    ft_print_error()
 char    *get_path(char **env, char *cmd)
 {
     int i;
+    int j;
     (void)env;
     char    **path_chunks;
     char    *cmd_joined_path;
@@ -33,11 +34,7 @@ char    *get_path(char **env, char *cmd)
         cmd_joined_path = ft_strjoin(ft_strdup(path_chunks[i]), cmd);
         if (access(cmd_joined_path, F_OK) == 0)
         {
-         /*    i = 0;
-            while (path_chunks[i])
-                free(path_chunks[i++]);
-            free(path_chunks); */
-            int j = -1;
+            j = -1;
             while (path_chunks[++j])
                 free(path_chunks[j]);
             free(path_chunks);
@@ -52,61 +49,6 @@ char    *get_path(char **env, char *cmd)
     free(path_chunks);
     // todo :: you have to check if all path are not valid 
     return (cmd);
-}
-
-int    handle_redirections(t_AST *pipe_strc)
-{
-    int i;
-    int fd;
-    t_redir **redirec;
-
-    i = 0;
-    redirec = pipe_strc->redirec;
-    if (!redirec)
-        return (0);
-    while (i < pipe_strc->size_redirec)
-    {
-        if (redirec[i]->type == INPUT)
-        {
-
-            fd = open(redirec[i]->filename, O_RDONLY);
-            if (fd == -1)
-            {
-                perror("Minishell: ");
-                exit(1) ;
-            }
-
-            dup2(fd, 0);
-            close(fd);
-
-        }
-        else if (redirec[i]->type == OUTPUT)
-        {
-
-            fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_TRUNC, 0644);
-            if (fd == -1)
-                perror("Minishell: ");
-            dup2(fd, 1);
-            close(fd);
-  
-        }
-        else if (redirec[i]->type == APPAND )
-        {
-            fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_APPEND, 0644);
-            if (fd == -1)
-                perror("Minishell: ");
-            dup2(fd, 1);
-            close(fd);
-        }
-        else if (redirec[i]->type == HERE_DOC)
-        {
-            dup2(redirec[i]->heredoc[0], 0);
-            close(redirec[i]->heredoc[0]);
-        }
-        i++;
-    }
-    return (1);
-    
 }
 
 void run_builtins(t_AST *pipe_strc)
@@ -200,9 +142,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
         }
 
         if (pid == 0)
-        {
-            printf("here\n");
-            
+        {            
             // child process code start
             if (i != pipes->nbre_pipes - 1)
             {
@@ -263,7 +203,6 @@ void check_builtins(t_pipes *pipes)
             pipes->tab_cmd[i]->is_builten = 1;
         else
             pipes->tab_cmd[i]->is_builten = 0;
-        // printf("cmd == [%s] ****is*** %d\n",pipes->tab_cmd[i]->args[0],pipes->tab_cmd[i]->is_builten)
         i++;
     }
 }
@@ -271,9 +210,7 @@ void check_builtins(t_pipes *pipes)
 void    execution(t_pipes *pipes, char **env)
 {   
     
-    (void)env;
     check_builtins(pipes);
-    		// visitor(pipes);
     if (pipes->nbre_pipes == 1)
         exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)

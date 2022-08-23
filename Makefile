@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/23 02:32:35 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/23 04:24:25 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ execution/ft_cd_cmd.c \
 execution/ft_pwd_cmd.c \
 execution/ft_echo.c \
 execution/ft_env_cmd.c \
-
+execution/redirections.c \
+execution/ft_herdoc.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
