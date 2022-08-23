@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 04:26:32 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:16:37 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ int	main(int ac, char **av, char **env)
 			ft_herdoc(ast);
 			execution(ast, env);
 			free_ast_pipe(ast);
-			// system("leaks minishell");
+			system("leaks minishell");
 		}
 	}
 	return (g_data.exit_status);
-
 }
