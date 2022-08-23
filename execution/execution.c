@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/23 04:26:20 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 05:19:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char    *get_path(char **env, char *cmd)
     return (cmd);
 }
 
-void run_builtins(t_AST *pipe_strc)
+void run_builtins(t_AST *pipe_strc, int size)
 {
     int std_out;
     // (void) pipe_strc;
@@ -59,8 +59,16 @@ void run_builtins(t_AST *pipe_strc)
     char *cmd;
     std_out = -1;
     std_out = dup(1);
-    if (pipe_strc->size_redirec)
-        handle_redirections(pipe_strc);
+    if (pipe_strc->size_redirec > 0)
+    {
+        if (!handle_redirections(pipe_strc))
+        {
+            if (size == 1)
+                return ;
+            else if (size > 1)
+                exit(1);
+        }
+    }
     if (!pipe_strc->args)
         return ;
     cmd = pipe_strc->args[0];
@@ -79,11 +87,21 @@ void run_builtins(t_AST *pipe_strc)
     // dup2(0, 0);
 }
 
-void    exec_commad(t_AST *pipe_strc, char **env)
+void    exec_commad(t_AST *pipe_strc, char **env, int size)
 {
     char *cmd_path;
     char *cmd;
-    handle_redirections(pipe_strc);
+    
+    if (pipe_strc->size_redirec > 0)
+    {
+        if(!handle_redirections(pipe_strc))
+        {
+            if (size == 1)
+                return ;
+            else if (size > 1)
+                exit(1);
+        }
+    }
     if (!pipe_strc->size_args)
         exit(0);
     if (pipe_strc->args[0][0] == 47)
@@ -98,11 +116,10 @@ void    exec_commad(t_AST *pipe_strc, char **env)
 
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
-            printf("size == %d\n", nbre_pipes);
 
     if (pipe_strc->is_builten)
     {
-        run_builtins(pipe_strc);
+        run_builtins(pipe_strc, nbre_pipes);
         if (nbre_pipes == 1)
             return ;
         else
@@ -111,12 +128,12 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     else if (nbre_pipes == 1)
     { 
         if (fork() == 0)
-            exec_commad(pipe_strc, env);
+            exec_commad(pipe_strc, env, nbre_pipes);
         else
             wait(NULL);
     }
     else if (nbre_pipes > 1)
-        exec_commad(pipe_strc, env);
+        exec_commad(pipe_strc, env, nbre_pipes);
     
 }
 

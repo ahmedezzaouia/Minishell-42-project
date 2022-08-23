@@ -6,13 +6,13 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:01:25 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/23 04:05:27 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 04:55:15 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
 
-void    handle_redirections(t_AST *pipe_strc)
+int    handle_redirections(t_AST *pipe_strc)
 {
     int i;
     int fd;
@@ -21,7 +21,7 @@ void    handle_redirections(t_AST *pipe_strc)
     i = 0;
     redirec = pipe_strc->redirec;
     if (!redirec)
-        return ;
+        return (0);
     while (i < pipe_strc->size_redirec)
     {
         if (redirec[i]->type == INPUT)
@@ -31,7 +31,7 @@ void    handle_redirections(t_AST *pipe_strc)
             if (fd == -1)
             {
                 perror("Minishell: ");
-                exit(1) ;
+                return (0);
             }
 
             dup2(fd, 0);
@@ -43,7 +43,11 @@ void    handle_redirections(t_AST *pipe_strc)
 
             fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_TRUNC, 0644);
             if (fd == -1)
+            {
                 perror("Minishell: ");
+                return (0);
+            }
+
             dup2(fd, 1);
             close(fd);
   
@@ -52,7 +56,10 @@ void    handle_redirections(t_AST *pipe_strc)
         {
             fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_APPEND, 0644);
             if (fd == -1)
+            {   
                 perror("Minishell: ");
+                return (0);
+            }
             dup2(fd, 1);
             close(fd);
         }
@@ -63,5 +70,5 @@ void    handle_redirections(t_AST *pipe_strc)
         }
         i++;
     }
-    
+    return (1);
 }
