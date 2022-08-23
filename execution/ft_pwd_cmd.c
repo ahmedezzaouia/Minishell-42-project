@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 06:33:54 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/21 16:07:34 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 01:58:03 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void    ft_pwd_cmd()
 {
-    char s[100];
+    char *s;
 
-    if (!getcwd(s, 100))
+    s = getcwd(NULL, 0);
+    if (!s)
         printf("%s\n", getenv("PWD")); 
     else 
-        printf("%s\n", getcwd(s, 100)); 
-
-        
+        printf("%s\n", s); 
+    free(s);
     // fprintf(stderr, "%s\n",getcwd(s, 100));
         
 }

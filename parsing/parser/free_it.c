@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_it.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:11:00 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/20 19:08:04 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/23 02:12:12 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,22 @@ void	free_parser(t_parser *parser)
 /* free ast NODE*/
 t_AST	*free_ast_cmd(t_AST *ast)
 {
+	int i;
+
+	i = -1;
 	if (ast != NULL)
 	{
-		while (ast->size_args-- > 0)
-			free(ast->args[ast->size_args]);
+		while (++i < ast->size_args)
+			free(ast->args[i]);
 		free(ast->args);
-		while (ast->size_redirec -- > 0)
+		i = -1;
+		while (++i < ast->size_redirec)
 		{
-			free(ast->redirec[ast->size_redirec]->filename);
-			free(ast->redirec[ast->size_redirec]);
+			free(ast->redirec[i]->filename);
+			free(ast->redirec[i]);
 		}
-		if (ast->redirec)
-			free(ast->redirec);
-		if (ast)
-			free(ast);
+		free(ast->redirec);
+		free(ast);
 	}
 	return (NULL);
 }
@@ -72,16 +74,15 @@ t_AST	*free_ast_cmd(t_AST *ast)
 
 t_pipes	*free_ast_pipe(t_pipes *pipes)
 {
+	int i;
+
+	i = -1;
 	if (pipes != NULL)
 	{
-		while (pipes->nbre_pipes-- > 0)
-		{
-			free_ast_cmd(pipes->tab_cmd[pipes->nbre_pipes]);
-		}
-		if (pipes->tab_cmd)
-			free(pipes->tab_cmd);
-		if (pipes)
-			free(pipes);
+		while (++i < pipes->nbre_pipes)
+			free_ast_cmd(pipes->tab_cmd[i]);
+		free(pipes->tab_cmd);
+		free(pipes);
 	}
 	return (NULL);
 }
