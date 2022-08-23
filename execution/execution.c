@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/22 15:34:12 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 03:43:20 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,26 @@ char    *get_path(char **env, char *cmd)
     path_chunks = ft_split(getenv("PATH"), ':');
     while (path_chunks[i])
     {
-        cmd_joined_path = ft_strjoin(path_chunks[i], cmd);
+        cmd_joined_path = ft_strjoin(ft_strdup(path_chunks[i]), cmd);
         if (access(cmd_joined_path, F_OK) == 0)
+        {
+         /*    i = 0;
+            while (path_chunks[i])
+                free(path_chunks[i++]);
+            free(path_chunks); */
+            int j = -1;
+            while (path_chunks[++j])
+                free(path_chunks[j]);
+            free(path_chunks);
             return (cmd_joined_path);
+        }
+        free(cmd_joined_path);
         i++;
     }
+    i = -1;
+    while (path_chunks[++i])
+        free(path_chunks[i]);
+    free(path_chunks);
     // todo :: you have to check if all path are not valid 
     return (cmd);
 }
@@ -141,6 +156,8 @@ void    exec_commad(t_AST *pipe_strc, char **env)
 
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
+            printf("size == %d\n", nbre_pipes);
+
     if (pipe_strc->is_builten)
     {
         run_builtins(pipe_strc);
@@ -167,10 +184,11 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     int fd[2];
     int pid;
     int last_fd = -1;
+    (void)env;
 
-    pipes->nbre_pipes--;
-    i = 0;
-    while (i <= pipes->nbre_pipes)
+    // pipes->nbre_pipes--;
+    i = -1;
+    while (++i < pipes->nbre_pipes)
     {
         if (pipe(fd) == -1)
             ft_print_error();
@@ -180,11 +198,13 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
             printf("minishell: fork: Resource temporarily unavailable\n");
             break ;
         }
+
         if (pid == 0)
         {
+            printf("here\n");
             
             // child process code start
-            if (i != pipes->nbre_pipes)
+            if (i != pipes->nbre_pipes - 1)
             {
                 dup2(fd[1], 1);
                 close(fd[1]);
@@ -197,7 +217,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
                 close(last_fd);
             }
             close(fd[0]);
-            exec_simple_cmd(pipes->tab_cmd[i], env, pipes->nbre_pipes + 1);
+            exec_simple_cmd(pipes->tab_cmd[i], env, pipes->nbre_pipes);
             // child process code end  
         }
         else
@@ -207,7 +227,6 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
             last_fd = fd[0];
             close(fd[1]);
         }
-        i++;
     }
     i = 0;
     int res = 0;
@@ -259,6 +278,5 @@ void    execution(t_pipes *pipes, char **env)
         exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)
         exec_pipe_cmd(pipes, env);
-    
 }
 

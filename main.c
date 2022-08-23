@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/22 21:26:32 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/23 03:43:48 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int	main(int ac, char **av, char **env)
 						        free(str);
 						        break ;
 						    }
-							
-						    ft_putstr_fd(ft_strjoin(str, "\n"), ast->tab_cmd[i]->redirec[j]->heredoc[1]);
-					
+							char *sh = ft_strjoin(str, "\n");
+						    ft_putstr_fd(sh, ast->tab_cmd[i]->redirec[j]->heredoc[1]);
+							free(sh);
 						}
 						close(ast->tab_cmd[i]->redirec[j]->heredoc[1]);
 						// only p[0] too get input from 
@@ -90,9 +90,11 @@ int	main(int ac, char **av, char **env)
 				i++;
 			}
 			execution(ast, env);
+			// ast->nbre_pipes++;
+			free_ast_pipe(ast);
+			system("leaks minishell");
 		}
-		//free_ast_pipe(ast);
-		 system("leaks minishell");
 	}
 	return (g_data.exit_status);
+
 }
