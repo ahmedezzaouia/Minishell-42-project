@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 16:57:25 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/23 19:42:41 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ int				handle_redirections(t_AST *pipe_strc);
 void			ft_herdoc(t_pipes *ast);
 t_AST			*get_ast_simple_cmd(t_parser *parser);
 void			ft_exit(char **av, unsigned int size);
+void			exit_with_one_args(char *str);
+int				check_first_args_is_nbre(char *str);
+void			check_max_long(unsigned char i, char *str);
+void			not_numeric(char *str);
 char			*ft_get_env(char *s);
 
 /*   parsing functions     */

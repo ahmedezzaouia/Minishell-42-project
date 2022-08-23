@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/23 16:32:01 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/23 19:27:51 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ execution/ft_echo.c \
 execution/ft_env_cmd.c \
 execution/redirections.c \
 execution/ft_exit.c \
+execution/ft_max_long_exit.c\
 execution/ft_herdoc.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address

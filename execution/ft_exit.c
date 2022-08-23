@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:16:50 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 17:36:19 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/23 19:41:35 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_del_fespace(char *str)
 	return (str);
 }
 
-static int	check_first_args_is_nbre(char *str)
+int	check_first_args_is_nbre(char *str)
 {
 	int	i;
 
@@ -30,26 +30,39 @@ static int	check_first_args_is_nbre(char *str)
 	str = ft_del_fespace(str);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	return (ft_isdigit(str[i]));
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-static void	exit_with_one_args(char *str)
+void	not_numeric(char *str)
 {
-	unsigned char	i;
+	write(2, "exit\n", 6);
+	write(2, "Minishell : exit: ", 19);
+	write(2, str, ft_strlen(str));
+	write(2, ": numeric argument required\n", 28);
+	exit(255);
+}
 
-	if (!check_first_args_is_nbre(str))
+void	check_max_long(unsigned char i, char *str)
+{
+	if (i == 255)
 	{
-		write(2, "exit\n", 6);
-		write(2, "Minishell : exit: ", 19);
-		write(2, str, ft_strlen(str));
-		write(2, ": numeric argument required\n", 28);
-		exit(255);
+		if (!ft_strncmp(str, "922337203685477580",
+				ft_strlen("922337203685477580")))
+			if (str[18] - '0' > 7)
+				not_numeric(str);
 	}
-	else
+	else if (i == 0)
 	{
-		i = ft_atoi(str);
-		write(2, "exit\n", 6);
-		exit(i);
+		if (!ft_strncmp(str, "-922337203685477580",
+				ft_strlen("-922337203685477580")))
+			if (str[19] - '0' > 8)
+				not_numeric(str);
 	}
 }
 
@@ -62,13 +75,7 @@ void	ft_exit(char **av, unsigned int size)
 	else if (size > 2)
 	{
 		if (!check_first_args_is_nbre(av[1]))
-		{
-			write(2, "exit\n", 6);
-			write(2, "Minishell : exit: ", 19);
-			write(2, av[1], ft_strlen(av[1]));
-			write(2, ": numeric argument required\n", 28);
-			exit(255);
-		}
+			not_numeric(av[1]);
 		write(2, "exit\n", 6);
 		write(2, "Minishell : exit: too arguments\n", 33);
 		exit(1);
