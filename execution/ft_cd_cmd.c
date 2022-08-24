@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/23 21:05:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 03:41:40 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int     get_oldpwd_index()
     int i;
     
     i = 0;
-    while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "OLDPWD=",4))
+    while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "OLDPWD=",7))
         i++;
     return (i);
 }
@@ -46,22 +46,36 @@ int get_env_list_size()
 void    ft_cd_cmd(t_AST *cmd_strc)
 {
     int i;
+    int len;
     // char *str;
     // char **split_path;
     char *pwd;
     char *s;
+    char *item;
 
+
+    s = NULL;
+    item = NULL;
+
+
+    len = get_env_list_size();
     pwd = g_data.env_list[get_pwd_index()];
-    
-    if (!g_data.env_list[get_oldpwd_index()])
+    int oldpwdindex = get_oldpwd_index();
+    printf("oldpwd index === %d\n",oldpwdindex);
+    printf("oldpwd == %s\n", g_data.env_list[get_oldpwd_index()]);
+    if (g_data.env_list[oldpwdindex] == NULL)
     {
-        g_data.env_list = ft_realloc_er(g_data.env_list, sizeof(char *), get_env_list_size() + 1);
-        g_data.env_list[get_env_list_size()] = ft_strjoin(ft_strdup("OLD"), pwd);
-        g_data.env_list[get_env_list_size() + 1] = NULL;
+        g_data.env_list = ft_realloc_er(g_data.env_list, sizeof(char *), len + 1);
+        g_data.env_list[len] = ft_strjoin(ft_strdup("OLD"), pwd);
+        g_data.env_list[len + 1] = NULL;
     }
     else
+    {
+        // ft_sanitize here 
+        item = g_data.env_list[oldpwdindex]; 
         g_data.env_list[get_oldpwd_index()] = ft_strjoin(ft_strdup("OLD"), pwd);
-
+        free(item);
+    }
     i = 1;
     while ((i < cmd_strc->size_args) && (cmd_strc->args[i][0] == 45))
         i++;
@@ -70,55 +84,53 @@ void    ft_cd_cmd(t_AST *cmd_strc)
         return ;
     if (cmd_strc->size_args == 1)
     {
-        // printf("getenv(HOME) === %s\n", getenv("HOME"));
+
         if (chdir(getenv("HOME")) == -1)
             perror("Minishell :");
+        else
+        {
+
+            /* TODO: update The pwd on case one arg (cd) */
+            // free(item);
+            item = g_data.env_list[get_pwd_index()];
+            s = getcwd(NULL, 0);
+            // printf("getCwd == %s\n",getcwd(NULL, 0));s
+            g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
+            free(item);
+        }
     }
     else
     {
+        
 
         if (chdir(cmd_strc->args[i]) == -1)
-        {
-            // printf("cd error\n");
-            // g_data.env_list[get_pwd_index()] = ft_strjoin(pwd, ft_strjoin(ft_strdup("/"),cmd_strc->args[i]));
             perror("Minishell :");
-        }
         else
         {
+            // item = g_data.env_list[get_pwd_index()];
             s = getcwd(NULL, 0);
-            printf("cwd = %s\n",s);
             printf("pwd == %s\n",pwd);
+            printf("cwd = %s\n",s);
             if (s == NULL)
             {
-                // g_data.env_list[get_pwd_index()] = s;
-                // error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
                 printf("Minishell : error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
-                g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(g_data.env_list[get_pwd_index()]), ft_strjoin(ft_strdup("/"), cmd_strc->args[i]));
+                g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), ft_strjoin(ft_strdup("/"), cmd_strc->args[i]));
+
             }
             else
             {   
-                printf("**************** cwd else ********\n");
+                // printf("**************** cwd else ********\n");
+                item = g_data.env_list[get_pwd_index()];
                 g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
-                printf("cwd after == %s\n",s);
+                free(item);
+                // free(g_data.env_list[get_pwd_index()]);
+                // printf("cwd after == %s\n",s);
+                // free(tmp);
 
             }
-
-
-
-            // printf("g_data.env_list[i] == %s\n", g_data.env_list[get_pwd_index()]);
-            // ft_strcmp(cmd_strc->args[i], "..", 2)
-            // printf("else cd run\n");
-            // if (!getcwd(NULL, 0))
-            // {
-            //     g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), \
-            //                     ft_strjoin(ft_strdup("/"), cmd_strc->args[i]));
-            // }
-            // else
-                // g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), \
-                //                 ft_strjoin(ft_strdup("/"), cmd_strc->args[i]));
-            // printf("%s\n",pwd);
-            // printf("%s\n",cmd_strc->args[i]);
+            // free(tmp);
         }
     }
-         
+    free (s);
+
 }

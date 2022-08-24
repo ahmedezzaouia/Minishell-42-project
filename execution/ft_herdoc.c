@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_herdoc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:08:51 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/23 04:14:48 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:21:40 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
-
 
 void    ft_herdoc(t_pipes *ast)
 {

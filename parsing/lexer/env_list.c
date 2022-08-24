@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:24:25 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 16:40:47 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/24 03:13:27 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-void	env_variable(char***env_list, char **env)
+void	env_variable(char **env)
 {
 	int		i;
 	int		size;
@@ -21,12 +21,12 @@ void	env_variable(char***env_list, char **env)
 	size = 0;
 	while (env[i] != NULL)
 	{
-		(*env_list) = ft_realloc_er((*env_list), sizeof(char *), size);
+		g_data.env_list = ft_realloc_er(g_data.env_list, sizeof(char *), size);
 		size += 1;
-		(*env_list)[size - 1] = env[i];
+		g_data.env_list[size - 1] = ft_strdup(env[i]);
 		i++;
 	}
-	(*env_list) = ft_realloc_er((*env_list), sizeof(char *), size);
+	g_data.env_list = ft_realloc_er(g_data.env_list, sizeof(char *), size);
 		size += 1;
-	(*env_list)[size - 1] = NULL;
+	g_data.env_list[size - 1] = NULL;
 }

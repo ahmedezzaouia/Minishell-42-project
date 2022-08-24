@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 05:17:34 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 03:07:01 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,14 @@ void			ft_cd_cmd(t_AST *pipe_strc);
 void			ft_pwd_cmd(void);
 void			ft_echo(char **av);
 void			ft_env_cmd(void);
-int    			handle_redirections(t_AST *pipe_strc);
-void    		ft_herdoc(t_pipes *ast);
+int				handle_redirections(t_AST *pipe_strc);
+void			ft_herdoc(t_pipes *ast);
 t_AST			*get_ast_simple_cmd(t_parser *parser);
+void			ft_exit(char **av, unsigned int size);
+void			exit_with_one_args(char *str);
+int				check_first_args_is_nbre(char *str);
+void			check_max_long(unsigned char i, char *str);
+void			not_numeric(char *str);
 char			*ft_get_env(char *s);
 
 /*   parsing functions     */
@@ -107,7 +112,7 @@ void			check_error_max_here_doc(char *cmd_line);
 int				check_ambiguous(int status);
 void			fill_args(char ***args, char **str, int *size);
 int				not_redirect(t_tocken *tocken);
-void			env_variable(char***env_list, char **env);
+void			env_variable(char **env);
 
 t_global_data	g_data;
 #endif

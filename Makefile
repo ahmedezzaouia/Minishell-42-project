@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/23 04:24:25 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/24 03:34:04 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ parsing/lib/ft_strdup.c \
 parsing/lib/ft_strjoin.c \
 parsing/lib/ft_strjoin_char.c \
 parsing/lib/ft_substr.c \
+parsing/lib/ft_atoi.c \
 parsing/lib/ft_memcpy.c \
 parsing/lib/ft_bzero.c \
 parsing/lib/ft_isalnum.c \
@@ -62,6 +63,8 @@ execution/ft_pwd_cmd.c \
 execution/ft_echo.c \
 execution/ft_env_cmd.c \
 execution/redirections.c \
+execution/ft_exit.c \
+execution/ft_max_long_exit.c\
 execution/ft_herdoc.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
