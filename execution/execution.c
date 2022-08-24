@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/24 04:59:55 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 05:58:51 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
     if(execve(cmd_path, pipe_strc->args, env) == -1)
     {
         perror("minishell: ");
-        return ;
+        exit(1);
     }
 }
 
