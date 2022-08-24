@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:16:50 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 03:45:34 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 05:06:47 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void	ft_exit(char **av, unsigned int size)
 		write(2, "exit\n", 6);
 		exit(0);
 	}
+	
 }

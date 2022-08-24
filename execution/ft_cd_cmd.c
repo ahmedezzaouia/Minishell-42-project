@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/24 03:41:40 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 05:17:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void    ft_cd_cmd(t_AST *cmd_strc)
 {
     int i;
     int len;
-    // char *str;
-    // char **split_path;
+    char *str_join;
     char *pwd;
     char *s;
     char *item;
@@ -94,7 +93,6 @@ void    ft_cd_cmd(t_AST *cmd_strc)
             // free(item);
             item = g_data.env_list[get_pwd_index()];
             s = getcwd(NULL, 0);
-            // printf("getCwd == %s\n",getcwd(NULL, 0));s
             g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
             free(item);
         }
@@ -113,9 +111,12 @@ void    ft_cd_cmd(t_AST *cmd_strc)
             printf("cwd = %s\n",s);
             if (s == NULL)
             {
+                item =  g_data.env_list[get_pwd_index()];
                 printf("Minishell : error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
-                g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), ft_strjoin(ft_strdup("/"), cmd_strc->args[i]));
-
+                str_join = ft_strjoin(ft_strdup("/"), cmd_strc->args[i]);
+                g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd),str_join);
+                free(item);
+                free(str_join);
             }
             else
             {   
