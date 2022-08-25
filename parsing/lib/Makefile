@@ -6,7 +6,7 @@
 #    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 20:12:24 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/14 22:55:11 by ahmaidi          ###   ########.fr        #
+#    Updated: 2022/08/25 00:37:48 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,49 +51,39 @@ FILES = ft_memset \
 		ft_putendl_fd \
 		ft_putnbr_fd \
 		ft_striteri \
-		ft_realloc
-
-FILES_B = 	ft_lstnew_bonus \
-	  		ft_lstadd_front_bonus \
-	  		ft_lstsize_bonus \
-	  		ft_lstlast_bonus \
-	  		ft_lstadd_back_bonus \
-	  		ft_lstdelone_bonus \
-	  		ft_lstclear_bonus \
-	  		ft_lstiter_bonus \
-	  		ft_lstmap_bonus
+		ft_realloc \
+		ft_lstnew_bonus \
+	  	ft_lstadd_front_bonus \
+	  	ft_lstsize_bonus \
+	  	ft_lstlast_bonus \
+	  	ft_lstadd_back_bonus \
+	  	ft_lstdelone_bonus \
+	  	ft_lstclear_bonus \
+	  	ft_lstiter_bonus \
+	  	ft_lstmap_bonus
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-SRCS_B = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES_B)))
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
-OBJS_B = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_B)))
 
 all: $(NAME)
 
 $(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) -c  $(SRCS)
-	@echo "files objects created "
+	@$(CC) $(CFLAGS) -c  $(SRCS)
+	@echo "\033[92mObjects files created\033[0m"
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
-
-bonus: $(OBJS_B)
-
-$(OBJS_B):
-	$(CC) $(CFLAGS) -c -g $(SRCS_B)
-	@echo "files bonus's objects created "
-	$(AR) $(NAME) $(OBJS_B)
-
-
+	@$(AR) $@ $^
+	@echo "\033[92mLibrary is Created\033[0m"
+	@$(RM) $(OBJS)
 clean:
-	$(RM) $(OBJS) $(OBJS_B)
-
+	@$(RM) $(OBJS)
+	@echo "\033[91mObjects files deleted\033[0m"
 fclean: clean
-	$(RM) $(NAME)
-
+	@$(RM) $(NAME)
+	@echo "\033[91mLibrary is deleted\033[0m"
 re: clean all
 
 .PHONY: bonus all clean fclean re

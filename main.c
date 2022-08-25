@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 20:02:53 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:19:17 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ int	main(int ac, char **av, char **env)
 		if (ast)
 		{
 			ft_herdoc(ast);
-			execution(
-				ast, env);
+			execution(ast, g_data.env_list);
 			free_ast_pipe(ast);
 		}
-		// free (ast->tab_cmd[0]->args[0]);
 		// free(g_data.env_list[5]);
 		//system("leaks minishell");
 	}

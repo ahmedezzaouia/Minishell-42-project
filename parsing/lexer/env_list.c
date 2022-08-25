@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:24:25 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 03:13:27 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 02:43:02 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	env_variable(char **env)
 	{
 		g_data.env_list = ft_realloc_er(g_data.env_list, sizeof(char *), size);
 		size += 1;
-		g_data.env_list[size - 1] = ft_strdup(env[i]);
+		g_data.env_list[size - 1] = ft_strdup_er(env[i]);
 		i++;
 	}
 	g_data.env_list = ft_realloc_er(g_data.env_list, sizeof(char *), size);
-		size += 1;
+	size += 1;
 	g_data.env_list[size - 1] = NULL;
+	g_data.size_env_list = size;
 }
