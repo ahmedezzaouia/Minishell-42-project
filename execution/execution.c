@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/25 02:19:02 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:30:31 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,14 @@ char    *get_path(char **env, char *cmd)
 
     i = 0;
     // printf("cmd == %s\n", cmd);
-    path_chunks = ft_split(getenv("PATH"), ':');
+    if (!ft_get_env("PATH"))
+    {
+        write (2, "Minishell : ",13);
+        write (2, cmd + 1, ft_strlen(cmd) - 1);
+        write (2, ": No such file or directory\n", 29);
+    }
+    path_chunks = ft_split(ft_get_env("PATH"), ':');
+    
     while (path_chunks[i])
     {
         cmd_joined_path = ft_strjoin(ft_strdup(path_chunks[i]), cmd);
@@ -116,7 +123,7 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
     cmd_path = get_path(env, cmd);
     printf("command start in execve\n");
-    if(execve(cmd_path, pipe_strc->args, env) == -1)
+    if(execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
     {
         perror("minishell: ");
         exit(1);
