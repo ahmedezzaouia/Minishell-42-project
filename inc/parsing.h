@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 03:07:01 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 02:41:36 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_global_data
 {
 	int		exit_status;
 	char	**env_list;
+	int		size_env_list;
+	int		is_quotes;
 }	t_global_data;
 
 typedef enum s_type_redir
@@ -88,8 +90,13 @@ int				check_first_args_is_nbre(char *str);
 void			check_max_long(unsigned char i, char *str);
 void			not_numeric(char *str);
 char			*ft_get_env(char *s);
+void			ft_export(t_AST	*cmd);
+int				display_export(t_AST *cmd);
+void			ft_unset(t_AST *cmd);
+void			delete_env(char *arg);
 
 /*   parsing functions     */
+
 t_AST			*init_ast(void);
 t_pipes			*parser_parse(t_parser *parser);
 int				check_syntax_cmd(t_parser *parser);

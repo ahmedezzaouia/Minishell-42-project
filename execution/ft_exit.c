@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:16:50 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 05:06:47 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 23:04:17 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_first_args_is_nbre(char *str)
 
 void	not_numeric(char *str)
 {
-	write(2, "exit\n", 6);
+	write(1, "exit\n", 6);
 	write(2, "Minishell : exit: ", 19);
 	write(2, str, ft_strlen(str));
 	write(2, ": numeric argument required\n", 28);
@@ -76,13 +76,13 @@ void	ft_exit(char **av, unsigned int size)
 	{
 		if (!check_first_args_is_nbre(av[1]))
 			not_numeric(av[1]);
-		write(2, "exit\n", 6);
+		write(1, "exit\n", 6);
 		write(2, "Minishell : exit: too arguments\n", 33);
+		g_data.exit_status = 1;
 	}
 	else
 	{
-		write(2, "exit\n", 6);
+		write(1, "exit\n", 6);
 		exit(0);
 	}
-	
 }

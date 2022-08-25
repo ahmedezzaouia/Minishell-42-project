@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/24 03:34:04 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/25 01:19:15 by ahmaidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,25 +28,6 @@ parsing/lexer/env_list.c \
 parsing/lexer/get_env.c \
 main.c \
 parsing/lexer/get_simple_chars.c \
-parsing/lib/ft_calloc.c \
-parsing/lib/ft_strchr.c \
-parsing/lib/ft_strncmp.c \
-parsing/lib/ft_split.c \
-parsing/lib/ft_putchar_fd.c \
-parsing/lib/ft_putstr_fd.c \
-parsing/lib/ft_realloc.c \
-parsing/lib/ft_isdigit.c \
-parsing/lib/ft_strlen.c \
-parsing/lib/ft_isalpha.c \
-parsing/lib/ft_strdup.c \
-parsing/lib/ft_strjoin.c \
-parsing/lib/ft_strjoin_char.c \
-parsing/lib/ft_substr.c \
-parsing/lib/ft_atoi.c \
-parsing/lib/ft_memcpy.c \
-parsing/lib/ft_bzero.c \
-parsing/lib/ft_isalnum.c \
-parsing/lib/ft_itoa.c \
 parsing/parser/ft_realloc_er.c \
 parsing/parser/parsing_utils.c \
 parsing/parser/parsing_utils2.c \
@@ -64,19 +45,30 @@ execution/ft_echo.c \
 execution/ft_env_cmd.c \
 execution/redirections.c \
 execution/ft_exit.c \
+execution/ft_export.c \
+execution/ft_display_export.c \
 execution/ft_max_long_exit.c\
-execution/ft_herdoc.c
+execution/ft_herdoc.c \
+execution/ft_unset.c\
+execution/delete_env.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
 READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib \
 			   -I /Users/$(USER)/.brew/opt/readline/include
+LIBFT = ./parsing/lib/libft.a
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	@$(CC) $(CFLAGS) $(READLINE) $(SRCS) -o $(NAME)
+	@make -C ./parsing/lib
+	@$(CC) $(CFLAGS) $(READLINE) $(SRCS) $(LIBFT) -o $(NAME)
 	@echo "\033[92mExecution file Created\033[0m"
+
+clean:
+	@make -C ./parsing/lib clean
+
 fclean:
+	@make -C ./parsing/lib fclean
 	$(RM) $(NAME)
 	@echo "\033[91mExecution file deleted\033[0m"
 re: fclean all

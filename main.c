@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 04:59:47 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:02:53 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(int ac, char **av, char **env)
 		if (ast)
 		{
 			ft_herdoc(ast);
-			execution(ast, env);
+			execution(
+				ast, env);
 			free_ast_pipe(ast);
 		}
 		// free (ast->tab_cmd[0]->args[0]);
