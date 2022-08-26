@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/15 20:12:24 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/25 00:37:48 by ahmaidi          ###   ########.fr        #
+#    Created: 2021/11/15 20:13:24 by ahmaidi           #+#    #+#              #
+#    Updated: 2022/08/26 05:52:08 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ FILES = ft_memset \
 		ft_strtrim \
 		ft_split \
 		ft_itoa \
+		ft_strjoin_char\
 		ft_strmapi \
 		ft_putchar_fd \
 		ft_putstr_fd \
