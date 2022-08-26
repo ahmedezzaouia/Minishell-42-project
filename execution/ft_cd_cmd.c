@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/25 05:19:23 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/26 02:38:14 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void    go_to_home(char *s)
         g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
         printf("s == %s\n",s);
         free(item);
+        free(s);
     }
 }
 
@@ -95,6 +96,7 @@ void    change_dir(t_AST *cmd_strc, char *s, char *str_join, char *pwd)
             g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
             free(item);
         }
+    free(s);
 }
 
 void    ft_cd_cmd(t_AST *cmd_strc)

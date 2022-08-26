@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:49:29 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/25 16:37:30 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/26 02:47:51 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
 
-static	int	error_export(char *str)
+static int	error_export(char *str)
 {
 	write(2, "Minishell : export : `", 23);
 	write(2, str, ft_strlen(str));
@@ -30,8 +30,8 @@ static int	check_args_export(char *str)
 	i++;
 	while (str[i])
 	{
-		if ((!ft_isalnum(str[i]) && str[i] != '_') || str[i] == '='
-			|| str[i] == '+')
+		if ((!ft_isalnum(str[i]) && str[i] != '_')
+			|| str[i] == '=' || str[i] == '+')
 			break ;
 		i++;
 	}
@@ -51,10 +51,8 @@ static int	ft_index_env(char *str)
 	i = 0;
 	while (str[i] != '=' && str[i])
 		i++;
-	if (str[i] == '\0')
-		return (0);
 	len = i;
-	if (str[i - 1] == '+')
+	if (str[i] != '\0' && str[i - 1] == '+')
 		len--;
 	i = 0;
 	while (g_data.env_list[i])
@@ -72,22 +70,27 @@ static void	update_env(char *env)
 
 	if (ft_strchr(env, '+'))
 	{
-		g_data.env_list[ft_index_env(env)] = ft_strjoin(g_data.env_list[ft_index_env(env)], ft_strchr(env, '=') + 1);
+		g_data.env_list[ft_index_env(env)] = ft_strjoin(
+				g_data.env_list[ft_index_env(env)],
+				ft_strchr(env, '=') + 1);
 	}
 	else
 	{
-		temp = g_data.env_list[ft_index_env(env)];
-			g_data.env_list[ft_index_env(env)]
-			= ft_strdup_er(env);
-		free(temp);
+		if (ft_strchr(env, '='))
+		{
+			temp = g_data.env_list[ft_index_env(env)];
+			g_data.env_list[ft_index_env(env)] = ft_strdup_er(env);
+			free(temp);
+		}
 	}
 }
 
-void	ft_export(t_AST	*cmd)
+void	ft_export(t_AST *cmd)
 {
-	int		i;
+	int	i;
 
 	i = 1;
+	i += !ft_strncmp(cmd->args[i], "--", ft_strlen(cmd->args[i]));
 	if (display_export(cmd))
 	{
 		while (i < cmd->size_args)
@@ -99,7 +102,7 @@ void	ft_export(t_AST	*cmd)
 				else
 				{
 					g_data.env_list[g_data.size_env_list - 1]
-						= ft_strdup_er(cmd->args[i]);
+						= filling_args_export(cmd->args[i]);
 					g_data.env_list = ft_realloc_er(g_data.env_list,
 							sizeof(char *), g_data.size_env_list);
 					g_data.size_env_list += 1;

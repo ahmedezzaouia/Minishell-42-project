@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 00:50:36 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/25 02:46:55 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/26 02:57:07 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int is_Exist_on_env_list(char *arg)
     {
 
         if (!ft_strncmp(g_data.env_list[i],str, ft_strlen(str)))
+        {
+            free(str);
             return (i);
+        }
         i++;
     }
 	free(str);
@@ -44,7 +47,6 @@ void    delete_env(char *arg)
 	if (remove_index == -1)
 		return ;
     g_data.size_env_list -= 1;
-    // printf("old env size == %d\n",g_data.size_env_list);
     new_env_list = ft_calloc(sizeof(char *) , g_data.size_env_list);
 
     if (!new_env_list)
@@ -55,23 +57,16 @@ void    delete_env(char *arg)
 
         if (i == remove_index)
         {
-            // free (g_data.env_list[i]);
+            free (g_data.env_list[i]);
             i++;
             continue ;
         }
         new_env_list[j] = ft_strdup(g_data.env_list[i]);
-		// free (g_data.env_list[i]);
+		free (g_data.env_list[i]);
 		i++;
 		j++;
 	}
-
+    free (g_data.env_list);
 	g_data.env_list = new_env_list;
-    // printf("unsetadadadd\n");
-    // i = 0;
-    // while (new_env_list[i])
-    // {
-    //     printf("%s\n",new_env_list[i]);
-    //     i++;
-    // }
-    
+   
 }
