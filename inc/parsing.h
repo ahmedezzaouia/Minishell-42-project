@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/25 02:41:36 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:32:57 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void			not_numeric(char *str);
 char			*ft_get_env(char *s);
 void			ft_export(t_AST	*cmd);
 int				display_export(t_AST *cmd);
+char			*filling_args_export(char *str);
 void			ft_unset(t_AST *cmd);
 void			delete_env(char *arg);
 

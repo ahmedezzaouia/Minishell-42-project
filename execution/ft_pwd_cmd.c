@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 06:33:54 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/24 02:06:28 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:01:23 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void    ft_pwd_cmd()
 {
-    int i;
+    // int i;
+    char *s;
     
     // char *s;
 
-    i = 0;
-    while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "PWD=",4))
-        i++;
-    
-    printf("%s\n",g_data.env_list[i]+ 4);
+    // i = 0;
+    // while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "PWD=",4))
+    //     i++;
+    s = getcwd(NULL, 0);
+    printf("%s\n", s);
+    free (s);
     // s = getcwd(NULL, 0);
     // if (!s)
     //     printf("%s\n", getenv("PWD")); 

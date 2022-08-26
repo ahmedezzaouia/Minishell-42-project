@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:49:29 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/25 02:46:13 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:37:30 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ static int	ft_index_env(char *str)
 	int	len;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i])
 		i++;
+	if (str[i] == '\0')
+		return (0);
 	len = i;
 	if (str[i - 1] == '+')
 		len--;
@@ -70,9 +72,7 @@ static void	update_env(char *env)
 
 	if (ft_strchr(env, '+'))
 	{
-		g_data.env_list[ft_index_env(env)] = ft_strjoin(
-				g_data.env_list[ft_index_env(env)],
-				ft_strchr(env, '=') + 1);
+		g_data.env_list[ft_index_env(env)] = ft_strjoin(g_data.env_list[ft_index_env(env)], ft_strchr(env, '=') + 1);
 	}
 	else
 	{

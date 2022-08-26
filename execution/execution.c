@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/25 03:30:31 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:22:58 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void run_builtins(t_AST *pipe_strc, int size)
     // dup2(0, 0);
 }
 
+
+
 void    exec_commad(t_AST *pipe_strc, char **env, int size)
 {
     char *cmd_path;
@@ -117,11 +119,12 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
     }
     if (!pipe_strc->size_args)
         exit(0);
-    if (pipe_strc->args[0][0] == 47)
+    if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')
         cmd = pipe_strc->args[0];
     else
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
     cmd_path = get_path(env, cmd);
+    printf("cmd path = %s\n",cmd_path);
     printf("command start in execve\n");
     if(execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
     {
