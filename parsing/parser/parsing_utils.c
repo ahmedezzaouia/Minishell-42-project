@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:46 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 18:17:31 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/27 13:10:37 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_parser	*init_parser(char *cmd)
 	parser->lexer = lexer;
 	parser->cur_tocken = lexer_get_next_tocken(lexer);
 	parser->prev_tocken = NULL;
+	parser->lex_ambg = 0;
 	return (parser);
 }
 /* initialize the AST */
@@ -99,14 +100,13 @@ t_AST	*get_ast_simple_cmd(t_parser *parser)
 			return (free_ast_cmd(ast));
 	}
 	if (!parser->cur_tocken)
-	{
-		free_ast_cmd(ast);
-		return (NULL);
-	}
+		return (free_ast_cmd(ast));
 	if (ast->args)
 	{
 		ast->args = ft_realloc_er(ast->args, sizeof(char *), ast->size_args);
 		ast->args[ast->size_args] = NULL;
 	}
+	if (parser->lex_ambg)
+		free_args_in_ambg_cas(&ast, &parser);
 	return (ast);
 }

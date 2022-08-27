@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/27 05:35:18 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:32:23 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,20 @@ void    ft_print_error()
     exit(1);
 }
 
-char    *get_path(char **env, char *cmd)
+char    *get_path(char *cmd)
 {
     int i;
     int j;
-    (void)env;
     char    **path_chunks;
     char    *cmd_joined_path;
 
     i = 0;
-    // printf("cmd == %s\n", cmd);
-    if (!ft_get_env("PATH"))
-    {
-        write (2, "Minishell : ",13);
-        write (2, cmd + 1, ft_strlen(cmd) - 1);
-        write (2, ": No such file or directory\n", 29);
-    }
+    // if (!ft_get_env("PATH"))
+    // {
+    //     write (2, "Minishell : ",13);
+    //     write (2, cmd + 1, ft_strlen(cmd) - 1);
+    //     write (2, ": No such file or directory\n", 29);
+    // }
     path_chunks = ft_split(ft_get_env("PATH"), ':');
     
     while (path_chunks[i])
@@ -54,14 +52,14 @@ char    *get_path(char **env, char *cmd)
     while (path_chunks[++i])
         free(path_chunks[i]);
     free(path_chunks);
-    // todo :: you have to check if all path are not valid 
+    // TODO:  :: you have to check if all path are not valid
     return (cmd);
 }
 
 void run_builtins(t_AST *pipe_strc, int size)
 {
+    
     int std_out;
-    // (void) pipe_strc;
     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
     char *cmd;
     std_out = -1;
@@ -95,18 +93,15 @@ void run_builtins(t_AST *pipe_strc, int size)
         ft_export(pipe_strc);
     close(1);
     dup2(std_out, 1);
-
-
-    // dup2(0, 0);
 }
 
 
 
-void    exec_commad(t_AST *pipe_strc, char **env, int size)
+void    exec_commad(t_AST *pipe_strc, int size)
 {
+
     char *cmd_path;
     char *cmd;
-    
     if (pipe_strc->size_redirec > 0)
     {
         if(!handle_redirections(pipe_strc))
@@ -124,7 +119,7 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
         cmd = pipe_strc->args[0];
     else
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
-    cmd_path = get_path(env, cmd);
+    cmd_path = get_path(cmd);
     printf("cmd path = %s\n",cmd_path);
     printf("command start in execve\n");
     if(execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
@@ -134,7 +129,7 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
     }
 }
 
-void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
+void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
 {
     
     if (pipe_strc->is_builten)
@@ -147,13 +142,26 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
     }
     else if (nbre_pipes == 1)
     {
+
         if (fork() == 0)
-            exec_commad(pipe_strc, env, nbre_pipes);
+        {
+            signal(SIGINT, SIG_DFL);
+            signal(SIGQUIT, SIG_DFL);
+            exec_commad(pipe_strc, nbre_pipes);
+        }
         else
-            wait(NULL);
+        {
+            signal(SIGINT, SIG_IGN);
+	        signal(SIGQUIT, SIG_IGN);
+            int res = 0;
+            while (res != -1)
+                res = waitpid(-1, NULL, g_data.exit_status);
+            signal(SIGINT, sig_handler);
+            signal(SIGQUIT, SIG_IGN);
+        }
     }
     else if (nbre_pipes > 1)
-        exec_commad(pipe_strc, env, nbre_pipes);
+        exec_commad(pipe_strc, nbre_pipes);
     
 }
 
@@ -167,26 +175,23 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     int last_fd = -1;
     (void)env;
 
-    // pipes->nbre_pipes--;
     i = -1;
+
     while (++i < pipes->nbre_pipes)
     {
         if (pipe(fd) == -1)
             ft_print_error();
         pid = fork();
-    
         if (pid == -1)
         {
             printf("minishell: fork: Resource temporarily unavailable\n");
             break ;
         }
-
         if (pid == 0)
         {            
-            // child process code start
             signal(SIGINT, SIG_DFL);
             signal(SIGQUIT, sig_handler);
-            printf("is child == %d\n",  g_data.is_child);
+            // printf("is child == %d\n",  g_data.is_child);
             if (i != pipes->nbre_pipes - 1)
             {
                 dup2(fd[1], 1);
@@ -200,7 +205,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
                 close(last_fd);
             }
             close(fd[0]);
-            exec_simple_cmd(pipes->tab_cmd[i], env, pipes->nbre_pipes);
+            exec_simple_cmd(pipes->tab_cmd[i], pipes->nbre_pipes);
             // child process code end  
         }
         else
@@ -211,16 +216,20 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
             close(fd[1]);
         }
     }
-    i = 0;
     int res = 0;
-    while (res != -1) 
-        res = waitpid(-1, NULL, 0);
+    signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+    while (res != -1)
+        res = waitpid(-1, NULL, g_data.exit_status);
+    if (g_data.exit_status == 3 || g_data.exit_status == 2)
+        g_data.exit_status += 128;
+    signal(SIGINT, sig_handler);
+    signal(SIGQUIT, SIG_IGN);
     close(fd[0]);
     close(fd[1]);
-
 }
 
-void check_builtins(t_pipes *pipes)
+void init_builtins(t_pipes *pipes)
 {
     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
     int i;
@@ -259,11 +268,13 @@ void check_builtins(t_pipes *pipes)
 
 void    execution(t_pipes *pipes, char **env)
 {   
+
     g_data.is_child = 1;
-    check_builtins(pipes);
+    init_builtins(pipes);
     if (pipes->nbre_pipes == 1)
-        exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);
+        exec_simple_cmd(pipes->tab_cmd[0], pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)
         exec_pipe_cmd(pipes, env);
+
 }
 

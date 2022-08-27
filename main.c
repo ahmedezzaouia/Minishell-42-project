@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 05:47:17 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:29:54 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,25 @@ void sig_handler(int sig)
 		{
 			if (g_data.is_child == 1)
 			{
-				printf("enterr .....\n");
-				g_data.is_child = 0;
-				printf("\n");
 				rl_on_new_line();
-				rl_replace_line("", 0);
+				rl_replace_line("", 1);
 			}
 			else
 			{				
-				printf("\n");
+				write(1, "\n", 1);
 				rl_on_new_line();
-				rl_replace_line("", 0);
+				rl_replace_line("", 1);
 				rl_redisplay();
 			}
-
 		}
-		// rl_replace_line("", 0);
-		// rl_redisplay();
 	}
 	
-	if (sig == SIGQUIT)
+	else if (sig == SIGQUIT)
 	{
 		if(g_data.is_child == 1)
 		{
-			printf("^\\Quit: 3\n");
+			printf("Quit: 3\n");
+			exit(1);
 		}
 	}
 }
@@ -103,12 +98,12 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	rl_catch_signals = 0;
 	input = dup(0);
-	signal(SIGINT, sig_handler);
-    signal(SIGQUIT, sig_handler);
+
 	env_variable(env);
 	while (1)
 	{
-		g_data.num_of_cmds = 1;
+	signal(SIGINT, sig_handler);
+    signal(SIGQUIT, SIG_IGN);
 		g_data.is_herdoc = 0;
 		g_data.kill_herdoc = 0;
 		g_data.is_child = 0;
@@ -118,12 +113,13 @@ int	main(int ac, char **av, char **env)
 		add_history(cmd_line);
 		check_error_max_here_doc(cmd_line);
 		parser = init_parser(cmd_line);
+		if (parser->cur_tocken && parser->cur_tocken->type == 6)
+			continue ;
 		ast = parser_parse(parser);
 		free_parser(parser);
-		// visitor(ast);
+		//visitor(ast);
 		if (ast)
 		{
-			g_data.num_of_cmds = ast->nbre_pipes;
 			ft_herdoc(ast);
 			if (g_data.kill_herdoc == 0)
 				execution(ast, g_data.env_list);

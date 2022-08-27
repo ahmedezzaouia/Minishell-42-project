@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/21 18:17:36 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/26 23:40:45 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,19 @@ int	collect_redirect(t_parser *parser, t_AST *ast)
 {
 	t_type_redir	type;
 	int				index_c;
-	int				ambg;
 
 	index_c = parser->lexer->i;
 	type = get_type_redirect(parser);
 	parser_expected(parser, parser->cur_tocken->type);
-	ambg = parser->lexer->is_ambg;
-	if (type != HERE_DOC && check_ambiguous(ambg))
+	if (parser->lexer->is_ambg && !parser->lex_ambg)
+		parser->lex_ambg = parser->lexer->is_ambg;
+	if (type != HERE_DOC && (check_ambiguous(parser->lexer->is_ambg)
+			|| parser->lex_ambg))
 	{
-		if (parser->cur_tocken->value)
-			free(parser->cur_tocken->value);
-		return (1);
+		parser_expected(parser, parser->cur_tocken->type);
+		if (parser->prev_tocken)
+			free(parser->prev_tocken->value);
+		return (0);
 	}
 	if (parser_expected(parser, TOCKEN_WORD))
 		return (1);

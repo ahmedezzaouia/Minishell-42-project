@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 05:08:10 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 12:58:50 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_global_data
 	int		size_env_list;
 	int		is_quotes;
 	int		is_herdoc;
-	int		num_of_cmds;
 	int		kill_herdoc;
 	int		is_child;
 
@@ -73,6 +72,7 @@ typedef struct s_parser
 	t_lexer		*lexer;
 	t_tocken	*cur_tocken;
 	t_tocken	*prev_tocken;
+	int			lex_ambg;
 }	t_parser;
 
 /* init the parser */
@@ -126,7 +126,9 @@ int				check_ambiguous(int status);
 void			fill_args(char ***args, char **str, int *size);
 int				not_redirect(t_tocken *tocken);
 void			env_variable(char **env);
+void			free_args_in_ambg_cas(t_AST **ast, t_parser **parser);
 
 t_global_data	g_data;
 void sig_handler(int sig);
+void	ft_signal(int i);
 #endif

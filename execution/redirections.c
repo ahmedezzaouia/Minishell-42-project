@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:01:25 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/26 10:49:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:16:43 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int    handle_redirections(t_AST *pipe_strc)
 {
+    printf("ahdgadghjagdhjagdhjgajdghjd\n");
     int i;
     int fd;
     t_redir **redirec;
@@ -31,7 +32,6 @@ int    handle_redirections(t_AST *pipe_strc)
             if (fd == -1)
             {
                 perror("Minishell: ");
-
                 return (0);
             }
 

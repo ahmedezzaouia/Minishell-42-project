@@ -6,7 +6,7 @@
 /*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 13:11:00 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/23 19:28:53 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/27 02:24:14 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_AST	*free_ast_cmd(t_AST *ast)
 	{
 		while (++i < ast->size_args)
 			free(ast->args[i]);
-		free(ast->args);
+		if (ast->args)
+			free(ast->args);
 		i = -1;
 		while (++i < ast->size_redirec)
 		{
@@ -85,4 +86,23 @@ t_pipes	*free_ast_pipe(t_pipes *pipes)
 		free(pipes);
 	}
 	return (NULL);
+}
+
+/* free the tab of args in simple cmd with ambigous direct */
+
+void	free_args_in_ambg_cas(t_AST **ast, t_parser **parser)
+{
+	int	i;
+
+	i = -1;
+	if ((*parser)->lex_ambg)
+	{
+		if ((*ast)->size_args > 0)
+		{
+			while (++i < (*ast)->size_args)
+				free((*ast)->args[i]);
+		}
+		(*ast)->size_args = 0;
+	}
+	(*parser)->lex_ambg = 0;
 }
