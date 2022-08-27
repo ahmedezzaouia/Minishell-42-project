@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 13:29:54 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:49:00 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	main(int ac, char **av, char **env)
 	env_variable(env);
 	while (1)
 	{
-	signal(SIGINT, sig_handler);
-    signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, sig_handler);
+    	signal(SIGQUIT, SIG_IGN);
 		g_data.is_herdoc = 0;
 		g_data.kill_herdoc = 0;
 		g_data.is_child = 0;

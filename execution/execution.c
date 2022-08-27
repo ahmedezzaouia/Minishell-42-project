@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/27 14:32:23 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:47:46 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ char    *get_path(char *cmd)
     char    *cmd_joined_path;
 
     i = 0;
-    // if (!ft_get_env("PATH"))
-    // {
-    //     write (2, "Minishell : ",13);
-    //     write (2, cmd + 1, ft_strlen(cmd) - 1);
-    //     write (2, ": No such file or directory\n", 29);
-    // }
     path_chunks = ft_split(ft_get_env("PATH"), ':');
     
     while (path_chunks[i])
@@ -97,6 +91,34 @@ void run_builtins(t_AST *pipe_strc, int size)
 
 
 
+void    handle_directory(char *cmd)
+{
+    DIR    *directory;
+    directory = opendir(cmd);
+    if (cmd[0] == '/' && !directory)
+    {
+        printf("minishell : %s : No such file or directory\n", cmd);
+        g_data.exit_status = 127;
+    }
+    else if (directory && ft_strchr(cmd, '/'))
+    {
+        closedir(directory);
+        printf("minishell : %s : Is a directory\n", cmd);
+        g_data.exit_status = 126;
+    }
+    else if (!directory && ft_strchr(cmd, '/'))
+    {
+        printf("minishell : %s : Not a directory\n", cmd);
+        g_data.exit_status = 1;
+    }
+    else
+    {
+        printf("minishell : %s : command not found\n", cmd);
+        g_data.exit_status = 127;
+
+    }
+}
+
 void    exec_commad(t_AST *pipe_strc, int size)
 {
 
@@ -114,7 +136,7 @@ void    exec_commad(t_AST *pipe_strc, int size)
         }
     }
     if (!pipe_strc->size_args)
-        exit(0);
+        exit(1);
     if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')
         cmd = pipe_strc->args[0];
     else
@@ -124,8 +146,8 @@ void    exec_commad(t_AST *pipe_strc, int size)
     printf("command start in execve\n");
     if(execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
     {
-        perror("minishell: ");
-        exit(1);
+        handle_directory(pipe_strc->args[0]);
+        exit(g_data.exit_status);
     }
 }
 
@@ -156,6 +178,10 @@ void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
             int res = 0;
             while (res != -1)
                 res = waitpid(-1, NULL, g_data.exit_status);
+
+            g_data.exit_status = WEXITSTATUS(g_data.exit_status); 
+			if (WIFSIGNALED(g_data.exit_status))
+				g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
             signal(SIGINT, sig_handler);
             signal(SIGQUIT, SIG_IGN);
         }
@@ -191,7 +217,6 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
         {            
             signal(SIGINT, SIG_DFL);
             signal(SIGQUIT, sig_handler);
-            // printf("is child == %d\n",  g_data.is_child);
             if (i != pipes->nbre_pipes - 1)
             {
                 dup2(fd[1], 1);

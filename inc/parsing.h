@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 12:58:50 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:07:48 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "lexer.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
+
 
 typedef struct s_global_data
 {
