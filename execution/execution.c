@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/27 16:47:46 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:05:02 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void run_builtins(t_AST *pipe_strc, int size)
             if (size == 1)
                 return ;
             else if (size > 1)
-                exit(1);
+                exit(g_data.exit_status);
         }
     }
     if (!pipe_strc->args)
@@ -94,11 +94,13 @@ void run_builtins(t_AST *pipe_strc, int size)
 void    handle_directory(char *cmd)
 {
     DIR    *directory;
+    
     directory = opendir(cmd);
+    // printf("directory == %d\n", opendir(cmd));
     if (cmd[0] == '/' && !directory)
     {
         printf("minishell : %s : No such file or directory\n", cmd);
-        g_data.exit_status = 127;
+        g_data.exit_status = 1;
     }
     else if (directory && ft_strchr(cmd, '/'))
     {
@@ -115,7 +117,6 @@ void    handle_directory(char *cmd)
     {
         printf("minishell : %s : command not found\n", cmd);
         g_data.exit_status = 127;
-
     }
 }
 
@@ -132,7 +133,7 @@ void    exec_commad(t_AST *pipe_strc, int size)
             if (size == 1)
                 return ;
             else if (size > 1)
-                exit(1);
+                exit(g_data.exit_status);
         }
     }
     if (!pipe_strc->size_args)
@@ -147,24 +148,23 @@ void    exec_commad(t_AST *pipe_strc, int size)
     if(execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
     {
         handle_directory(pipe_strc->args[0]);
+        printf("status === %d\n", g_data.exit_status);
         exit(g_data.exit_status);
     }
 }
 
 void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
 {
-    
     if (pipe_strc->is_builten)
     {
         run_builtins(pipe_strc, nbre_pipes);
         if (nbre_pipes == 1)
             return ;
         else
-            exit(0);
+            exit(g_data.exit_status);
     }
     else if (nbre_pipes == 1)
     {
-
         if (fork() == 0)
         {
             signal(SIGINT, SIG_DFL);
@@ -177,11 +177,11 @@ void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
 	        signal(SIGQUIT, SIG_IGN);
             int res = 0;
             while (res != -1)
-                res = waitpid(-1, NULL, g_data.exit_status);
-
-            g_data.exit_status = WEXITSTATUS(g_data.exit_status); 
-			if (WIFSIGNALED(g_data.exit_status))
-				g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
+                res = waitpid(-1, &g_data.exit_status, 0);
+            g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
+			// if (WIFSIGNALED(g_data.exit_status)) // WIFSIGNALED returns true if the child process was terminated by a signal
+			// 	g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
+                
             signal(SIGINT, sig_handler);
             signal(SIGQUIT, SIG_IGN);
         }
@@ -244,10 +244,13 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     int res = 0;
     signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-    while (res != -1)
-        res = waitpid(-1, NULL, g_data.exit_status);
-    if (g_data.exit_status == 3 || g_data.exit_status == 2)
-        g_data.exit_status += 128;
+    if (pid)
+        res = waitpid(pid, &g_data.exit_status, 0);
+
+    g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
+	// if (WIFSIGNALED(g_data.exit_status)) // WIFSIGNALED returns true if the child process was terminated by a signal
+	// 	g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
+
     signal(SIGINT, sig_handler);
     signal(SIGQUIT, SIG_IGN);
     close(fd[0]);

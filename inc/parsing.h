@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 16:07:48 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:00:36 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_global_data
 	int		is_herdoc;
 	int		kill_herdoc;
 	int		is_child;
+	int		last_child;
 
 }	t_global_data;
 

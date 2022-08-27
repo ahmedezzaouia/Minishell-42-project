@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 16:49:00 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:39:24 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,6 @@ void sig_handler(int sig)
 				rl_replace_line("", 1);
 				rl_redisplay();
 			}
-		}
-	}
-	
-	else if (sig == SIGQUIT)
-	{
-		if(g_data.is_child == 1)
-		{
-			printf("Quit: 3\n");
-			exit(1);
 		}
 	}
 }

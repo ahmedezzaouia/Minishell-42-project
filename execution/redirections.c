@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:01:25 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/27 13:16:43 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:36:09 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int    handle_redirections(t_AST *pipe_strc)
 {
-    printf("ahdgadghjagdhjagdhjgajdghjd\n");
     int i;
     int fd;
     t_redir **redirec;
@@ -31,7 +30,11 @@ int    handle_redirections(t_AST *pipe_strc)
             fd = open(redirec[i]->filename, O_RDONLY);
             if (fd == -1)
             {
-                perror("Minishell: ");
+               if (access(redirec[i]->filename, R_OK) != 0)
+                {
+                    printf("Permission denied \n");
+                    g_data.exit_status = 1;
+                }
                 return (0);
             }
 
@@ -45,7 +48,11 @@ int    handle_redirections(t_AST *pipe_strc)
             fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_TRUNC, 0644);
             if (fd == -1)
             {
-                perror("Minishell: ");
+                if (access(redirec[i]->filename, W_OK) != 0)
+                {
+                    printf("Permission denied \n");
+                    g_data.exit_status = 1;
+                }
                 return (0);
             }
 
@@ -57,8 +64,12 @@ int    handle_redirections(t_AST *pipe_strc)
         {
             fd = open(redirec[i]->filename,  O_CREAT | O_RDWR | O_APPEND, 0644);
             if (fd == -1)
-            {   
-                perror("Minishell: ");
+            {
+                if (access(redirec[i]->filename, W_OK) != 0)
+                {
+                    printf("Permission denied \n");
+                    g_data.exit_status = 1;
+                }
                 return (0);
             }
             dup2(fd, 1);

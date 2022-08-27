@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:49:29 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/26 02:47:51 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/27 19:13:12 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	error_export(char *str)
 	write(2, "Minishell : export : `", 23);
 	write(2, str, ft_strlen(str));
 	write(2, "': not a valid identifier\n", 27);
+	g_data.exit_status = 1;
 	return (0);
 }
 
@@ -108,6 +109,7 @@ void	ft_export(t_AST *cmd)
 					g_data.size_env_list += 1;
 					g_data.env_list[g_data.size_env_list - 1] = NULL;
 				}
+				g_data.exit_status = 0;
 			}
 			i++;
 		}

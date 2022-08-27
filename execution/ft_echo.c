@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:38:59 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/22 21:28:21 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/27 19:10:32 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	ft_echo(char **av)
 	}
 	if (!rm_newline)
 		ft_putstr_fd("\n", 1);
+	g_data.exit_status = 0;
 }
