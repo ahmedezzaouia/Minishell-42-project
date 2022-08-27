@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/25 16:32:57 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/27 05:08:10 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ typedef struct s_global_data
 	char	**env_list;
 	int		size_env_list;
 	int		is_quotes;
+	int		is_herdoc;
+	int		num_of_cmds;
+	int		kill_herdoc;
+	int		is_child;
+
 }	t_global_data;
 
 typedef enum s_type_redir
@@ -123,4 +128,5 @@ int				not_redirect(t_tocken *tocken);
 void			env_variable(char **env);
 
 t_global_data	g_data;
+void sig_handler(int sig);
 #endif

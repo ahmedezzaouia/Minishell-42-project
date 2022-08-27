@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:08:51 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/26 02:12:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:34:46 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ char	*expand_variable(char *str)
 	free (str);
 	return (new_str);
 }
+// void	sig_handler(int sig)
+// {
+	
+// }
 
 void    ft_herdoc(t_pipes *ast)
 {
@@ -71,11 +75,14 @@ void    ft_herdoc(t_pipes *ast)
 	i = 0;
 	j = 0;
 	str = NULL;
-	while (i < ast->nbre_pipes)
+	g_data.is_herdoc = 1;
+	while (i < ast->nbre_pipes && g_data.is_herdoc)
 	{
+		printf("pipes loop\n");
 		j = 0;
-		while (j < ast->tab_cmd[i]->size_redirec)
+		while (j < ast->tab_cmd[i]->size_redirec && g_data.is_herdoc)
 		{
+			printf("redirec loop\n");
 			if (ast->tab_cmd[i]->redirec[j]->type == HERE_DOC)
 			{
 				if (pipe(ast->tab_cmd[i]->redirec[j]->heredoc) == -1)
@@ -83,8 +90,10 @@ void    ft_herdoc(t_pipes *ast)
 					printf("Error: \n");
     				exit(1);
 				}
-				while ((str = readline("> ")))
+				while ((str = readline("> ")) && g_data.is_herdoc)
 				{
+				printf("redline loop\n");
+					
 					if (!str)
 						break ;
 					
@@ -94,24 +103,17 @@ void    ft_herdoc(t_pipes *ast)
 						break ;
 					}
 					if (ft_strchr(str, '$'))
-					{
 						str = expand_variable(str);	
-					}
-
-
-					if (get_dollar_index(str) != -1)
-					{
-						str = expand_variable(str);
-					}
-					char *sh = ft_strjoin(str, "\n");
-					ft_putstr_fd(sh, ast->tab_cmd[i]->redirec[j]->heredoc[1]);
-					free(sh);
+					str = ft_strjoin(str, "\n");
+					ft_putstr_fd(str, ast->tab_cmd[i]->redirec[j]->heredoc[1]);
+					free(str);
 				}
+				printf("{%s}\n", str);
 				close(ast->tab_cmd[i]->redirec[j]->heredoc[1]);
-				// only p[0] too get input from 
 			}
 			j++;
 		}
 		i++;
 	}
+	g_data.is_herdoc = 0;
 }

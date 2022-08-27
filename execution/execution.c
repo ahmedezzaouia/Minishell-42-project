@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/25 12:22:58 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/27 05:35:18 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
     {
         if(!handle_redirections(pipe_strc))
         {
+            
             if (size == 1)
                 return ;
             else if (size > 1)
@@ -135,7 +136,7 @@ void    exec_commad(t_AST *pipe_strc, char **env, int size)
 
 void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
 {
-
+    
     if (pipe_strc->is_builten)
     {
         run_builtins(pipe_strc, nbre_pipes);
@@ -145,7 +146,7 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
             exit(0);
     }
     else if (nbre_pipes == 1)
-    { 
+    {
         if (fork() == 0)
             exec_commad(pipe_strc, env, nbre_pipes);
         else
@@ -155,6 +156,8 @@ void    exec_simple_cmd(t_AST *pipe_strc, char **env, int nbre_pipes)
         exec_commad(pipe_strc, env, nbre_pipes);
     
 }
+
+void sig_handler(int sig);
 
 void    exec_pipe_cmd(t_pipes *pipes, char **env)
 {
@@ -171,6 +174,7 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
         if (pipe(fd) == -1)
             ft_print_error();
         pid = fork();
+    
         if (pid == -1)
         {
             printf("minishell: fork: Resource temporarily unavailable\n");
@@ -180,6 +184,9 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
         if (pid == 0)
         {            
             // child process code start
+            signal(SIGINT, SIG_DFL);
+            signal(SIGQUIT, sig_handler);
+            printf("is child == %d\n",  g_data.is_child);
             if (i != pipes->nbre_pipes - 1)
             {
                 dup2(fd[1], 1);
@@ -207,9 +214,10 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
     i = 0;
     int res = 0;
     while (res != -1) 
-        res = waitpid(-1, NULL, 0);    
+        res = waitpid(-1, NULL, 0);
     close(fd[0]);
     close(fd[1]);
+
 }
 
 void check_builtins(t_pipes *pipes)
@@ -251,7 +259,7 @@ void check_builtins(t_pipes *pipes)
 
 void    execution(t_pipes *pipes, char **env)
 {   
-    
+    g_data.is_child = 1;
     check_builtins(pipes);
     if (pipes->nbre_pipes == 1)
         exec_simple_cmd(pipes->tab_cmd[0], env , pipes->nbre_pipes);

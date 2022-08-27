@@ -1,0 +1,3 @@
+cmd path = /bin/cat
+command start in execve
+yo 1
