@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 18:35:18 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:25:45 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_init(void)
 	g_data.is_herdoc = 0;
 	g_data.kill_herdoc = 0;
 	g_data.is_child = 0;
+	g_data.nb_of_ambg = 0;
 }
 
 void	run_minishell(t_pipes *ast, t_parser *parser, int input, char *cmd_line)
@@ -70,6 +71,8 @@ void	run_minishell(t_pipes *ast, t_parser *parser, int input, char *cmd_line)
 		ast = parser_parse(parser);
 		free_parser(parser);
 		if (ast)
+			ft_error_ambg();
+		if (ast && ast->nbre_pipes != 0)
 		{
 			ft_herdoc(ast);
 			if (g_data.kill_herdoc == 0)

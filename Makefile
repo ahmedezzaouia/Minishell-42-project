@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/28 11:29:09 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/28 19:20:13 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ parsing/parser/parsing_utils.c \
 parsing/parser/parsing_utils2.c \
 parsing/parser/free_it.c \
 parsing/parser/parsing.c \
+parsing/parser/ft_error_ambg.c \
 parsing/visitor.c \
 parsing/parser/not_redirect.c \
 parsing/parser/anlyse_here_doc.c \

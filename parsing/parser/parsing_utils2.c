@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:19:39 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/26 23:40:45 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/28 19:22:11 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	check_ambiguous(int status)
 {
 	if (status)
 	{
-		write(2, "Minishell: ambiguous redirect\n", 31);
-		g_data.exit_status = 1;
+		g_data.nb_of_ambg += 1;
 		return (1);
 	}
 	return (0);

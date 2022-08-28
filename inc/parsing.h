@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 15:10:53 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:34:00 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_global_data
 	int		kill_herdoc;
 	int		is_child;
 	int		last_child;
+	int		nb_of_ambg;
 
 }	t_global_data;
 
@@ -84,11 +85,11 @@ t_parser		*init_parser(char *cmd);
 /* init the Abstract tree */
 
 /*   execution functions     */
-void    		handle_directory(char *cmd);
+void   			handle_directory(char *cmd);
 void			execution(t_pipes *pipes);
-void    		exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes);
-void    		exec_pipe_cmd(t_pipes *pipes);
-void    		wait_child(int pid);
+void   			exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes);
+void   			exec_pipe_cmd(t_pipes *pipes);
+void   			wait_child(int pid);
 void			exec_commad(t_AST *pipe_strc, int size);
 void 			init_builtins(t_pipes *pipes);
 void 			run_builtins(t_AST *pipe_strc, int size);
@@ -111,6 +112,7 @@ char			*filling_args_export(char *str);
 void			ft_unset(t_AST *cmd);
 void			delete_env(char *arg);
 void			sig_handler(int sig);
+void			ft_signal(int i);
 
 /*   parsing functions     */
 
@@ -138,8 +140,7 @@ void			fill_args(char ***args, char **str, int *size);
 int				not_redirect(t_tocken *tocken);
 void			env_variable(char **env);
 void			free_args_in_ambg_cas(t_AST **ast, t_parser **parser);
+void			ft_error_ambg(void);
 
 t_global_data	g_data;
-void sig_handler(int sig);
-void	ft_signal(int i);
 #endif
