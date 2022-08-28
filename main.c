@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 19:39:24 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 09:23:32 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	rl_catch_signals = 0;
 	input = dup(0);
-
 	env_variable(env);
 	while (1)
 	{

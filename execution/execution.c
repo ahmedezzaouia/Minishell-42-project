@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/27 19:05:02 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 09:38:45 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ void    exec_commad(t_AST *pipe_strc, int size)
 
 void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
 {
+    int pid;
+
     if (pipe_strc->is_builten)
     {
         run_builtins(pipe_strc, nbre_pipes);
@@ -165,7 +167,8 @@ void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
     }
     else if (nbre_pipes == 1)
     {
-        if (fork() == 0)
+        pid = fork();
+        if (pid == 0)
         {
             signal(SIGINT, SIG_DFL);
             signal(SIGQUIT, SIG_DFL);
@@ -175,13 +178,15 @@ void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
         {
             signal(SIGINT, SIG_IGN);
 	        signal(SIGQUIT, SIG_IGN);
-            int res = 0;
-            while (res != -1)
-                res = waitpid(-1, &g_data.exit_status, 0);
-            g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
-			// if (WIFSIGNALED(g_data.exit_status)) // WIFSIGNALED returns true if the child process was terminated by a signal
-			// 	g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
-                
+            if (pid)
+            {
+                waitpid(pid, &g_data.exit_status, 0);
+                if (WIFEXITED(g_data.exit_status))
+                    g_data.exit_status = WEXITSTATUS(g_data.exit_status);
+                else if (g_data.exit_status == 3 || g_data.exit_status == 2)
+                    g_data.exit_status += 128;
+            }
+
             signal(SIGINT, sig_handler);
             signal(SIGQUIT, SIG_IGN);
         }
@@ -241,16 +246,23 @@ void    exec_pipe_cmd(t_pipes *pipes, char **env)
             close(fd[1]);
         }
     }
-    int res = 0;
     signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-    if (pid)
-        res = waitpid(pid, &g_data.exit_status, 0);
-
-    g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
+    while (wait(NULL) != -1)
+	{
+        if (pid)
+        {
+            waitpid(pid, &g_data.exit_status, 0);
+            if (WIFEXITED(g_data.exit_status))
+                    g_data.exit_status = WEXITSTATUS(g_data.exit_status);
+            else if (g_data.exit_status == 3 || g_data.exit_status == 2)
+                    g_data.exit_status += 128;
+        }
+	}
+    // g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
 	// if (WIFSIGNALED(g_data.exit_status)) // WIFSIGNALED returns true if the child process was terminated by a signal
 	// 	g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
-
+            
     signal(SIGINT, sig_handler);
     signal(SIGQUIT, SIG_IGN);
     close(fd[0]);
