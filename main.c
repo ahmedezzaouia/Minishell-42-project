@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 19:25:45 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:22:08 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_init(void)
 	g_data.kill_herdoc = 0;
 	g_data.is_child = 0;
 	g_data.nb_of_ambg = 0;
+	g_data.is_quotes = 0;
 }
 
 void	run_minishell(t_pipes *ast, t_parser *parser, int input, char *cmd_line)

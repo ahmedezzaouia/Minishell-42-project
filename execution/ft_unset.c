@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 23:35:47 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/25 02:46:46 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:01:00 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	check_args_unset(char *str)
 			break ;
 		i++;
 	}
-
 	if (str[i] == '\0')
 		return (1);
 	else
@@ -46,7 +45,6 @@ void	ft_unset(t_AST *cmd)
 	int	i;
 
 	i = 1;
-
 	if (cmd->size_args == 1)
 		return ;
 	while (i < cmd->size_args)

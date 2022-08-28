@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   anlyse_here_doc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 18:19:18 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/16 15:35:47 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/28 22:23:06 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ void	analyse_here_doc(t_parser *parser, t_type_redir *type, int index_c)
 	{
 		if (parser->lexer->contents[index_c] == '\''
 			|| parser->lexer->contents[index_c] == '"')
+		{
+			g_data.is_quotes = 1;
 			collect_string_quotes_herdoc(parser, &value, &index_c);
+		}
 		else
 			collect_string_herdoc(parser, &value, &index_c);
 	}

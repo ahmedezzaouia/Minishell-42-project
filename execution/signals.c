@@ -6,14 +6,13 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 09:06:32 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 11:47:04 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:01:22 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
 
-
-void sig_handler(int sig)
+void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -51,12 +50,11 @@ void	ft_signal(int i)
 	else if (i == 1)
 	{
 		signal(SIGINT, SIG_DFL);
-        signal(SIGQUIT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 	}
 	else if (i == 2)
 	{
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	
 }
