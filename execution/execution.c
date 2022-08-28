@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 10:50:45 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:30:37 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,44 +50,44 @@ char    *get_path(char *cmd)
     return (cmd);
 }
 
-void run_builtins(t_AST *pipe_strc, int size)
-{
+// void run_builtins(t_AST *pipe_strc, int size)
+// {
     
-    int std_out;
-    // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
-    char *cmd;
-    std_out = -1;
-    std_out = dup(1);
-    if (pipe_strc->size_redirec > 0)
-    {
-        if (!handle_redirections(pipe_strc))
-        {
-            if (size == 1)
-                return ;
-            else if (size > 1)
-                exit(g_data.exit_status);
-        }
-    }
-    if (!pipe_strc->args)
-        return ;
-    cmd = pipe_strc->args[0];
-    if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
-        ft_cd_cmd(pipe_strc);
-    else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
-        ft_pwd_cmd();
-    else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
-        ft_echo(pipe_strc->args);
-    else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
-        ft_env_cmd();
-    else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
-        ft_exit(pipe_strc->args, pipe_strc->size_args);
-    else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
-        ft_unset(pipe_strc);
-    else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
-        ft_export(pipe_strc);
-    close(1);
-    dup2(std_out, 1);
-}
+//     int std_out;
+//     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
+//     char *cmd;
+//     std_out = -1;
+//     std_out = dup(1);
+//     if (pipe_strc->size_redirec > 0)
+//     {
+//         if (!handle_redirections(pipe_strc))
+//         {
+//             if (size == 1)
+//                 return ;
+//             else if (size > 1)
+//                 exit(g_data.exit_status);
+//         }
+//     }
+//     if (!pipe_strc->args)
+//         return ;
+//     cmd = pipe_strc->args[0];
+//     if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+//         ft_cd_cmd(pipe_strc);
+//     else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+//         ft_pwd_cmd();
+//     else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+//         ft_echo(pipe_strc->args);
+//     else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+//         ft_env_cmd();
+//     else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+//         ft_exit(pipe_strc->args, pipe_strc->size_args);
+//     else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
+//         ft_unset(pipe_strc);
+//     else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+//         ft_export(pipe_strc);
+//     close(1);
+//     dup2(std_out, 1);
+// }
 
 
 
@@ -96,7 +96,6 @@ void    handle_directory(char *cmd)
     DIR    *directory;
     
     directory = opendir(cmd);
-    // printf("directory == %d\n", opendir(cmd));
     if (cmd[0] == '/' && !directory)
     {
         printf("minishell : %s : No such file or directory\n", cmd);
@@ -269,42 +268,42 @@ void    exec_commad(t_AST *pipe_strc, int size)
 //     close(fd[1]);
 // }
 
-void init_builtins(t_pipes *pipes)
-{
-    // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
-    int i;
-    char *cmd;
+// void init_builtins(t_pipes *pipes)
+// {
+//     // TODO: don't forget to lowercase the commmnd args[0] Cat CAt ...
+//     int i;
+//     char *cmd;
 
-    i = 0;
-    while (i < pipes->nbre_pipes)
-    {
-        if (!pipes->tab_cmd[i]->size_args)
-        {
-            pipes->tab_cmd[i]->is_builten = 0;
-            i++;
-            continue;
-            return ;
-        }
-        cmd = pipes->tab_cmd[i]->args[0];
-        if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
-            pipes->tab_cmd[i]->is_builten = 1;
-        else
-            pipes->tab_cmd[i]->is_builten = 0;
-        i++;
-    }
-}
+//     i = 0;
+//     while (i < pipes->nbre_pipes)
+//     {
+//         if (!pipes->tab_cmd[i]->size_args)
+//         {
+//             pipes->tab_cmd[i]->is_builten = 0;
+//             i++;
+//             continue;
+//             return ;
+//         }
+//         cmd = pipes->tab_cmd[i]->args[0];
+//         if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+//             pipes->tab_cmd[i]->is_builten = 1;
+//         else
+//             pipes->tab_cmd[i]->is_builten = 0;
+//         i++;
+//     }
+// }
 
 void    execution(t_pipes *pipes)
 {   

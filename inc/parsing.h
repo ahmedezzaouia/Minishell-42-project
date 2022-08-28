@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 10:51:21 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:24:36 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void    		exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes);
 void    		exec_pipe_cmd(t_pipes *pipes);
 void    		wait_child(int pid);
 void			exec_commad(t_AST *pipe_strc, int size);
+void 			init_builtins(t_pipes *pipes);
 void 			run_builtins(t_AST *pipe_strc, int size);
 void			ft_cd_cmd(t_AST *pipe_strc);
 void			ft_pwd_cmd(void);
