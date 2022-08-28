@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 09:23:32 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:12:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,34 @@ int	read_cmd_line(char **cmd)
 	return (1);
 }
 
-void sig_handler(int sig)
-{
+// void sig_handler(int sig)
+// {
 	
-	if (sig == SIGINT)
-	{
-		if (g_data.is_herdoc == 1)
-		{
-			g_data.is_herdoc = 0;
-			g_data.kill_herdoc = 1;
-			close(0);
-		}
-		else
-		{
-			if (g_data.is_child == 1)
-			{
-				rl_on_new_line();
-				rl_replace_line("", 1);
-			}
-			else
-			{				
-				write(1, "\n", 1);
-				rl_on_new_line();
-				rl_replace_line("", 1);
-				rl_redisplay();
-			}
-		}
-	}
-}
+// 	if (sig == SIGINT)
+// 	{
+// 		if (g_data.is_herdoc == 1)
+// 		{
+// 			g_data.is_herdoc = 0;
+// 			g_data.kill_herdoc = 1;
+// 			close(0);
+// 		}
+// 		else
+// 		{
+// 			if (g_data.is_child == 1)
+// 			{
+// 				rl_on_new_line();
+// 				rl_replace_line("", 1);
+// 			}
+// 			else
+// 			{				
+// 				write(1, "\n", 1);
+// 				rl_on_new_line();
+// 				rl_replace_line("", 1);
+// 				rl_redisplay();
+// 			}
+// 		}
+// 	}
+// }
 
 void	close_herdoc_pipes(t_pipes *cmds)
 {

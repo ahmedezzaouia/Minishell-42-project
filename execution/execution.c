@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 09:43:38 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:03:05 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,48 +153,48 @@ void    exec_commad(t_AST *pipe_strc, int size)
     }
 }
 
-void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
-{
-    int pid;
+// void    exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
+// {
+//     int pid;
 
-    if (pipe_strc->is_builten)
-    {
-        run_builtins(pipe_strc, nbre_pipes);
-        if (nbre_pipes == 1)
-            return ;
-        else
-            exit(g_data.exit_status);
-    }
-    else if (nbre_pipes == 1)
-    {
-        pid = fork();
-        if (pid == 0)
-        {
-            signal(SIGINT, SIG_DFL);
-            signal(SIGQUIT, SIG_DFL);
-            exec_commad(pipe_strc, nbre_pipes);
-        }
-        else
-        {
-            signal(SIGINT, SIG_IGN);
-	        signal(SIGQUIT, SIG_IGN);
-            if (pid)
-            {
-                waitpid(pid, &g_data.exit_status, 0);
-                if (WIFEXITED(g_data.exit_status))
-                    g_data.exit_status = WEXITSTATUS(g_data.exit_status);
-                else if (g_data.exit_status == 3 || g_data.exit_status == 2)
-                    g_data.exit_status += 128;
-            }
+//     if (pipe_strc->is_builten)
+//     {
+//         run_builtins(pipe_strc, nbre_pipes);
+//         if (nbre_pipes == 1)
+//             return ;
+//         else
+//             exit(g_data.exit_status);
+//     }
+//     else if (nbre_pipes == 1)
+//     {
+//         pid = fork();
+//         if (pid == 0)
+//         {
+//             signal(SIGINT, SIG_DFL);
+//             signal(SIGQUIT, SIG_DFL);
+//             exec_commad(pipe_strc, nbre_pipes);
+//         }
+//         else
+//         {
+//             signal(SIGINT, SIG_IGN);
+// 	        signal(SIGQUIT, SIG_IGN);
+//             if (pid)
+//             {
+//                 waitpid(pid, &g_data.exit_status, 0);
+//                 if (WIFEXITED(g_data.exit_status))
+//                     g_data.exit_status = WEXITSTATUS(g_data.exit_status);
+//                 else if (g_data.exit_status == 3 || g_data.exit_status == 2)
+//                     g_data.exit_status += 128;
+//             }
 
-            signal(SIGINT, sig_handler);
-            signal(SIGQUIT, SIG_IGN);
-        }
-    }
-    else if (nbre_pipes > 1)
-        exec_commad(pipe_strc, nbre_pipes);
+//             signal(SIGINT, sig_handler);
+//             signal(SIGQUIT, SIG_IGN);
+//         }
+//     }
+//     else if (nbre_pipes > 1)
+//         exec_commad(pipe_strc, nbre_pipes);
     
-}
+// }
 
 void sig_handler(int sig);
 

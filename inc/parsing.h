@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/27 18:00:36 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:17:04 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ t_parser		*init_parser(char *cmd);
 
 /*   execution functions     */
 void			execution(t_pipes *pipes, char **env);
+void    		exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes);
+void			exec_commad(t_AST *pipe_strc, int size);
+void 			run_builtins(t_AST *pipe_strc, int size);
 void			ft_cd_cmd(t_AST *pipe_strc);
 void			ft_pwd_cmd(void);
 void			ft_echo(char **av);
@@ -103,6 +106,7 @@ int				display_export(t_AST *cmd);
 char			*filling_args_export(char *str);
 void			ft_unset(t_AST *cmd);
 void			delete_env(char *arg);
+void			sig_handler(int sig);
 
 /*   parsing functions     */
 

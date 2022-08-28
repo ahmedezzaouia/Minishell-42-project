@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/27 09:10:22 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/28 10:15:44 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ execution/ft_max_long_exit.c\
 execution/ft_herdoc.c \
 execution/ft_unset.c\
 execution/delete_env.c \
-execution/signals.c
+execution/signals.c \
+execution/execution_simple_command.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
