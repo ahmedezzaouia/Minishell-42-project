@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 10:50:31 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 18:35:18 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,42 +28,12 @@ int	read_cmd_line(char **cmd)
 	return (1);
 }
 
-// void sig_handler(int sig)
-// {
-	
-// 	if (sig == SIGINT)
-// 	{
-// 		if (g_data.is_herdoc == 1)
-// 		{
-// 			g_data.is_herdoc = 0;
-// 			g_data.kill_herdoc = 1;
-// 			close(0);
-// 		}
-// 		else
-// 		{
-// 			if (g_data.is_child == 1)
-// 			{
-// 				rl_on_new_line();
-// 				rl_replace_line("", 1);
-// 			}
-// 			else
-// 			{				
-// 				write(1, "\n", 1);
-// 				rl_on_new_line();
-// 				rl_replace_line("", 1);
-// 				rl_redisplay();
-// 			}
-// 		}
-// 	}
-// }
-
 void	close_herdoc_pipes(t_pipes *cmds)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < cmds->nbre_pipes)
 	{
 		j = 0;
@@ -75,7 +45,40 @@ void	close_herdoc_pipes(t_pipes *cmds)
 		}
 		i++;
 	}
-	
+}
+
+void	ft_init(void)
+{
+	ft_signal(2);
+	g_data.is_herdoc = 0;
+	g_data.kill_herdoc = 0;
+	g_data.is_child = 0;
+}
+
+void	run_minishell(t_pipes *ast, t_parser *parser, int input, char *cmd_line)
+{
+	while (1)
+	{
+		ft_init();
+		if (!read_cmd_line(&cmd_line))
+			continue ;
+		add_history(cmd_line);
+		check_error_max_here_doc(cmd_line);
+		parser = init_parser(cmd_line);
+		if (parser->cur_tocken && parser->cur_tocken->type == 6)
+			continue ;
+		ast = parser_parse(parser);
+		free_parser(parser);
+		if (ast)
+		{
+			ft_herdoc(ast);
+			if (g_data.kill_herdoc == 0)
+				execution(ast);
+			close_herdoc_pipes(ast);
+			free_ast_pipe(ast);
+			dup2(input, 0);
+		}
+	}
 }
 
 int	main(int ac, char **av, char **env)
@@ -87,37 +90,12 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	ast = NULL;
+	parser = NULL;
+	cmd_line = NULL;
 	rl_catch_signals = 0;
 	input = dup(0);
 	env_variable(env);
-	while (1)
-	{
-		signal(SIGINT, sig_handler);
-    	signal(SIGQUIT, SIG_IGN);
-		g_data.is_herdoc = 0;
-		g_data.kill_herdoc = 0;
-		g_data.is_child = 0;
-		
-		if (!read_cmd_line(&cmd_line))
-			continue ;
-		add_history(cmd_line);
-		check_error_max_here_doc(cmd_line);
-		parser = init_parser(cmd_line);
-		if (parser->cur_tocken && parser->cur_tocken->type == 6)
-			continue ;
-		ast = parser_parse(parser);
-		free_parser(parser);
-		//visitor(ast);
-		if (ast)
-		{
-			ft_herdoc(ast);
-			if (g_data.kill_herdoc == 0)
-				execution(ast);
-			close_herdoc_pipes(ast);
-			free_ast_pipe(ast);
-			dup2(input, 0);
-		}
-		//system("leaks minishell");
-	}
+	run_minishell(ast, parser, input, cmd_line);
 	return (g_data.exit_status);
 }

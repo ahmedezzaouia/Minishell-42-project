@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 15:15:13 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 18:35:40 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void    exec_commad(t_AST *pipe_strc, int size)
         if(!handle_redirections(pipe_strc))
             exit(g_data.exit_status);
     }
-    printf("continue ...\n");
     if (!pipe_strc->size_args)
         exit(1);
     if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')
