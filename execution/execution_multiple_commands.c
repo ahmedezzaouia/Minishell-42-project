@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:19:14 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 11:12:55 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:54:38 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void    read_pipe(int *last_fd)
     }
 }
 
-void    ft_print_error()
-{
-    printf("Error: \n");
-    exit(1);
-}
+// void    ft_print_error()
+// {
+//     printf("Error: \n");
+//     exit(1);
+// }
 
 void    save_last_pipe(int *last_fd, int fd[2])
 {
@@ -77,7 +77,7 @@ void    exec_pipe_cmd(t_pipes *pipes)
     while (++i < pipes->nbre_pipes)
     {
         if (pipe(fd) == -1)
-            ft_print_error();
+            pipe_err();
         pid = fork();
         if (pid == -1)
         {

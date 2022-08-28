@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 19:34:00 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:53:16 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_parser		*init_parser(char *cmd);
 /* init the Abstract tree */
 
 /*   execution functions     */
+void			pipe_err();
 void   			handle_directory(char *cmd);
 void			execution(t_pipes *pipes);
 void   			exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes);
