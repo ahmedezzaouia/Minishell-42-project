@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:49:29 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 22:48:02 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:49:18 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,16 @@ static void	update_env(char *env)
 			free(temp);
 		}
 	}
+}
+
+void	ft_export_add(t_AST *cmd, int i)
+{
+	g_data.env_list[g_data.size_env_list - 1]
+		= filling_args_export(cmd->args[i]);
+	g_data.env_list = ft_realloc_er(g_data.env_list,
+			sizeof(char *), g_data.size_env_list);
+	g_data.size_env_list += 1;
+	g_data.env_list[g_data.size_env_list - 1] = NULL;
 }
 
 void	ft_export(t_AST *cmd)
