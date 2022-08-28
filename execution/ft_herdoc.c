@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:08:51 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 22:42:11 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:04:54 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	expand_variable_set_var(char *str, int i, char **new_str)
 	var = ft_substr(str, i, j - i);
 	temp = var;
 	var = ft_get_env(var);
+	if (!var)
+		var = ft_strdup("");
 	free(temp);
 	*new_str = ft_strjoin(*new_str, var);
 	free (var);
@@ -71,36 +73,45 @@ void	pipe_err(void)
 	exit(1);
 }
 
+int	herdoc_compare(char *str, t_pipes *ast, int i, int j)
+{
+	if (!ft_strncmp(str, ast->tab_cmd[i]->redirec[j]->filename, \
+		ft_strlen(str)))
+	{
+		free(str);
+		return (0);
+	}
+	return (1);
+}
+
 void	run_herdoc(t_pipes *ast, int i, int j)
 {
 	char	*str;
 
 	if (ast->tab_cmd[i]->redirec[j]->type == HERE_DOC)
 	{
-		str = readline("> ");
 		if (pipe(ast->tab_cmd[i]->redirec[j]->heredoc) == -1)
-			pipe_err();
-		while (str && g_data.is_herdoc)
 		{
-			str = readline("> ");
+			ft_putstr_fd("Pipe creation Error: \n", 2);
+			exit(1);
+		}
+		str = readline("> ");
+		while (str && g_data.is_herdoc)
+		{		
 			if (!str)
 				break ;
-			if (!ft_strncmp(str, ast->tab_cmd[i]->redirec[j]->filename, \
-				ft_strlen(str)))
-			{
-				free(str);
+			if (!herdoc_compare(str, ast, i, j))
 				break ;
-			}
-			if (ft_strchr(str, '$'))
+			if (ft_strchr(str, '$') && g_data.is_quotes == 0)
 				str = expand_variable(str);
 			str = ft_strjoin(str, "\n");
 			ft_putstr_fd(str, ast->tab_cmd[i]->redirec[j]->heredoc[1]);
 			free(str);
+			str = readline("> ");
 		}
 		close(ast->tab_cmd[i]->redirec[j]->heredoc[1]);
 	}
 }
-
 void	ft_herdoc(t_pipes *ast)
 {
 	int	i;
