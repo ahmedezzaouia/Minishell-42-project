@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 11:42:56 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:15:13 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,15 @@ char    *get_path(char *cmd)
 // }
 
 
+void    ft_error_sdnrr(char *cmd, char *msg)
+{
+    write(2, "minishell : ", 12);
+    write(2, ": ", 2);
+    write(2, cmd, ft_strlen(cmd));
+    write(2, ": ", 2);
+    write(2, msg, ft_strlen(msg));
+    write(2, "\n", 2);
+}
 
 void    handle_directory(char *cmd)
 {
@@ -104,23 +113,23 @@ void    handle_directory(char *cmd)
     directory = opendir(cmd);
     if (cmd[0] == '/' && !directory)
     {
-        printf("minishell : %s : No such file or directory\n", cmd);
+        ft_error_sdnrr(cmd, "No such file or directory");
         g_data.exit_status = 1;
     }
     else if (directory && ft_strchr(cmd, '/'))
     {
         closedir(directory);
-        printf("minishell : %s : Is a directory\n", cmd);
-        g_data.exit_status = 126;
+        ft_error_sdnrr(cmd, "Is a directory");
+        g_data.exit_status = 1;
     }
     else if (!directory && ft_strchr(cmd, '/'))
     {
-        printf("minishell : %s : Not a directory\n", cmd);
+        ft_error_sdnrr(cmd, "Not a directory");
         g_data.exit_status = 1;
     }
     else
     {
-        printf("minishell : %s : command not found\n", cmd);
+        ft_error_sdnrr(cmd, "command not found");
         g_data.exit_status = 127;
     }
 }
@@ -129,16 +138,14 @@ void    exec_commad(t_AST *pipe_strc, int size)
 {
     char *cmd_path;
     char *cmd;
+
+    (void)size;
     if (pipe_strc->size_redirec > 0)
     {
         if(!handle_redirections(pipe_strc))
-        {
-            if (size == 1)
-                return ;
-            else if (size > 1)
-                exit(g_data.exit_status);
-        }
+            exit(g_data.exit_status);
     }
+    printf("continue ...\n");
     if (!pipe_strc->size_args)
         exit(1);
     if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')

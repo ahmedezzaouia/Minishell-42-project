@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 09:06:32 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 10:26:00 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:47:04 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void sig_handler(int sig)
 {
-	
 	if (sig == SIGINT)
 	{
 		if (g_data.is_herdoc == 1)
@@ -40,7 +39,6 @@ void sig_handler(int sig)
 			}
 		}
 	}
-
 }
 
 void	ft_signal(int i)

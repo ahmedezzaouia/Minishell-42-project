@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/27 18:45:25 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:48:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,8 @@ void    ft_cd_cmd(t_AST *cmd_strc)
 
             g_data.exit_status = 1;
         }
-
         else
             change_dir(cmd_strc, s, str_join, pwd);
     }
     free (s);
-
 }
