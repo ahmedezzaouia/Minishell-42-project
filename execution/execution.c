@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 11:30:37 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:42:56 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 //     exit(1);
 // }
 
+
+void    get_path_free(char  **path_chunks)
+{
+    int i;
+
+    i = -1;
+    while (path_chunks[++i])
+        free(path_chunks[i]);
+    free(path_chunks);
+}
+
 char    *get_path(char *cmd)
 {
     int i;
@@ -27,7 +38,6 @@ char    *get_path(char *cmd)
 
     i = 0;
     path_chunks = ft_split(ft_get_env("PATH"), ':');
-    
     while (path_chunks[i])
     {
         cmd_joined_path = ft_strjoin(ft_strdup(path_chunks[i]), cmd);
@@ -42,11 +52,7 @@ char    *get_path(char *cmd)
         free(cmd_joined_path);
         i++;
     }
-    i = -1;
-    while (path_chunks[++i])
-        free(path_chunks[i]);
-    free(path_chunks);
-    // TODO:  :: you have to check if all path are not valid
+    get_path_free(path_chunks);
     return (cmd);
 }
 
@@ -121,14 +127,12 @@ void    handle_directory(char *cmd)
 
 void    exec_commad(t_AST *pipe_strc, int size)
 {
-
     char *cmd_path;
     char *cmd;
     if (pipe_strc->size_redirec > 0)
     {
         if(!handle_redirections(pipe_strc))
         {
-            
             if (size == 1)
                 return ;
             else if (size > 1)
@@ -142,12 +146,9 @@ void    exec_commad(t_AST *pipe_strc, int size)
     else
         cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
     cmd_path = get_path(cmd);
-    printf("cmd path = %s\n",cmd_path);
-    printf("command start in execve\n");
     if(execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
     {
         handle_directory(pipe_strc->args[0]);
-        printf("status === %d\n", g_data.exit_status);
         exit(g_data.exit_status);
     }
 }
