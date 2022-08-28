@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 21:35:38 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:20:03 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ char	*get_path(char *cmd)
 	}
 	get_path_free(path_chunks);
 	return (cmd);
-}
-
-void	ft_error_sdnrr(char *cmd, char *msg)
-{
-	write(2, "minishell : ", 12);
-	write(2, ": ", 2);
-	write(2, cmd, ft_strlen(cmd));
-	write(2, ": ", 2);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 2);
 }
 
 void	handle_directory(char *cmd)
@@ -113,7 +103,7 @@ void	exec_commad(t_AST *pipe_strc, int size)
 }
 
 void	execution(t_pipes *pipes)
-{ 
+{
 	g_data.is_child = 1;
 	init_builtins(pipes);
 	if (pipes->nbre_pipes == 1)

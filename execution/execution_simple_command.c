@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:03:06 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 21:30:53 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:32:29 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,20 @@ void	exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
 		one_command(pipe_strc, nbre_pipes);
 	else if (nbre_pipes > 1)
 		exec_commad(pipe_strc, nbre_pipes);
+}
+
+void	ft_error_sdnrr(char *cmd, char *msg)
+{
+	write(2, "minishell : ", 12);
+	write(2, ": ", 2);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": ", 2);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 2);
+}
+
+void	pipe_err(void)
+{
+	ft_putstr_fd("Pipe creation Error: \n", 2);
+	exit(1);
 }

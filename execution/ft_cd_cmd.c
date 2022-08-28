@@ -6,48 +6,11 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 21:57:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:40:45 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
-
-int	get_pwd_index(void)
-{
-	int	i;
-
-	i = 0;
-	while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "PWD=", 4))
-		i++;
-	return (i);
-}
-
-int	get_oldpwd_index(void)
-{
-	int	i;
-
-	i = 0;
-	while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "OLDPWD=", 7))
-		i++;
-	return (i);
-}
-
-void	go_to_home(char *s)
-{
-	char	*item;
-
-	item = NULL;
-	if (chdir(ft_get_env("HOME")) == -1)
-		perror("Minishell :");
-	else
-	{
-		item = g_data.env_list[get_pwd_index()];
-		s = getcwd(NULL, 0);
-		g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
-		free(item);
-		free(s);
-	}
-}
 
 void	update_old_pwd(char *pwd)
 {
@@ -80,8 +43,10 @@ void	change_dir(t_AST *cmd_strc, char *s, char *str_join, char *pwd)
 	if (s == NULL)
 	{
 		item = g_data.env_list[get_pwd_index()];
-		ft_putstr_fd("Minishell : error retrieving current directory: getcwd: \
-			cannot access parent directories: No such file or directory\n", 2);
+		ft_putstr_fd("Minishell : error retrieving ", 2);
+		ft_putstr_fd("current directory: getcwd: ", 2);
+		ft_putstr_fd("cannot access parent directories: ", 2);
+		ft_putstr_fd("No such file or directory\n", 2);
 		str_join = ft_strjoin(ft_strdup("/"), cmd_strc->args[1]);
 		g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), str_join);
 		free(item);

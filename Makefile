@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/28 19:20:13 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/29 00:36:54 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,14 @@ parsing/parser/check_error.c \
 parsing/parser/fill_args.c \
 execution/execution.c \
 execution/ft_cd_cmd.c \
+execution/ft_cd_cmd_utils.c \
 execution/ft_pwd_cmd.c \
 execution/ft_echo.c \
 execution/ft_env_cmd.c \
 execution/redirections.c \
 execution/ft_exit.c \
 execution/ft_export.c \
+execution/export_update.c \
 execution/ft_display_export.c \
 execution/filling_args_export.c \
 execution/ft_max_long_exit.c\
@@ -56,6 +58,7 @@ execution/delete_env.c \
 execution/signals.c \
 execution/execution_simple_command.c \
 execution/execution_multiple_commands.c \
+execution/execution_multiple_commands_utils.c \
 execution/builtins.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address

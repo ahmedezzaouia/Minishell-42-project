@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 22:14:09 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:35:38 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ void			exec_commad(t_AST *pipe_strc, int size);
 void			init_builtins(t_pipes *pipes);
 void			run_builtins(t_AST *pipe_strc, int size);
 void			ft_cd_cmd(t_AST *pipe_strc);
+int				get_pwd_index(void);
+int				get_oldpwd_index(void);
+void			go_to_home(char *s);
 void			ft_pwd_cmd(void);
 void			ft_echo(char **av);
 void			ft_env_cmd(void);
@@ -107,12 +110,19 @@ void			check_max_long(unsigned char i, char *str);
 void			not_numeric(char *str);
 char			*ft_get_env(char *s);
 void			ft_export(t_AST	*cmd);
+void			update_env(char *env);
+void			ft_export_add(t_AST *cmd, int i);
 int				display_export(t_AST *cmd);
+int				ft_index_env(char *str);
 char			*filling_args_export(char *str);
 void			ft_unset(t_AST *cmd);
 void			delete_env(char *arg);
 void			sig_handler(int sig);
 void			ft_signal(int i);
+void			output_to_pipe(t_pipes *pipes, int fd[2], int i);
+void			read_pipe(int *last_fd);
+void			save_last_pipe(int *last_fd, int fd[2]);
+void			ft_error_sdnrr(char *cmd, char *msg);
 
 /*   parsing functions     */
 

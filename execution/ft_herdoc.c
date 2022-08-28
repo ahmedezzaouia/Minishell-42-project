@@ -6,24 +6,11 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:08:51 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 00:04:54 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:32:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
-
-int	get_dollar_index(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '$')
-		i++;
-	if ((int)ft_strlen(str) == i)
-		return (-1);
-	else
-		return (i);
-}
 
 int	expand_variable_set_var(char *str, int i, char **new_str)
 {
@@ -67,16 +54,10 @@ char	*expand_variable(char *str)
 	return (new_str);
 }
 
-void	pipe_err(void)
-{
-	ft_putstr_fd("Pipe creation Error: \n", 2);
-	exit(1);
-}
-
 int	herdoc_compare(char *str, t_pipes *ast, int i, int j)
 {
-	if (!ft_strncmp(str, ast->tab_cmd[i]->redirec[j]->filename, \
-		ft_strlen(str)))
+	if (ft_strlen(str) && !ft_strncmp(str, \
+		ast->tab_cmd[i]->redirec[j]->filename, ft_strlen(str)))
 	{
 		free(str);
 		return (0);
@@ -97,7 +78,7 @@ void	run_herdoc(t_pipes *ast, int i, int j)
 		}
 		str = readline("> ");
 		while (str && g_data.is_herdoc)
-		{		
+		{
 			if (!str)
 				break ;
 			if (!herdoc_compare(str, ast, i, j))
@@ -112,6 +93,7 @@ void	run_herdoc(t_pipes *ast, int i, int j)
 		close(ast->tab_cmd[i]->redirec[j]->heredoc[1]);
 	}
 }
+
 void	ft_herdoc(t_pipes *ast)
 {
 	int	i;
