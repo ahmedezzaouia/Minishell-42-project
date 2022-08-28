@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 10:12:35 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:50:31 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	main(int ac, char **av, char **env)
 		{
 			ft_herdoc(ast);
 			if (g_data.kill_herdoc == 0)
-				execution(ast, g_data.env_list);
+				execution(ast);
 			close_herdoc_pipes(ast);
 			free_ast_pipe(ast);
 			dup2(input, 0);

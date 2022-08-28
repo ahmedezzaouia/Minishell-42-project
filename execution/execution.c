@@ -6,17 +6,17 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 10:03:05 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:50:45 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
 
-void    ft_print_error()
-{
-    printf("Error: \n");
-    exit(1);
-}
+// void    ft_print_error()
+// {
+//     printf("Error: \n");
+//     exit(1);
+// }
 
 char    *get_path(char *cmd)
 {
@@ -196,78 +196,78 @@ void    exec_commad(t_AST *pipe_strc, int size)
     
 // }
 
-void sig_handler(int sig);
+// void sig_handler(int sig);
 
-void    exec_pipe_cmd(t_pipes *pipes, char **env)
-{
-    int i;
-    int fd[2];
-    int pid;
-    int last_fd = -1;
-    (void)env;
+// void    exec_pipe_cmd(t_pipes *pipes, char **env)
+// {
+//     int i;
+//     int fd[2];
+//     int pid;
+//     int last_fd = -1;
+//     (void)env;
 
-    i = -1;
+//     i = -1;
 
-    while (++i < pipes->nbre_pipes)
-    {
-        if (pipe(fd) == -1)
-            ft_print_error();
-        pid = fork();
-        if (pid == -1)
-        {
-            printf("minishell: fork: Resource temporarily unavailable\n");
-            break ;
-        }
-        if (pid == 0)
-        {            
-            signal(SIGINT, SIG_DFL);
-            signal(SIGQUIT, sig_handler);
-            if (i != pipes->nbre_pipes - 1)
-            {
-                dup2(fd[1], 1);
-                close(fd[1]);
-            }
-            else 
-                close(fd[1]);
-            if (last_fd != -1)
-            {
-                dup2(last_fd, 0);
-                close(last_fd);
-            }
-            close(fd[0]);
-            exec_simple_cmd(pipes->tab_cmd[i], pipes->nbre_pipes);
-            // child process code end  
-        }
-        else
-        {
-            if (last_fd != -1)
-                close(last_fd);
-            last_fd = fd[0];
-            close(fd[1]);
-        }
-    }
-    signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-    while (wait(NULL) != -1)
-	{
-        if (pid)
-        {
-            waitpid(pid, &g_data.exit_status, 0);
-            if (WIFEXITED(g_data.exit_status))
-                    g_data.exit_status = WEXITSTATUS(g_data.exit_status);
-            else if (g_data.exit_status == 3 || g_data.exit_status == 2)
-                    g_data.exit_status += 128;
-        }
-	}
-    // g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
-	// if (WIFSIGNALED(g_data.exit_status)) // WIFSIGNALED returns true if the child process was terminated by a signal
-	// 	g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
+//     while (++i < pipes->nbre_pipes)
+//     {
+//         if (pipe(fd) == -1)
+//             ft_print_error();
+//         pid = fork();
+//         if (pid == -1)
+//         {
+//             printf("minishell: fork: Resource temporarily unavailable\n");
+//             break ;
+//         }
+//         if (pid == 0)
+//         {            
+//             signal(SIGINT, SIG_DFL);
+//             signal(SIGQUIT, sig_handler);
+//             if (i != pipes->nbre_pipes - 1)
+//             {
+//                 dup2(fd[1], 1);
+//                 close(fd[1]);
+//             }
+//             else 
+//                 close(fd[1]);
+//             if (last_fd != -1)
+//             {
+//                 dup2(last_fd, 0);
+//                 close(last_fd);
+//             }
+//             close(fd[0]);
+//             exec_simple_cmd(pipes->tab_cmd[i], pipes->nbre_pipes);
+//             // child process code end  
+//         }
+//         else
+//         {
+//             if (last_fd != -1)
+//                 close(last_fd);
+//             last_fd = fd[0];
+//             close(fd[1]);
+//         }
+//     }
+//     signal(SIGINT, SIG_IGN);
+// 	signal(SIGQUIT, SIG_IGN);
+//     while (wait(NULL) != -1)
+// 	{
+//         if (pid)
+//         {
+//             waitpid(pid, &g_data.exit_status, 0);
+//             if (WIFEXITED(g_data.exit_status))
+//                     g_data.exit_status = WEXITSTATUS(g_data.exit_status);
+//             else if (g_data.exit_status == 3 || g_data.exit_status == 2)
+//                     g_data.exit_status += 128;
+//         }
+// 	}
+//     // g_data.exit_status = WEXITSTATUS(g_data.exit_status); //WEXITSTATUS returns the exit status of the child process
+// 	// if (WIFSIGNALED(g_data.exit_status)) // WIFSIGNALED returns true if the child process was terminated by a signal
+// 	// 	g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
             
-    signal(SIGINT, sig_handler);
-    signal(SIGQUIT, SIG_IGN);
-    close(fd[0]);
-    close(fd[1]);
-}
+//     signal(SIGINT, sig_handler);
+//     signal(SIGQUIT, SIG_IGN);
+//     close(fd[0]);
+//     close(fd[1]);
+// }
 
 void init_builtins(t_pipes *pipes)
 {
@@ -306,7 +306,7 @@ void init_builtins(t_pipes *pipes)
     }
 }
 
-void    execution(t_pipes *pipes, char **env)
+void    execution(t_pipes *pipes)
 {   
 
     g_data.is_child = 1;
@@ -314,7 +314,7 @@ void    execution(t_pipes *pipes, char **env)
     if (pipes->nbre_pipes == 1)
         exec_simple_cmd(pipes->tab_cmd[0], pipes->nbre_pipes);
     else if (pipes->nbre_pipes > 1)
-        exec_pipe_cmd(pipes, env);
+        exec_pipe_cmd(pipes);
 
 }
 
