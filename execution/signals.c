@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 09:06:32 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 22:01:22 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 00:45:32 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	sig_handler(int sig)
 		{
 			g_data.is_herdoc = 0;
 			g_data.kill_herdoc = 1;
+			g_data.exit_status = 1;
 			close(0);
 		}
 		else
