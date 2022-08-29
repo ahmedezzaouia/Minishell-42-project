@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 16:53:24 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:55:43 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	update_old_pwd(char *pwd)
 {
 	int		oldpwdindex;
 	char	*item;
+
+	if (!pwd)
+		return ;
 
 	oldpwdindex = get_oldpwd_index();
 	if (g_data.env_list[oldpwdindex] == NULL)
@@ -29,7 +32,7 @@ void	update_old_pwd(char *pwd)
 	else
 	{
 		item = g_data.env_list[oldpwdindex];
-		g_data.env_list[get_oldpwd_index()] = ft_strjoin(ft_strdup("OLD"), pwd);
+		g_data.env_list[oldpwdindex] = ft_strjoin(ft_strdup("OLD"), pwd);
 		free(item);
 	}
 }
@@ -42,21 +45,29 @@ void	change_dir(t_AST *cmd_strc, char *s, char *str_join, char *pwd)
 	s = getcwd(NULL, 0);
 	if (s == NULL)
 	{
-		item = g_data.env_list[get_pwd_index()];
 		ft_putstr_fd("Minishell : error retrieving ", 2);
 		ft_putstr_fd("current directory: getcwd: ", 2);
 		ft_putstr_fd("cannot access parent directories: ", 2);
 		ft_putstr_fd("No such file or directory\n", 2);
+		
+		item = g_data.pwd;
 		str_join = ft_strjoin(ft_strdup("/"), cmd_strc->args[1]);
-		g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), str_join);
+		if (!pwd)
+			g_data.pwd = ft_strjoin(ft_strdup(g_data.pwd), str_join);
+		else
+			g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), str_join);
 		free(item);
 		free(str_join);
+		
 	}
 	else
 	{
-		item = g_data.env_list[get_pwd_index()];
-		g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
-		free(item);
+		if (pwd)
+		{
+			item = pwd;
+			g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
+			free(item);
+		}
 	}
 	free(s);
 }

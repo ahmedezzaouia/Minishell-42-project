@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 13:26:11 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:16:03 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_global_data
 	int		is_child;
 	int		last_child;
 	int		nb_of_ambg;
+	char	*pwd;
 
 }	t_global_data;
 

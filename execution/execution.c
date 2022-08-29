@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 17:40:56 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:15:02 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ void	exec_path(t_AST *pipe_strc, char *command)
 	}
 }
 
-// void	check_path_exsit(t_AST *pipe_strc)
-// {
-// 	char *path;
+void	check_path_exsit(t_AST *pipe_strc)
+{
+	char	*path;
 
-// 	path = ft_get_env("PATH");
-// 	if (!path)
-// 		ft_error_sdnrr(pipe_strc->args[0], " No such file or directory");
-// 	else
-// 		handle_directory(pipe_strc->args[0]);
-// 	free(path);
-// 	exit(127);
-// }
+	path = ft_get_env("PATH");
+	if (!path)
+		ft_error_sdnrr(pipe_strc->args[0], " No such file or directory");
+	else
+		handle_directory(pipe_strc->args[0]);
+	free(path);
+	exit(127);
+}
 
 void	exec_commad(t_AST *pipe_strc, int size)
 {
@@ -75,13 +75,7 @@ void	exec_commad(t_AST *pipe_strc, int size)
 	if (!pipe_strc->size_args)
 		exit(1);
 	if (ft_strlen(pipe_strc->args[0]) == 0)
-	{
-		if (!ft_get_env("PATH"))
-			ft_error_sdnrr(pipe_strc->args[0], "No such file or directory");
-		else
-			handle_directory(pipe_strc->args[0]);
-		exit(127);
-	}
+		check_path_exsit(pipe_strc);
 	if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')
 	{
 		exec_path(pipe_strc, pipe_strc->args[0]);
@@ -90,13 +84,7 @@ void	exec_commad(t_AST *pipe_strc, int size)
 	{
 		cmd_path = get_path(pipe_strc->args[0], 1);
 		if (!cmd_path)
-		{
-			if (!ft_get_env("PATH"))
-				ft_error_sdnrr(pipe_strc->args[0], " No such file or directory");
-			else
-				handle_directory(pipe_strc->args[0]);
-			exit(127);
-		}
+			check_path_exsit(pipe_strc);
 		else
 			exec_path(pipe_strc, cmd_path);
 	}

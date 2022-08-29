@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 06:33:54 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 22:00:51 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:14:37 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_pwd_cmd(void)
 	else
 	{
 		s = ft_get_env("PWD");
-		printf("%s\n", s);
+		if (!s)
+			printf("%s\n", g_data.pwd);
+		else
+			printf("%s\n", s);
 	}
 	free (s);
 }
