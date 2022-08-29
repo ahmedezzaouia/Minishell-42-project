@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 19:55:43 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 00:55:22 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,39 @@ void	update_old_pwd(char *pwd)
 {
 	int		oldpwdindex;
 	char	*item;
-
-	if (!pwd)
-		return ;
+	t_AST	*ast;
 
 	oldpwdindex = get_oldpwd_index();
-	if (g_data.env_list[oldpwdindex] == NULL)
+	if (oldpwdindex == -1)
 	{
-		g_data.env_list = ft_realloc_er(g_data.env_list, \
-			sizeof(char *), g_data.size_env_list + 1);
-		g_data.env_list[g_data.size_env_list] = ft_strjoin(ft_strdup("OLD"), \
-			pwd);
-		g_data.env_list[g_data.size_env_list + 1] = NULL;
+		ast = malloc(sizeof(t_AST) * 1);
+		ast->args = ft_calloc(sizeof(char *), 3);
+		ast->args[0] = ft_strdup("export");
+		ast->args[1] = ft_strdup("OLDPWD=");
+		ast->size_args = 2;
+		ast->size_redirec = 0;
+		ast->redirec = NULL;
+		ft_export(ast);
+		free_ast_cmd(ast);
 	}
 	else
 	{
+		printf("Update oldpwd-----\n");
 		item = g_data.env_list[oldpwdindex];
-		g_data.env_list[oldpwdindex] = ft_strjoin(ft_strdup("OLD"), pwd);
+		if (g_data.pwd)
+		{
+			g_data.env_list[oldpwdindex \
+				] = ft_strjoin(ft_strdup("OLD"), g_data.pwd);
+		}
+		else
+		{
+			g_data.env_list[oldpwdindex] = ft_strjoin(ft_strdup("OLD"), pwd);
+		}
 		free(item);
 	}
 }
 
-void	change_dir(t_AST *cmd_strc, char *s, char *str_join, char *pwd)
+void	change_dir(t_AST *cmd_strc, char *s, char *str_join)
 {
 	char	*item;
 
@@ -49,24 +60,26 @@ void	change_dir(t_AST *cmd_strc, char *s, char *str_join, char *pwd)
 		ft_putstr_fd("current directory: getcwd: ", 2);
 		ft_putstr_fd("cannot access parent directories: ", 2);
 		ft_putstr_fd("No such file or directory\n", 2);
-		
-		item = g_data.pwd;
 		str_join = ft_strjoin(ft_strdup("/"), cmd_strc->args[1]);
-		if (!pwd)
-			g_data.pwd = ft_strjoin(ft_strdup(g_data.pwd), str_join);
+		if (g_data.pwd)
+			g_data.pwd = ft_strjoin(g_data.pwd, str_join);
 		else
-			g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup(pwd), str_join);
-		free(item);
+			g_data.env_list[get_pwd_index()] = ft_strjoin(g_data.pwd, str_join);
 		free(str_join);
-		
 	}
 	else
 	{
-		if (pwd)
+		if (g_data.pwd)
 		{
-			item = pwd;
-			g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
+			item = g_data.pwd;
+			g_data.pwd = ft_strjoin(ft_strdup("PWD="), s);
 			free(item);
+		}
+		else
+		{
+			item = g_data.env_list[get_pwd_index()];
+			g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
+			free (item);
 		}
 	}
 	free(s);
@@ -77,24 +90,25 @@ void	ft_cd_cmd(t_AST *cmd_strc)
 	char	*str_join;
 	char	*pwd;
 	char	*s;
-	char	*item;
 
 	s = NULL;
-	item = NULL;
 	str_join = NULL;
 	pwd = g_data.env_list[get_pwd_index()];
-	update_old_pwd(pwd);
 	if (cmd_strc->size_args == 1)
 		go_to_home(s);
 	else
 	{
 		if (chdir(cmd_strc->args[1]) == -1)
 		{
+			printf("cd === %s\n", cmd_strc->args[1]);
 			ft_error_sdnrr(cmd_strc->args[1], "Not a directory");
 			g_data.exit_status = 1;
 		}
 		else
-			change_dir(cmd_strc, s, str_join, pwd);
+		{
+			update_old_pwd(pwd);
+			change_dir(cmd_strc, s, str_join);
+		}
 	}
 	free (s);
 }

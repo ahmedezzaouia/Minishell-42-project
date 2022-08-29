@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:03:06 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 17:08:46 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 00:45:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	exec_simple_cmd(t_AST *pipe_strc, int nbre_pipes)
 
 void	ft_error_sdnrr(char *cmd, char *msg)
 {
-	write(2, "minishell ", 12);
-	write(2, ": ", 2);
-	write(2, cmd, ft_strlen(cmd));
-	write(2, ": ", 2);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 2);
+	ft_putstr_fd("minishell ", 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 }
 
 void	pipe_err(void)

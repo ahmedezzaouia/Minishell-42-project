@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:34:27 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 18:16:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 00:08:00 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	get_oldpwd_index(void)
 	i = 0;
 	while (g_data.env_list[i] && ft_strncmp(g_data.env_list[i], "OLDPWD=", 7))
 		i++;
+	if (g_data.env_list[i] == NULL)
+		return (-1);
 	return (i);
 }
 
