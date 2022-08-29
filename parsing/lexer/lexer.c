@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:53:27 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 11:57:51 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:45:20 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_tocken	*lexer_get_next_tocken(t_lexer *lexer)
 		lexer->is_ambg = 0;
 		lexer->env_vide = 0;
 		lexer->split_lexer = 0;
-		if (lexer->c == ' ')
+		if (lexer->c == ' ' || lexer->c == '\t')
 			lexer_skip_white_spaces(lexer);
 		else if (lexer->c == '|')
 			return (lexer_advc_tocken(lexer,

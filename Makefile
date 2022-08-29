@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/29 12:49:01 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/29 15:54:01 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ execution/execution_multiple_commands_utils.c \
 execution/builtins.c \
 execution/get_cmd_path.c
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
 READLINE = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib \
 			   -I /Users/$(USER)/.brew/opt/readline/include

@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 00:50:36 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 12:22:55 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:55:56 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ int	is_exist_on_env_list(char *arg)
 			!ft_strncmp(g_data.env_list[i], str2, ft_strlen(str2) + 1))
 		{
 			free (str);
+			free (str2);
 			return (i);
 		}
 		i++;
 	}
 	free(str);
+	free(str2);
 	return (-1);
 }
 

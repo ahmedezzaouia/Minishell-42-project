@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 11:59:01 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:34:26 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	read_cmd_line(char **cmd)
 	*cmd = readline("\033[32mMinishell$ \033[0m");
 	if (*cmd == NULL)
 	{
-		write(1, "\033[91mMinishell$ Exit\033[0m\n", 26);
+		if (g_data.is_child == 0)
+			write(1, "\033[91mMinishell$ Exit\033[0m\n", 26);
 		exit(EXIT_SUCCESS);
 	}
 	if (cmd[0][0] == '\0')
