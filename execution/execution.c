@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 13:41:35 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:40:56 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ void	exec_path(t_AST *pipe_strc, char *command)
 	}
 }
 
+// void	check_path_exsit(t_AST *pipe_strc)
+// {
+// 	char *path;
+
+// 	path = ft_get_env("PATH");
+// 	if (!path)
+// 		ft_error_sdnrr(pipe_strc->args[0], " No such file or directory");
+// 	else
+// 		handle_directory(pipe_strc->args[0]);
+// 	free(path);
+// 	exit(127);
+// }
+
 void	exec_commad(t_AST *pipe_strc, int size)
 {
 	char	*cmd_path;
@@ -64,7 +77,7 @@ void	exec_commad(t_AST *pipe_strc, int size)
 	if (ft_strlen(pipe_strc->args[0]) == 0)
 	{
 		if (!ft_get_env("PATH"))
-				ft_error_sdnrr(pipe_strc->args[0]," No such file or directory");
+			ft_error_sdnrr(pipe_strc->args[0], "No such file or directory");
 		else
 			handle_directory(pipe_strc->args[0]);
 		exit(127);
@@ -79,7 +92,7 @@ void	exec_commad(t_AST *pipe_strc, int size)
 		if (!cmd_path)
 		{
 			if (!ft_get_env("PATH"))
-				ft_error_sdnrr(pipe_strc->args[0]," No such file or directory");
+				ft_error_sdnrr(pipe_strc->args[0], " No such file or directory");
 			else
 				handle_directory(pipe_strc->args[0]);
 			exit(127);

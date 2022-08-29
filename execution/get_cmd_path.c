@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 02:52:49 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 13:25:05 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:25:50 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ char	*get_path(char *cmd, int join)
 		if (access(cmd_joined_path, F_OK) == 0)
 		{
 			j = -1;
-			while (path_chunks[++j])
-				free(path_chunks[j]);
-			free(path_chunks);
+			free_it(path_chunks, NULL);
 			return (cmd_joined_path);
 		}
 		free(cmd_joined_path);
