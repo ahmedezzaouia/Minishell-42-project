@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 18:19:18 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 22:23:06 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:14:04 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static void	collect_string_herdoc(t_parser *parser, char **value, int *index_c)
 	int		ends;
 
 	start = (*index_c);
-	while (diff_of_special_chars(parser->lexer->contents[*index_c]))
+	while (diff_of_special_chars(parser->lexer->contents[*index_c])
+		&& parser->lexer->contents[*index_c] != '\''
+		&& parser->lexer->contents[*index_c] != '"')
 		(*index_c)++;
 	ends = (*index_c);
 	str = ft_substr(parser->lexer->contents, start, ends - start);
