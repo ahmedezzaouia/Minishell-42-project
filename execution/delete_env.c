@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 00:50:36 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 21:25:19 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:22:55 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ int	is_exist_on_env_list(char *arg)
 {
 	int		i;
 	char	*str;
+	char	*str2;
 
 	i = 0;
 	str = ft_strdup_er(arg);
+	str2 = ft_strdup_er(arg);
 	str = ft_strjoin(str, "=");
 	while (g_data.env_list[i])
 	{
-		if (!ft_strncmp(g_data.env_list[i], str, ft_strlen(str)))
+		if (!ft_strncmp(g_data.env_list[i], str, ft_strlen(str)) || \
+			!ft_strncmp(g_data.env_list[i], str2, ft_strlen(str2) + 1))
 		{
 			free (str);
 			return (i);

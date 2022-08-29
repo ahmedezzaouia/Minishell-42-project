@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:15:23 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 02:55:04 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:26:11 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_parser		*init_parser(char *cmd);
 
 /*   execution functions     */
 void			get_path_free(char **path_chunks);
-char			*get_path(char *cmd);
+char			*get_path(char *cmd, int join);
 void			pipe_err(void);
 void			handle_directory(char *cmd);
 void			execution(t_pipes *pipes);

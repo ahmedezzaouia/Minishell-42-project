@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 00:40:45 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:54:30 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_cd_cmd(t_AST *cmd_strc)
 	{
 		if (chdir(cmd_strc->args[1]) == -1)
 		{
-			printf("minishell : %s : Not a directory\n", cmd_strc->args[1]);
+			ft_error_sdnrr(cmd_strc->args[1], "Not a directory");
 			g_data.exit_status = 1;
 		}
 		else

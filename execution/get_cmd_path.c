@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 02:52:49 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 02:53:38 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:25:05 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_path_free(char **path_chunks)
 	free(path_chunks);
 }
 
-char	*get_path(char *cmd)
+char	*get_path(char *cmd, int join)
 {
 	int		i;
 	int		j;
@@ -30,6 +30,8 @@ char	*get_path(char *cmd)
 	char	*cmd_joined_path;
 
 	i = 0;
+	if (join == 1)
+		cmd = ft_strjoin(ft_strdup("/"), cmd);
 	path_chunks = ft_split(ft_get_env("PATH"), ':');
 	if (path_chunks == NULL)
 		return (NULL);
@@ -48,5 +50,5 @@ char	*get_path(char *cmd)
 		i++;
 	}
 	get_path_free(path_chunks);
-	return (cmd);
+	return (NULL);
 }

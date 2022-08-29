@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 02:53:51 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:41:35 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	exec_path(t_AST *pipe_strc, char *command)
 void	exec_commad(t_AST *pipe_strc, int size)
 {
 	char	*cmd_path;
-	char	*cmd;
 
 	(void)size;
 	if (pipe_strc->size_redirec > 0)
@@ -62,17 +61,31 @@ void	exec_commad(t_AST *pipe_strc, int size)
 	}
 	if (!pipe_strc->size_args)
 		exit(1);
+	if (ft_strlen(pipe_strc->args[0]) == 0)
+	{
+		if (!ft_get_env("PATH"))
+				ft_error_sdnrr(pipe_strc->args[0]," No such file or directory");
+		else
+			handle_directory(pipe_strc->args[0]);
+		exit(127);
+	}
 	if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')
 	{
 		exec_path(pipe_strc, pipe_strc->args[0]);
 	}
 	else
 	{
-		cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
-		cmd_path = get_path(cmd);
+		cmd_path = get_path(pipe_strc->args[0], 1);
 		if (!cmd_path)
-			cmd_path = cmd;
-		exec_path(pipe_strc, cmd_path);
+		{
+			if (!ft_get_env("PATH"))
+				ft_error_sdnrr(pipe_strc->args[0]," No such file or directory");
+			else
+				handle_directory(pipe_strc->args[0]);
+			exit(127);
+		}
+		else
+			exec_path(pipe_strc, cmd_path);
 	}
 }
 

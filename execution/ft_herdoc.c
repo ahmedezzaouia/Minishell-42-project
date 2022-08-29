@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:08:51 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 00:32:35 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:38:01 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*expand_variable(char *str)
 int	herdoc_compare(char *str, t_pipes *ast, int i, int j)
 {
 	if (ft_strlen(str) && !ft_strncmp(str, \
-		ast->tab_cmd[i]->redirec[j]->filename, ft_strlen(str)))
+		ast->tab_cmd[i]->redirec[j]->filename, ft_strlen(str) + 1))
 	{
 		free(str);
 		return (0);

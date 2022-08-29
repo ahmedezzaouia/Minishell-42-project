@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:16:50 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/24 23:04:17 by ahmaidi          ###   ########.fr       */
+/*   Updated: 2022/08/29 12:32:31 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	ft_exit(char **av, unsigned int size)
 	else
 	{
 		write(1, "exit\n", 6);
-		exit(0);
+		exit(g_data.exit_status);
 	}
 }

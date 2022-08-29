@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 04:01:25 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 22:12:46 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:47:10 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ int	redc_output(t_redir **redirec, int *fd, int i)
 	*fd = open(redirec[i]->filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (*fd == -1)
 	{
-		handle_directory(redirec[i]->filename);
 		if (access(redirec[i]->filename, W_OK) != 0)
 		{
 			ft_error_sdnrr(redirec[i]->filename, "Permission denied");
 			g_data.exit_status = 1;
 		}
+		else
+			handle_directory(redirec[i]->filename);
 		return (0);
 	}
 	dup2(*fd, 1);
@@ -59,12 +60,13 @@ int	redc_append(t_redir **redirec, int *fd, int i)
 	*fd = open(redirec[i]->filename, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (*fd == -1)
 	{
-		handle_directory(redirec[i]->filename);
 		if (access(redirec[i]->filename, W_OK) != 0)
 		{
 			ft_error_sdnrr(redirec[i]->filename, "Permission denied");
 			g_data.exit_status = 1;
 		}
+		else
+			handle_directory(redirec[i]->filename);
 		return (0);
 	}
 	dup2(*fd, 1);

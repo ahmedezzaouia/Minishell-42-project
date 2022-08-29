@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 11:22:36 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/28 21:20:48 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:47:38 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	init_builtins_check(t_pipes *pipes, int i, char *cmd)
 {
-	if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+	if (!ft_strncmp(cmd, "cd", ft_strlen(cmd) + 1))
 		pipes->tab_cmd[i]->is_builten = 1;
-	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)+ 1))
 		pipes->tab_cmd[i]->is_builten = 1;
-	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)+ 1))
 		pipes->tab_cmd[i]->is_builten = 1;
-	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)+ 1))
 		pipes->tab_cmd[i]->is_builten = 1;
-	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)+ 1))
 		pipes->tab_cmd[i]->is_builten = 1;
-	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)+ 1))
 		pipes->tab_cmd[i]->is_builten = 1;
-	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)+ 1))
 		pipes->tab_cmd[i]->is_builten = 1;
 	else
 		pipes->tab_cmd[i]->is_builten = 0;
