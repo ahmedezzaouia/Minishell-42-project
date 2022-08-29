@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 16:52:22 by ahmaidi           #+#    #+#              #
-#    Updated: 2022/08/29 00:36:54 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/08/29 02:54:27 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ execution/signals.c \
 execution/execution_simple_command.c \
 execution/execution_multiple_commands.c \
 execution/execution_multiple_commands_utils.c \
-execution/builtins.c
+execution/builtins.c \
+execution/get_cmd_path.c
 
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f

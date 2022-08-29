@@ -6,54 +6,11 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:56 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/29 01:57:01 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/29 02:53:51 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
-
-void	get_path_free(char **path_chunks)
-{
-	int	i;
-
-	i = -1;
-	while (path_chunks[++i])
-		free(path_chunks[i]);
-	free(path_chunks);
-}
-
-char	*get_path(char *cmd)
-{
-	int		i;
-	int		j;
-	char	**path_chunks;
-	char	*cmd_joined_path;
-
-	i = 0;
-	// if (!ft_strchr(cmd, '/'))
-	// 	return (cmd);
-	path_chunks = ft_split(ft_get_env("PATH"), ':');
-	if (path_chunks == NULL)
-		return (NULL);
-	while (path_chunks[i])
-	{
-		cmd_joined_path = ft_strjoin(ft_strdup(path_chunks[i]), cmd);
-		if (access(cmd_joined_path, F_OK) == 0)
-		{
-			j = -1;
-			while (path_chunks[++j])
-				free(path_chunks[j]);
-			free(path_chunks);
-			printf("path== %s\n", cmd_joined_path);
-			return (cmd_joined_path);
-		}
-		free(cmd_joined_path);
-		i++;
-	}
-	printf("path2 == %s\n", cmd_joined_path);
-	get_path_free(path_chunks);
-	return (cmd);
-}
 
 void	handle_directory(char *cmd)
 {
@@ -83,10 +40,19 @@ void	handle_directory(char *cmd)
 	}
 }
 
+void	exec_path(t_AST *pipe_strc, char *command)
+{
+	if (execve(command, pipe_strc->args, g_data.env_list) == -1)
+	{
+		handle_directory(command);
+		exit(g_data.exit_status);
+	}
+}
+
 void	exec_commad(t_AST *pipe_strc, int size)
 {
 	char	*cmd_path;
-	char	*cmd =NULL;
+	char	*cmd;
 
 	(void)size;
 	if (pipe_strc->size_redirec > 0)
@@ -98,35 +64,16 @@ void	exec_commad(t_AST *pipe_strc, int size)
 		exit(1);
 	if (pipe_strc->args[0][0] == 47 || pipe_strc->args[0][0] == '.')
 	{
-		cmd = pipe_strc->args[0];
-		// cmd_path = get_path(cmd);
-		if (execve(cmd, pipe_strc->args, g_data.env_list) == -1)
-		{
-			handle_directory(pipe_strc->args[0]);
-			exit(g_data.exit_status);
-		}
+		exec_path(pipe_strc, pipe_strc->args[0]);
 	}
 	else
 	{
-		printf("HERE\n");
 		cmd = ft_strjoin(ft_strdup("/"), pipe_strc->args[0]);
 		cmd_path = get_path(cmd);
 		if (!cmd_path)
 			cmd_path = cmd;
-		printf("cmd = %s\n", cmd);
-		if (execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
-		{
-			handle_directory(cmd_path);
-			// printf(" No such file or directory\n");
-			exit(g_data.exit_status);
-		}
+		exec_path(pipe_strc, cmd_path);
 	}
-	// printf("cmd_path == %s\n", cmd_path);
-	// if (execve(cmd_path, pipe_strc->args, g_data.env_list) == -1)
-	// {
-	// 	handle_directory(pipe_strc->args[0]);
-	// 	exit(g_data.exit_status);
-	// }
 }
 
 void	execution(t_pipes *pipes)
