@@ -6,31 +6,35 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/30 00:59:28 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 01:38:41 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parsing.h"
 
+void	create_old_pwd(void)
+{
+	t_AST	*ast;
+
+	ast = malloc(sizeof(t_AST) * 1);
+	ast->args = ft_calloc(sizeof(char *), 3);
+	ast->args[0] = ft_strdup("export");
+	ast->args[1] = ft_strdup("OLDPWD=");
+	ast->size_args = 2;
+	ast->size_redirec = 0;
+	ast->redirec = NULL;
+	ft_export(ast);
+	free_ast_cmd(ast);
+}
+
 void	update_old_pwd(char *pwd)
 {
 	int		oldpwdindex;
 	char	*item;
-	t_AST	*ast;
 
 	oldpwdindex = get_oldpwd_index();
 	if (oldpwdindex == -1)
-	{
-		ast = malloc(sizeof(t_AST) * 1);
-		ast->args = ft_calloc(sizeof(char *), 3);
-		ast->args[0] = ft_strdup("export");
-		ast->args[1] = ft_strdup("OLDPWD=");
-		ast->size_args = 2;
-		ast->size_redirec = 0;
-		ast->redirec = NULL;
-		ft_export(ast);
-		free_ast_cmd(ast);
-	}
+		create_old_pwd();
 	else
 	{
 		item = g_data.env_list[oldpwdindex];
@@ -47,11 +51,26 @@ void	update_old_pwd(char *pwd)
 	}
 }
 
-void	change_dir(t_AST *cmd_strc, char *s, char *str_join)
+void	change_dir_normal(char *s)
 {
 	char	*item;
 
-	item = NULL;
+	if (g_data.pwd)
+	{
+		item = g_data.pwd;
+		g_data.pwd = ft_strjoin(ft_strdup("PWD="), s);
+		free(item);
+	}
+	else
+	{
+		item = g_data.env_list[get_pwd_index()];
+		g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
+		free (item);
+	}
+}
+
+void	change_dir(t_AST *cmd_strc, char *s, char *str_join)
+{
 	s = getcwd(NULL, 0);
 	if (s == NULL)
 	{
@@ -67,20 +86,7 @@ void	change_dir(t_AST *cmd_strc, char *s, char *str_join)
 		free(str_join);
 	}
 	else
-	{
-		if (g_data.pwd)
-		{
-			item = g_data.pwd;
-			g_data.pwd = ft_strjoin(ft_strdup("PWD="), s);
-			free(item);
-		}
-		else
-		{
-			item = g_data.env_list[get_pwd_index()];
-			g_data.env_list[get_pwd_index()] = ft_strjoin(ft_strdup("PWD="), s);
-			free (item);
-		}
-	}
+		change_dir_normal(s);
 	free(s);
 }
 

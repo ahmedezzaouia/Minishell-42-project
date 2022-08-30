@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:19:14 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/30 01:27:59 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 01:33:46 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	exec_pipe_cmd(t_pipes *pipes)
 		pid = fork();
 		if (pid == -1)
 		{
-			ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+			ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", \
+				2);
 			break ;
 		}
 		if (pid == 0)
