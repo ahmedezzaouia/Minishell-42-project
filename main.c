@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:33:41 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 22:11:29 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 01:30:28 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ int	main(int ac, char **av, char **env)
 	input = dup(0);
 	env_variable(env);
 	run_minishell(ast, parser, input, cmd_line);
-	
-	return (g_data.exit_status);
+	return (g_data.exit_status % 256);
 }
