@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 23:35:47 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/28 22:01:00 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 04:16:25 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static	int	error_export(char *str)
 	write(2, "Minishell : unset : `", 22);
 	write(2, str, ft_strlen(str));
 	write(2, "': not a valid identifier\n", 27);
+	g_data.exit_status = 1;
 	return (0);
 }
 

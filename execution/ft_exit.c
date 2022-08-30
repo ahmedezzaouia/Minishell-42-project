@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmaidi <ahmaidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:16:50 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 12:32:31 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 03:17:43 by ahmaidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,17 @@ void	check_max_long(unsigned char i, char *str)
 	{
 		if (!ft_strncmp(str, "922337203685477580",
 				ft_strlen("922337203685477580")))
-			if (str[18] - '0' > 7)
-				not_numeric(str);
+			if (str[18] - '0' == 7)
+				return ;
+		not_numeric(str);
 	}
 	else if (i == 0)
 	{
 		if (!ft_strncmp(str, "-922337203685477580",
 				ft_strlen("-922337203685477580")))
-			if (str[19] - '0' > 8)
-				not_numeric(str);
+			if (str[19] - '0' == 8)
+				return ;
+		not_numeric(str);
 	}
 }
 

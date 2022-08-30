@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 18:19:18 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 16:14:04 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 04:27:23 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	analyse_here_doc(t_parser *parser, t_type_redir *type, int index_c)
 			collect_string_quotes_herdoc(parser, &value, &index_c);
 		}
 		else
+		{
+			g_data.is_quotes = 0;
 			collect_string_herdoc(parser, &value, &index_c);
+		}
 	}
 	free(parser->prev_tocken->value);
 	parser->prev_tocken->value = value;
