@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/30 00:55:22 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 00:59:28 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	update_old_pwd(char *pwd)
 	}
 	else
 	{
-		printf("Update oldpwd-----\n");
 		item = g_data.env_list[oldpwdindex];
 		if (g_data.pwd)
 		{
@@ -100,7 +99,6 @@ void	ft_cd_cmd(t_AST *cmd_strc)
 	{
 		if (chdir(cmd_strc->args[1]) == -1)
 		{
-			printf("cd === %s\n", cmd_strc->args[1]);
 			ft_error_sdnrr(cmd_strc->args[1], "Not a directory");
 			g_data.exit_status = 1;
 		}

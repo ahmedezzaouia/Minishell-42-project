@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 00:50:36 by ahmaidi           #+#    #+#             */
-/*   Updated: 2022/08/29 22:30:28 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/08/30 01:27:13 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	delete_env(char *arg)
 	j = 0;
 	if (!ft_strncmp(arg, "PWD", ft_strlen("PWD")))
 		g_data.pwd = ft_get_env("PWD");
-	printf("g_data.pwd == %s\n",g_data.pwd);
+	// printf("g_data.pwd == %s\n",g_data.pwd);
 	remove_index = is_exist_on_env_list(arg);
 	if (remove_index == -1)
 		return ;
