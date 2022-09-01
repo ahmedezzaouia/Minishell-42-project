@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 02:33:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/08/30 01:38:41 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:17:00 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	change_dir(t_AST *cmd_strc, char *s, char *str_join)
 		else
 			g_data.env_list[get_pwd_index()] = ft_strjoin(g_data.pwd, str_join);
 		free(str_join);
+		g_data.exit_status = 1;
 	}
 	else
 		change_dir_normal(s);
